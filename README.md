@@ -2,8 +2,6 @@
 
 <img src="./banner.png" alt="rinzler mascot · a verifiable long-horizon-coherence RL environment" style="width: 100%; height: auto;" />
 
-# Rinzler
-
 **A verifiable RL environment for long-horizon agentic coherence — a model runs a simulated AI startup for a year from a written contract, graded by a hidden, non-gameable reward over its behavior.**
 
 [Quickstart](#quickstart) · [Reward contract](#the-reward-contract) · [Datasets](#datasets) · [Reproducibility](#reproducibility--offline-determinism) · [Limitations](#limitations)
