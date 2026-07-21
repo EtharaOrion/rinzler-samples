@@ -1,0 +1,27 @@
+schema_version = "1.1"
+
+[task]
+name = "rinzler/tier_medium-c61393ba"
+description = "Rinzler tier_medium pilot: 1-year startup sim using yc-bench harness. Bundle c61393ba-1106-56c0-b901-c6f70eeb6303."
+authors = [{ name = "Ethara.AI" }]
+keywords = ["rinzler", "yc-bench", "long-horizon", "tier_medium"]
+
+[metadata]
+family = "rinzler-fam-lhbs-001"
+declared_tier = "tier_medium"
+bundle_uuid = "c61393ba-1106-56c0-b901-c6f70eeb6303"
+seed = 7100216
+
+[agent]
+network_mode = "public"
+timeout_sec = 1800.0
+
+[verifier]
+network_mode = "public"
+timeout_sec = 180.0
+
+[environment]
+build_timeout_sec = 900.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 10240

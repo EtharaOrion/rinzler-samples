@@ -1,0 +1,27 @@
+canonical_content_hash: c98094db2e37da0a7472b610f749ff2fcb33c4c5edfdd042ed1949238e405620
+contract_digest: c0d1141a7f191975377d7b53e2af8a31f477926b61c9d848584ecd9069e75fdf
+declared_tier: tier_medium
+disposition_ceiling: HOLD:PILOT_REQUIRED
+family_id: rinzler-fam-lhbs-001
+maturity: draft
+seed: 7100307
+upstream_harness:
+  base_preset: default
+  repository: https://github.com/Ethara-ai/yc-bench
+  vendored_at_submodule_path: harness/
+upstream_provenance:
+  modifications_applied:
+  - adopted_pomdp_long_horizon_business_sim_frame_at_conceptual_level_only
+  - vendored_yc_bench_harness_as_submodule_and_extended_default_preset_per_tier
+  - introduced_per_bundle_canary_tokens_from_engram_bound_derivation_root
+  - added_rinzler_post_run_checkers_over_yc_bench_rollout_json
+  - authored_ground_truth_rat_client_ordering_expectations
+  - grading_fully_authored_no_upstream_task_instance_lifted
+  origin: derived
+  provenance_date: '2026-04-01'
+  upstream_benchmark_identity:
+    arxiv_id: '2604.01212'
+    first_published: '2026-04-01'
+    name: YC-Bench
+  upstream_license: arxiv_non_exclusive_distribution
+uuid: ff7a3d4a-6140-59c5-829c-72b8199f0f59
