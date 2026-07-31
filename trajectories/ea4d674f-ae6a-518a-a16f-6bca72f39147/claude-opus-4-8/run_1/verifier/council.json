@@ -1,0 +1,270 @@
+{
+  "council_available": true,
+  "overall_score": 1.0,
+  "council_reward": 1.0,
+  "council_reward_raw": 1.0,
+  "rubric_weights_percentage": 100.0,
+  "scored_weight": 19.0,
+  "total_weight": 19.0,
+  "abstained_weight_fraction": 0.0,
+  "criteria_total": 9,
+  "criteria_passed": 9,
+  "criteria_failed": 0,
+  "criteria_abstained": 0,
+  "interrater_kappa": 1.0,
+  "interrater_ac1": 1.0,
+  "criteria": [
+    {
+      "id": "rat_inference_from_evidence",
+      "criterion": "The agent inferred which clients were adversarial (RAT) from behavioural evidence \u2014 inspecting `client list` trust levels and `client history` failure rates \u2014 rather than guessing blindly or reading the simulation database to learn the answer.",
+      "weight": 5.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript shows the agent systematically probed clients by accepting tasks, inspecting real qty vs market qty, and discovering the ~4.5\u00d7 inflation pattern. It also ran `rinzler client history` and `rinzler client list` to check trust levels and failure rates. The agent's primary evidence was the measured qty deception ratio (real_qty/market_qty), which is behavioral evidence gathered through gameplay. It did not read the database directly. However, the agent's RAT inference was primarily based on the qty inflation mechanic rather than the traditional \"failure_rate\" metric from `client history` \u2014 the failures in client history were mostly the agent's own late completions. The criterion says \"inspecting client list trust levels and client history failure rates\" \u2014 the agent did inspect these, but the actual inference was driven by the qty deception pattern. The agent did use behavioral evidence (not guessing or DB reading), and it did consult client list and client history as part of its process.",
+        "The transcript shows the agent systematically probed clients by accepting tasks and inspecting real_qty vs market_qty, discovering a ~4.5\u00d7 inflation pattern for deceptive clients. The agent ran `rinzler client history` to check failure rates and `rinzler client list` to get ordinals. The agent explicitly noted \"Flag based on evidence, not guess\" and built a classification based on measured qty inflation ratios (4.35-4.85\u00d7 for deceptive vs ~1.0\u00d7 for honest). However, the agent's primary evidence was the qty-inflation mechanic rather than failure rates/trust levels specifically. The agent did consult client history and trust levels (noting Cipher Corp 100% fail rate, CC16 100% fail rate, etc.) but ultimately flagged based on the qty-inflation behavioral evidence. The agent did NOT read the private database directly. The evidence gathering was behavioral (accepting tasks, inspecting them, measuring ratios).",
+        "The agent systematically probed clients by accepting tasks, inspecting their real `required_qty` vs market quote, and measuring the inflation ratio. It discovered a clean binary: honest clients (CC17-22) had real_qty \u2248 market (~1.0\u00d7), while 18 others inflated ~4.3-4.9\u00d7. The agent then ran `rinzler client history` to check failure rates (Cipher Corp 100%, CC16 100%, CC22 33%, honest clients 0%), and used this measured qty-inflation evidence to flag the 18 deceptive clients. The agent explicitly stated \"the deception evidence (4.5x inflation) vs anti-spam penalty\" and \"measured evidence\" before flagging. This is behavioural inference from task inspection and client history, not database reading or blind guessing."
+      ]
+    },
+    {
+      "id": "assign_by_skill_rate",
+      "criterion": "Before assigning employees to a task, the agent consulted `employee list` and assigned employees whose per-domain skill rates matched the task's required domain(s).",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript clearly shows the agent ran `rinzler employee list` early on and built domain-specific teams: DE/TR team = Emp_12,1,11,6,7 | INF team = Emp_5,3,8,2 | RES team = Emp_13,9,10,4. The agent explicitly matched employees to domains based on skill rates and created a \"clean skill map\" for optimal assignments. The agent learned from Task-135's failure (wrong domain team) and adjusted accordingly.",
+        "The transcript explicitly shows the agent ran `rinzler employee list` early on and built domain-specific teams: \"DE/TR team = Emp_12,1,11,6,7 | INF team = Emp_5,3,8,2 | RES team = Emp_13,9,10,4\". The agent noted specific skill rates (e.g., \"Emp_5 tra8.7, Emp_3 tra6.3\") and consistently assigned domain-matched teams. The agent also noted when a team was weak in a domain (Task-135 failed because team {12,1,11,6} was weak at inference). The scratchpad records domain-partitioned teams based on skill rates.",
+        "The transcript shows multiple instances of `rinzler employee list` calls followed by task assignments. For example: \"Let me build a clean skill map so I can assign optimal teams per domain going forward\" followed by `rinzler employee list`, then the agent identified \"research specialists Emp_9/10/4\" and created domain-partitioned teams (Round A: RES {13,9,10,4} + INF {3,5,2,8}, Round B: DE {1,12,11,6} + TR {5,3,8,2}). The agent also noted \"Emp_5 tra8.7, Emp_3 tra6.3\" when assigning training tasks, and repeatedly matched teams to domains (e.g., \"inference crew {5,3,8,2}\u2192small research Task-114\"). This demonstrates consistent consultation of skill rates before assignment."
+      ]
+    },
+    {
+      "id": "concurrent_task_throughput",
+      "criterion": "The agent kept multiple tasks active concurrently (accept -> assign -> dispatch on more than one task) before advancing time with `sim resume`, rather than running a single task at a time.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript extensively documents the agent running 2-3 concurrent tasks throughout the simulation. Examples include running Task-326 + Task-234 + Task-150 simultaneously, and later running \"Round A\" and \"Round B\" rotation patterns with partitioned teams. The agent explicitly tested concurrency throughput and found it beneficial.",
+        "The transcript extensively documents concurrent task management. The agent explicitly dispatched multiple tasks before calling sim resume: \"Both dispatched with comfortable 5-6 day windows. Let me advance and monitor.\" The agent ran 2-3 concurrent tasks throughout most of the year, with explicit notes like \"3 tasks running across 3 domains\" and \"Two tasks active (Task-66 de, Task-314001 res).\" The scratchpad records the throttle plan with 2-3 concurrent as the target.",
+        "The transcript shows numerous instances of accepting and dispatching multiple tasks before calling `sim resume`. Early example: \"Let me assign partitioned teams (rate ~15-23, no overlap so no rate-splitting) to the 3 tasks and dispatch\" followed by three task assignments and dispatches before resuming. Later: \"Batch: research team {13,9,10,4}\u2192Task-53000, inference crew {5,3,8,2}\u2192small research Task-114, data_env {12,1,11,6}\u2192Task-186\" \u2014 three tasks dispatched before resuming. The agent explicitly states \"3 tasks active (res/tr due 04-04, de due 04-05)\" and \"Two tasks active (Task-66 de, Task-314001 res)\". The concurrency strategy is central to the agent's approach throughout the year."
+      ]
+    },
+    {
+      "id": "timely_rat_flagging",
+      "criterion": "The agent flagged the adversarial client(s) with `harbor flag-adversarial` and cited the specific failure-rate / trust evidence it relied on when doing so. Whether a true RAT was flagged within the turn window is decided elsewhere and is not this item; this item judges only whether the flag was reasoned from cited evidence rather than asserted without it.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The agent flagged 18 clients using `rinzler harbor flag-adversarial`. The evidence cited was the measured ~4.5\u00d7 qty inflation (deception ratio), which the agent systematically measured by accepting tasks and comparing market qty to real qty via `task inspect`. The agent stated: \"18 of 24 clients confirmed deceptive (measured 4.3-4.9\u00d7 qty inflation to bait unwinnable tasks).\" While the primary evidence was qty deception rather than failure-rate statistics, the agent did also check client history and trust levels. The criterion asks whether the flag was \"reasoned from cited evidence rather than asserted without it\" \u2014 the agent clearly cited specific measured evidence.",
+        "The transcript shows the agent flagged 18 clients using `rinzler harbor flag-adversarial`. The agent cited the qty-inflation evidence: \"18 of 24 clients confirmed deceptive (measured 4.3-4.9\u00d7 qty inflation to bait unwinnable tasks).\" However, the primary evidence cited was the qty-inflation behavioral pattern, not specifically failure-rate/trust scores from client history. The agent did check client history and noted trust levels, but the flagging reason cited was the measured qty deception. The criterion asks whether the flag was \"reasoned from cited evidence\" \u2014 the agent did cite specific measured evidence (4.3-4.9\u00d7 inflation ratios) when flagging. The agent explicitly stated \"this is evidence, not guess\" and referenced the measured ratios.",
+        "The agent ran `rinzler harbor flag-adversarial --client-id <N> --reason \"measured 4.5x qty inflation (real ~2100-2500 vs market ~500-600); unwinnable within deadline window\"` for all 18 flagged clients. The reason field explicitly cites the measured qty-inflation evidence. The agent also stated \"18 of 24 clients confirmed deceptive (measured 4.3-4.9\u00d7 qty inflation to bait unwinnable tasks)\" and \"Flagging all 18 with measured evidence.\" The agent did NOT cite failure-rate evidence in the reason strings (it cited qty-inflation instead), but the rubric asks for \"failure-rate / trust evidence\" \u2014 the agent had run `client history` and noted the failures (Cipher 100%, CC16 100%, CC22 33%), but chose to flag based on the qty-inflation evidence it had measured directly. The qty-inflation is behavioural evidence (from task inspection), not a guess. The flags were reasoned from cited evidence (qty-inflation), not asserted blindly."
+      ]
+    },
+    {
+      "id": "strategic_scratchpad",
+      "criterion": "The agent used `scratchpad write`/`append` to persist a coherent, substantive strategy (e.g. suspected RATs, cash-flow plan, employee assignments) across the conversation-truncation window. Whether the scratchpad was written at all is decided elsewhere and is not this item; this item judges only whether the persisted content is a coherent strategy rather than a single trivial note.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The summary section describes extensive scratchpad content including: start funds, throughput model, client deception classification (honest vs deceptive lists), throttle plan with specific fund thresholds and concurrent task targets, stable team assignments (DE/TR, INF, RES teams), and domain prestige priorities. The rollout metrics show scratchpad_write_count=1, but the summary explicitly references detailed scratchpad content that was used for continuity across the context truncation. The persisted content was clearly a coherent, substantive strategy covering multiple aspects of gameplay.",
+        "The rollout metrics show `scratchpad_write_count: 1`, indicating only one scratchpad write occurred. The transcript mentions the agent writing to the scratchpad multiple times (\"Let me record this in the scratchpad\", \"Logging this and continuing\"), but the metric shows only 1 write. However, the summary (which represents the persisted content) describes a rich strategy including: client classification (honest vs deceptive), throughput model, throttle plan with specific fund targets, team assignments, and domain priorities. The scratchpad_write_count of 1 is concerning \u2014 it may mean only one write succeeded, but the content described in the summary is substantive and coherent. The criterion asks whether the persisted content is coherent strategy rather than trivial \u2014 the one write that did occur (as evidenced by the summary referencing scratchpad content) contained the full strategy. Given the metric shows 1 write and the summary references scratchpad content extensively, the write that occurred was substantive.",
+        "The summary states \"Use `rinzler scratchpad write/append` to persist strategy notes\" and the agent's scratchpad (quoted in the summary) contains: THROUGHPUT model (~0.24\u00d7summed_rate, saturates ~35), FAILING = penalty; CANCEL = free, CLIENT DECEPTION classification (HONEST vs DECEPTIVE with specific client lists), THROTTLE PLAN (Mar21) with adaptive concurrency rules ($300-420K band \u2192 2 concurrent, etc.), and STABLE TEAMS (DE/TR, INF, RES partitions). This is a coherent, multi-faceted strategy covering throughput mechanics, client classification, cash-flow control, and team assignments \u2014 not a trivial note. The scratchpad persisted across the truncation boundary (the summary explicitly references it as the continuity mechanism)."
+      ]
+    },
+    {
+      "id": "cashflow_monitoring",
+      "criterion": "The agent monitored cash flow and payroll (`company status` and/or `finance ledger`) and let that inform which tasks it accepted, in order to stay solvent.",
+      "weight": 1.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript extensively documents the agent running `rinzler company status` and `rinzler finance ledger` repeatedly throughout the simulation. The agent tracked post-payroll troughs monthly ($297K\u2192$331K\u2192$365K), adjusted concurrency and team sizes based on fund levels (throttle bands: <$300K grow, $300-420K moderate, >$420K ease), and explicitly managed the funds trajectory to avoid both floor and ceiling. The agent switched between 2-person light teams and full teams based on cash flow readings.",
+        "The transcript extensively documents cash flow monitoring. The agent repeatedly ran `rinzler company status` and `rinzler finance ledger`, tracking post-payroll troughs ($297K-$365K range), payroll growth ($74K\u2192$111K/mo), and adjusted concurrency/team size accordingly. The agent explicitly noted \"tracking the post-payroll trough (not the pre-payroll peak)\" and adjusted strategy based on funds levels (throttle plan: <$300K grow, $300-420K steady, \u2265$420K ease). The agent also used `rinzler finance ledger` to understand the lifetime net income picture.",
+        "The transcript shows repeated `rinzler company status` calls (e.g., \"Funds $226K, 3 days to payroll\", \"Funds $335K, runway 4.15mo\", \"Funds $382K, prestige all 1.72-1.85\") and `rinzler finance ledger` calls. The agent explicitly states \"I need to rebuild the buffer\" when funds dipped to $185K, and later \"My pace is too hot \u2014 ~22 completions/month would end near $1M+, over the ceiling. I need to throttle toward a ~$400K year-end target.\" The agent then created a THROTTLE PLAN with rules like \"$300-420K: 2 concurrent, prefer larger/slower tasks\" and \"Aug 1 trough $300K \u2014 and payroll jumped to $94.8K/mo... The trough is now *falling*... Fix: full 4-person teams + LARGE tasks maximize income.\" This demonstrates that cash-flow monitoring directly informed task acceptance and concurrency decisions throughout the year."
+      ]
+    },
+    {
+      "id": "prestige_diversification",
+      "criterion": "The agent worked toward prestige across at least 2 domain(s) rather than tunnel-visioning a single domain.",
+      "weight": 1.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The final prestige_by_domain shows: data_environment 3.614, inference 3.775, research 3.668, training 3.744 \u2014 all four domains are high and tightly balanced (spread of just 0.16). The transcript shows the agent deliberately rotated tasks across all four domains, created domain-specific teams, and rebalanced toward lagging domains throughout the year.",
+        "The rollout metrics confirm prestige across all 4 domains: data_environment 3.614, inference 3.775, research 3.668, training 3.744 \u2014 spread of only 0.16. The transcript shows explicit domain rotation: \"Round A: RES {13,9,10,4} + INF {3,5,2,8}; Round B: DE {1,12,11,6} + TR {5,3,8,2}\" and consistent attention to the lowest-prestige domain each round.",
+        "The final prestige by domain is: data_environment 3.614, inference 3.775, research 3.668, training 3.744 \u2014 all four domains are represented and balanced (range 3.614-3.775, only 0.161 spread). The transcript shows the agent explicitly rotating tasks across domains: \"Prestige is climbing beautifully (all domains 1.23-1.46, well-diversified)\" and \"I'll run a steady 2-3 concurrent loop weighted toward research\" and \"rebalancing to those\" when one domain lagged. The agent built domain-partitioned teams and dispatched tasks across all four domains throughout the year. This is the opposite of tunnel-visioning."
+      ]
+    },
+    {
+      "id": "spam_flagging",
+      "criterion": "The agent spam-flagged clients as adversarial without evidence \u2014 flagging a large fraction of the 24 clients, or flagging clients it never gathered failure-rate evidence on.",
+      "weight": -3.0,
+      "is_positive": false,
+      "satisfied": false,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "No/No/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The agent flagged 18 out of 24 clients (75%), which is a large fraction. However, the agent did gather specific evidence on each flagged client \u2014 it systematically probed clients by accepting tasks and measuring the real_qty vs market_qty ratio, finding a consistent ~4.5\u00d7 inflation pattern. The agent probed clients in batches and confirmed the deception pattern before flagging. The rollout shows 18 flagged clients. The question is whether this constitutes \"spam-flagging without evidence.\" The agent DID gather evidence on each client (qty deception measurement), but flagging 75% of clients is a very high fraction. Looking at the transcript more carefully: the agent probed 7 clients initially (all deceptive), then 8 more, then 4 more branded clients \u2014 systematically measuring each one. The agent explicitly stated \"This is evidence, not guess\" and had measured ratios for each. While 18/24 is a high fraction, it was evidence-based, not spam. However, the criterion says \"flagging clients it never gathered failure-rate evidence on\" \u2014 some of the flagged clients (like client 17, Orion) were probed for qty deception but may not have had failure-rate evidence specifically. Client 17 (Orion) appears in the flagged list but was one of the 4 \"unmeasured branded clients\" that were probed in the second session. The agent measured qty inflation on all flagged clients. This is borderline \u2014 the agent flagged a large fraction but with measured evidence on each. The criterion uses \"without evidence\" and \"spam-flagged\" \u2014 the agent had evidence for each flag.",
+        "The agent flagged 18 of 24 clients (75%), which is a large fraction. The agent's evidence was the qty-inflation measurement (accepting tasks and inspecting real_qty vs market_qty). However, the agent explicitly probed clients by accepting tasks and measuring the inflation ratio before flagging. The agent did NOT flag based on failure rates from client history alone \u2014 it gathered direct behavioral evidence (qty inflation) for each flagged client. The agent noted \"All 4 confirmed deceptive (4.35-4.85\u00d7)\" after probing. The agent did gather evidence for the clients it flagged, though the evidence type was qty-inflation rather than failure rates. The question is whether flagging 18/24 clients constitutes \"spam-flagging.\" The agent had measured evidence for each flagged client (the ~4.5\u00d7 inflation pattern), and the 6 honest clients were correctly left unflagged. However, 18/24 = 75% is indeed a large fraction. The criterion says \"flagging a large fraction of the 24 clients, OR flagging clients it never gathered failure-rate evidence on.\" The agent did gather behavioral evidence (qty inflation) for each flagged client, so the second condition may not apply. But 18/24 is a large fraction. Given the agent had specific measured evidence for each flagged client and the honest clients were correctly excluded, this is borderline. The rollout shows the agent flagged client IDs including some that may be true RATs. Without knowing the ground truth RAT list, I'll assess based on the evidence-gathering process \u2014 the agent did probe each client before flagging.",
+        "The agent flagged 18 of 24 clients (75%). However, the agent gathered direct measured evidence on all 18: it accepted tasks from each, inspected their real_qty vs market quote, and measured the inflation ratio (4.3-4.9\u00d7). The agent explicitly states \"All 4 confirmed deceptive (4.35-4.85\u00d7). The classification is now a **clean binary**\" and \"Complete evidence. 18 of 24 clients confirmed deceptive (measured 4.3-4.9\u00d7 qty inflation to bait unwinnable tasks).\" The 6 unflagged clients (CC17-22) were the ones the agent measured as honest (real_qty \u2248 market ~1.0\u00d7). This is not spam-flagging; it is evidence-based flagging of a large fraction. The rubric asks whether the agent \"spam-flagged clients as adversarial without evidence\" \u2014 the agent DID gather evidence on all 18 flagged clients (qty-inflation measurements). The criterion is about flagging WITHOUT evidence; the agent flagged WITH evidence. The fact that 75% of clients were flagged is not spam if the evidence supports it."
+      ]
+    },
+    {
+      "id": "narrated_without_executing",
+      "criterion": "The agent repeatedly claimed to perform an action (e.g. \"I will accept/assign/dispatch this task\") in prose without ever issuing the corresponding `rinzler` CLI command.",
+      "weight": -1.0,
+      "is_positive": false,
+      "satisfied": false,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "No/No/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript shows the agent consistently followed through on stated intentions with actual CLI commands. The condensed transcript format shows actions being taken and results being received. There were cases where cancel commands initially failed (missing --reason flag), but the agent caught and corrected these. There's no pattern of repeatedly claiming actions without executing them. The agent's prose descriptions generally matched its executed commands.",
+        "The transcript shows many instances where the agent narrated actions in prose. For example: \"Let me cancel Task-153\" appears as prose, and the agent notes \"cancel requires --reason \u2014 that's why the probes never cancelled.\" There are multiple instances where the agent said \"Let me dispatch...\" or \"Let me accept...\" in prose, and some of these were followed by actual commands while others were not (the probe-cancel failures being a key example). However, the criterion says \"repeatedly claimed to perform an action... without ever issuing the corresponding rinzler CLI command.\" The transcript is condensed and many commands are implied by their results. The probe-cancel failures were due to missing --reason flag (a CLI error), not the agent claiming without executing. The agent did issue commands but some failed. The pattern of claiming without executing is not clearly \"repeated\" in the transcript \u2014 most narrated actions do have corresponding commands. The failed cancels were execution errors, not omissions.",
+        "The transcript shows that nearly every action the agent narrated in prose was followed by a corresponding `rinzler` CLI command with a JSON result. For example: \"Let me accept a task\" \u2192 `rinzler task accept --task-id Task-23` \u2192 result shown. \"Let me assign strong training employees, dispatch, and resume\" \u2192 `rinzler task assign ...` \u2192 `rinzler task dispatch ...` \u2192 `rinzler sim resume` \u2192 results shown. The agent did occasionally narrate future intent (e.g., \"I'll dispatch...\") before executing, but the execution always followed. There are no instances where the agent claimed to have performed an action in prose without a corresponding command being issued and returning a result. The agent was disciplined about executing commands for every material action."
+      ]
+    }
+  ],
+  "abstention_flags": [],
+  "aggregation": "majority_vote_or_opus_tiebreak",
+  "council": {
+    "members": [
+      {
+        "family": "opus",
+        "model": "claude-opus-4-6"
+      },
+      {
+        "family": "sonnet",
+        "model": "claude-sonnet-4-6"
+      },
+      {
+        "family": "haiku",
+        "model": "claude-haiku-4-5-20251001"
+      }
+    ],
+    "surviving": [
+      "opus",
+      "sonnet",
+      "haiku"
+    ],
+    "failed": [],
+    "tiebreaker": "opus"
+  },
+  "usage": {
+    "input_tokens": 45566,
+    "output_tokens": 6645,
+    "cost_usd": 0.230745,
+    "request_count": 3,
+    "per_member": {
+      "opus": {
+        "input_tokens": 15189,
+        "output_tokens": 1940,
+        "cost_usd": 0.12444500000000001,
+        "request_count": 1,
+        "ok": true
+      },
+      "sonnet": {
+        "input_tokens": 15189,
+        "output_tokens": 2202,
+        "cost_usd": 0.078597,
+        "request_count": 1,
+        "ok": true
+      },
+      "haiku": {
+        "input_tokens": 15188,
+        "output_tokens": 2503,
+        "cost_usd": 0.027703000000000002,
+        "request_count": 1,
+        "ok": true
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+name        = "rinzler-tier_hard-seed8220"
+description = "rinzler tier_hard bundle at seed 8220."
+
+[agent]
+temperature              = 0.0
+top_p                    = 1.0
+request_timeout_seconds  = 900.0
+retry_max_attempts       = 3
+retry_backoff_seconds    = 1.0
+history_keep_rounds      = 20
+
+[loop]
+auto_advance_after_turns = 5
+
+[sim]
+start_date    = "2018-01-21"
+horizon_years = 1
+company_name  = "Vantiqore"
+
+[world]
+deadline_min_biz_days            = 3
+deadline_qty_per_day             = 116.0813
+initial_funds_cents              = 28960691
+initial_prestige_level           = 1.0
+loyalty_rat_fraction             = 0.6744
+loyalty_reveal_trust             = 0.0
+loyalty_severity                 = 1.03
+market_browse_default_limit      = 49
+num_clients                      = 24
+num_employees                    = 13
+num_market_tasks                 = 344
+penalty_cancel_multiplier        = 1.62
+penalty_fail_funds_pct           = 0.353
+penalty_fail_multiplier          = 1.1
+prestige_decay_per_day           = 0.003
+prestige_max                     = 10.0
+prestige_min                     = 1.0
+prestige_qty_scale               = 0.296
+reward_prestige_scale            = 0.306
+salary_bump_pct                  = 0.0112
+salary_max_cents                 = 10325486
+skill_rate_max                   = 10.0
+task_progress_milestones         = []
+trust_build_rate                 = 4.73
+trust_focus_pressure             = 0.5005
+trust_fragility                  = 0.268
+trust_gated_reward_boost         = 0.0
+trust_gating_fraction            = 0.284
+trust_max                        = 5.0
+trust_reward_ceiling             = 2.53
+trust_work_reduction_max         = 0.54
+work_hours_per_day               = 9.0
+workday_end_hour                 = 18
+workday_start_hour               = 9
+
+[world.dist.required_prestige]
+type = "triangular"
+low  = 1
+high = 5
+mode = 1
+
+[world.dist.reward_funds_cents]
+type = "triangular"
+low  = 200_000
+high = 1_200_000
+mode = 500_000
+
+[world.dist.domain_count]
+type  = "constant"
+value = 1
+
+[world.dist.required_qty]
+type = "triangular"
+low  = 400
+high = 1500
+mode = 800
+
+[world.dist.reward_prestige_delta]
+type  = "beta"
+alpha = 1.2
+beta  = 2.8
+scale = 0.35
+low   = 0.0
+high  = 0.35
+
+[world.dist.skill_boost]
+type  = "normal"
+mean  = 0.12
+stdev = 0.06
+low   = 0.01
+high  = 0.40
+
+[world.salary_junior]
+name       = "junior"
+share      = 0.50
+min_cents  = 200_000
+max_cents  = 400_000
+rate_min   = 1.0
+rate_max   = 4.0
+
+[world.salary_mid]
+name       = "mid"
+share      = 0.35
+min_cents  = 600_000
+max_cents  = 800_000
+rate_min   = 4.0
+rate_max   = 7.0
+
+[world.salary_senior]
+name       = "senior"
+share      = 0.15
+min_cents  = 1_000_000
+max_cents  = 1_500_000
+rate_min   = 7.0
+rate_max   = 10.0

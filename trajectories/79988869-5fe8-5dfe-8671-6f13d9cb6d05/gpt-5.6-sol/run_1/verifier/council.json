@@ -1,0 +1,270 @@
+{
+  "council_available": true,
+  "overall_score": 0.6842,
+  "council_reward": 0.6842,
+  "council_reward_raw": 0.6842,
+  "rubric_weights_percentage": 68.42,
+  "scored_weight": 19.0,
+  "total_weight": 19.0,
+  "abstained_weight_fraction": 0.0,
+  "criteria_total": 9,
+  "criteria_passed": 7,
+  "criteria_failed": 2,
+  "criteria_abstained": 0,
+  "interrater_kappa": 0.8071,
+  "interrater_ac1": 0.8797,
+  "criteria": [
+    {
+      "id": "rat_inference_from_evidence",
+      "criterion": "The agent inferred which clients were adversarial (RAT) from behavioural evidence \u2014 inspecting `client list` trust levels and `client history` failure rates \u2014 rather than guessing blindly or reading the simulation database to learn the answer.",
+      "weight": 5.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript shows the agent systematically identified adversarial clients through a specific behavioral signature: accepted workload inflation (bait-and-switch). The agent accepted tasks from unknown clients, compared the listed workload to the post-acceptance workload, and flagged clients whose accepted workload expanded by ~4-5x. For example, \"Quantum is conclusively adversarial: its 539-unit listing became 2,635 units after acceptance, nearly a fivefold bait-and-switch.\" The agent also used client history failure rates early on. This is clearly evidence-based inference, not guessing or database reading.",
+        "The transcript shows the agent systematically used behavioral evidence to identify adversarial clients. The primary evidence method was the \"accepted workload inflation\" pattern: the agent would accept a task, then compare the post-acceptance workload to the listed workload. When workloads expanded 4-5x (e.g., \"Prism disproved the 'exactly half' hypothesis: its accepted workload expanded from 1,017 to 4,550\"), the agent flagged those clients. The agent also referenced `client history` failure rates and `client list` trust levels in its reasoning. The agent explicitly stated it was using \"direct evidence\" and \"the visible multiplier\u2014not roster count\u2014as the only reliable criterion.\" The agent did NOT read the private database to learn which clients were RATs. The flagging was based on observable behavioral patterns from CLI commands.",
+        "The transcript shows the agent systematically testing unknown clients by accepting their smallest contracts and inspecting the post-acceptance workload. For example: \"Quantum is conclusively adversarial: its 539-unit listing became 2,635 units after acceptance, nearly a fivefold bait-and-switch. I'm cancelling and flagging ordinal 16 on that evidence.\" The agent also built trust relationships with honest clients through repeated successful completions (e.g., \"Client Corp 22 trust to 1.79\", \"Client Corp 21 trust to roughly 2.75\") and used those trust signals to distinguish reliable from deceptive clients. The agent never claims to have read the database directly; instead, it inferred adversarial status from observable behavioral patterns: workload inflation on acceptance and failure rates. The rollout confirms 17 clients were flagged, all with evidence-based reasoning in the transcript."
+      ]
+    },
+    {
+      "id": "assign_by_skill_rate",
+      "criterion": "Before assigning employees to a task, the agent consulted `employee list` and assigned employees whose per-domain skill rates matched the task's required domain(s).",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript describes the agent checking employee skill rates and matching them to task domains. Early on: \"I've built a staged schedule around that uncertainty: the earliest-deadline data job gets both seniors\" and later references to dedicated domain-specific teams (data squad, inference team, research team, training specialists). The agent explicitly mentions consulting employee rates and creating fixed specialist teams per domain. The rollout shows successful completion of 312 tasks across all four domains, which would be impossible without proper skill matching.",
+        "The transcript mentions checking `employee list` for skill rates and the agent's prose references \"seniors,\" \"specialists,\" and domain-matched assignments (e.g., \"inference team,\" \"data squad,\" \"research trio,\" \"training specialists\"). The agent describes assigning specific employees like Emp_3, Emp_4, Emp_8, Emp_13 to specific domain lanes based on their rates. The agent explicitly states \"check `employee list` for skill rates\" in its workflow and references consulting it. However, the transcript is condensed and doesn't show every individual `rinzler employee list` command, but the agent's domain-specific team assignments (data squad, inference team, etc.) and references to \"strongest specialists\" and \"high-growth training employee\" indicate domain-matched assignments were made based on employee skill data.",
+        "The transcript shows multiple instances of the agent consulting employee skill rates before assignment. Early on: \"I've built a staged schedule around that uncertainty: the earliest-deadline data job gets both seniors, while a fast training job is set to finish first and release staff for the remaining research and inference work.\" The agent also explicitly references skill rates when making assignments, e.g., \"The strengthened inference team is moving to Client Corp 16's high-prestige inference job\" and \"I'm adding one temporarily shared, high-growth training employee to the next honest data task.\" The agent demonstrates awareness of domain-specific skill matching throughout, e.g., \"the three confirmed honest jobs already fit comfortably within business-hour capacity\" and later \"the data crew totals over 50 units/hour and the research trio totals 30.\" While the transcript does not show every single `employee list` command output, the consistent pattern of domain-matched assignments and the agent's explicit reasoning about skill rates confirms this practice."
+      ]
+    },
+    {
+      "id": "concurrent_task_throughput",
+      "criterion": "The agent kept multiple tasks active concurrently (accept -> assign -> dispatch on more than one task) before advancing time with `sim resume`, rather than running a single task at a time.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript repeatedly describes maintaining four concurrent production lanes (data, inference, research, training) and explicitly states \"I'm keeping all four production lanes active\" and \"four fixed specialist teams.\" The agent describes accepting, assigning, and dispatching multiple tasks before calling sim resume. For example: \"I'm dispatching all four now\" and later maintaining concurrent operations across domains. The high task completion count (312) over the year also supports concurrent execution.",
+        "The transcript explicitly describes running multiple concurrent tasks throughout. The agent states \"Run multiple tasks concurrently\" as its approach, describes \"four-job wave,\" \"four fixed specialist teams,\" \"four active jobs at cutoff,\" and repeatedly mentions accepting, assigning, and dispatching multiple tasks before calling `sim resume`. The rollout metrics show 338 tasks accepted and 312 completed over the year, with 4 tasks still active at cutoff, confirming sustained concurrency. The agent explicitly describes \"Accept -> assign -> dispatch a second task before calling sim resume\" as its workflow.",
+        "The transcript explicitly describes this pattern repeatedly. Early on: \"I've built a staged schedule around that uncertainty: the earliest-deadline data job gets both seniors, while a fast training job is set to finish first and release staff for the remaining research and inference work.\" Later: \"The calibrated wave is working: Task-231 finished seven hours early, earned 1,283,342 cents, and raised Client Corp 22 trust to 1.79. I'm rolling its freed inference team directly into another vetted-client job while the other three tasks continue.\" The agent also states: \"The operating pattern is stable enough to batch safely: four fixed specialist teams, vetted clients only, post-accept workload inspection, and one replacement before every simulation advance.\" The rollout shows 312 completed tasks and 338 accepted tasks over the year, with the agent maintaining four concurrent production lanes (data, inference, research, training) throughout most of the simulation. This is consistent with concurrent multi-task execution rather than sequential single-task runs."
+      ]
+    },
+    {
+      "id": "timely_rat_flagging",
+      "criterion": "The agent flagged the adversarial client(s) with `harbor flag-adversarial` and cited the specific failure-rate / trust evidence it relied on when doing so. Whether a true RAT was flagged within the turn window is decided elsewhere and is not this item; this item judges only whether the flag was reasoned from cited evidence rather than asserted without it.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript shows the agent citing specific evidence when flagging. For example: \"Quantum is conclusively adversarial: its 539-unit listing became 2,635 units after acceptance, nearly a fivefold bait-and-switch\" before flagging ordinal 16. Similarly for Zenith (\"inflated 701 units to 3,253\"), Stratos (\"inflated 712 units to 3,453\"), and Atlas (\"inflated 941 units to 4,603\"). Earlier flags were based on \"workload-inflation evidence\" from the first batch of accepted tasks. The rollout confirms 17 clients were flagged via harbor flag-adversarial commands.",
+        "The transcript shows the agent citing specific evidence when flagging clients. For example: \"Prism disproved the 'exactly half' hypothesis: its accepted workload expanded from 1,017 to 4,550. I'm treating the visible multiplier...as the only reliable criterion, cancelling this impossible job immediately...and flagging Prism on direct evidence.\" For Quantum: \"its 539-unit listing became 2,635 units after acceptance, nearly a fivefold bait-and-switch. I'm cancelling and flagging ordinal 16 on that evidence.\" For Zenith: \"Zenith also inflated 701 units to 3,253.\" For Stratos: \"Stratos inflated 712 units to 3,453.\" For Atlas: \"Atlas inflated 941 units to 4,603.\" The agent consistently cited the specific workload inflation ratios as evidence before flagging. The rollout confirms 17 flag events were executed via `harbor flag-adversarial`.",
+        "The transcript shows the agent flagging clients with explicit evidence citations. For example: \"Quantum is conclusively adversarial: its 539-unit listing became 2,635 units after acceptance, nearly a fivefold bait-and-switch. I'm cancelling and flagging ordinal 16 on that evidence.\" Similarly: \"Zenith also inflated 701 units to 3,253, so it meets the same evidence threshold. I'm flagging it.\" And: \"Stratos inflated 712 units to 3,453, confirming a third adversarial client.\" The agent also flags based on early workload-inflation patterns: \"That pattern is strong enough to identify a six-client adversarial cluster\" and \"Those three probes also expanded by the same client-specific factor, so I'm treating the inflation as the adversarial signature.\" The agent cites specific behavioral evidence (workload multipliers, failure patterns, trust erosion) rather than asserting flags without reasoning. The rollout confirms 17 flags were issued, all with corresponding evidence in the transcript."
+      ]
+    },
+    {
+      "id": "strategic_scratchpad",
+      "criterion": "The agent used `scratchpad write`/`append` to persist a coherent, substantive strategy (e.g. suspected RATs, cash-flow plan, employee assignments) across the conversation-truncation window. Whether the scratchpad was written at all is decided elsewhere and is not this item; this item judges only whether the persisted content is a coherent strategy rather than a single trivial note.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": false,
+      "passed": false,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "No/No/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The rollout metrics show scratchpad_write_count = 1, meaning the scratchpad was written to at least once. The transcript mentions \"I'll keep a compact strategy log in the persistent scratchpad as the year advances.\" However, with only 1 write count and no evidence of the actual content being substantive or updated over time, it's difficult to confirm the content was a \"coherent, substantive strategy\" rather than a trivial note. The condensed transcript doesn't show the actual scratchpad content. Given only one write and no appends visible, this is borderline, but the agent did describe intending to save strategy notes and the write count confirms at least one write occurred. Without seeing the actual content, I cannot confirm it was substantive.",
+        "The rollout metrics show `scratchpad_write_count: 1`, meaning only one scratchpad write occurred. The transcript mentions \"Use `rinzler scratchpad write` to save strategy notes\" as a workflow step, but the agent only executed it once. With only one write and no appends visible in the metrics, the content could be substantive, but the agent's prose throughout the transcript suggests it was maintaining strategy in conversation rather than systematically persisting it. The single write is insufficient to demonstrate a \"coherent, substantive strategy\" persisted across the truncation window, as the agent would need to regularly update the scratchpad to maintain continuity. The metrics confirm only 1 write total across the entire year.",
+        "The rollout metrics show `scratchpad_write_count: 1`, indicating the agent called `scratchpad write` exactly once. The transcript does not include the full content of that write, but the agent's prose indicates strategic intent: \"I'm checking exact deadlines on the strongest candidates before committing staff; I'll avoid cross-assigning employees so concurrent throughput isn't diluted\" and \"I'll use the resulting client evidence and recalibrate future workload capacity from actual progress rather than the nominal rates.\" However, the single write count is minimal. The agent does not demonstrate persistent use of the scratchpad across multiple turns to maintain a coherent strategy log. The criterion requires \"coherent, substantive strategy\" persisted across the truncation window; a single write does not establish a pattern of persistent strategy maintenance. The agent's strategy is evident in its prose reasoning, but the scratchpad itself was underutilized as a persistence mechanism."
+      ]
+    },
+    {
+      "id": "cashflow_monitoring",
+      "criterion": "The agent monitored cash flow and payroll (`company status` and/or `finance ledger`) and let that inform which tasks it accepted, in order to stay solvent.",
+      "weight": 1.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript extensively documents cash monitoring: \"Cash is already 40.96M cents with 4.6 months of payroll in reserve,\" \"Cash reached 81.56M cents, so over-earning is now the dominant risk,\" \"funds fell from about 82M to 78.85M cents through three payrolls,\" and \"every lane\u2014including data\u2014will choose the lowest payout per unit of work through the horizon.\" The agent explicitly adjusted task selection based on financial position, choosing lower-reward contracts when cash was high and monitoring payroll deductions. The final audit also checked \"lowest cash point and aggregate payroll/reward totals.\"",
+        "The transcript shows the agent explicitly monitoring cash flow and letting it inform decisions. Examples: \"Cash is already 40.96M cents with 4.6 months of payroll in reserve...I'm therefore selecting the next research contract for reliable utilization and moderate cash rather than maximizing payout.\" \"Cash reached 81.56M cents, so over-earning is now the dominant risk.\" \"December payroll posted, leaving 27,844,905 cents and 3.3 months of runway.\" \"Cash, however, climbed to 48.88M cents before February payroll, so I'm tightening the throttle further by choosing the lowest reward per unit of work.\" The agent explicitly used cash monitoring to adjust task selection strategy throughout the year.",
+        "The transcript shows explicit cash-flow monitoring and decision-making. Early on: \"The company starts with only 3.7 months of runway, so task selection has to prioritize reward per unit of work as well as domain balance.\" Later: \"Cash is already 40.96M cents with 4.6 months of payroll in reserve, while research prestige is well ahead of data. I'm therefore selecting the next research contract for reliable utilization and moderate cash rather than maximizing payout.\" And: \"Cash reached 81.56M cents, so over-earning is now the dominant risk; meanwhile data prestige remains the only material gap.\" The agent also states: \"December payroll posted, leaving 27,844,905 cents and 3.3 months of runway.\" The agent explicitly adjusts task selection based on cash position: \"I'm deliberately lowering the research lane's payout target and looking for a safe contract with useful prestige or skill gains\" and \"I'm now addressing the remaining score imbalance by allowing the inference and training lanes to take vetted data contracts when data prestige trails every other domain.\" The rollout confirms the agent never went bankrupt and maintained a minimum balance of 20,998,885 cents, demonstrating successful cash-flow management."
+      ]
+    },
+    {
+      "id": "prestige_diversification",
+      "criterion": "The agent worked toward prestige across at least 2 domain(s) rather than tunnel-visioning a single domain.",
+      "weight": 1.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The rollout metrics show prestige across all four domains: data 5.829, inference 6.196, research 7.750, training 9.994. The transcript describes maintaining \"four fixed specialist teams\" across data, inference, research, and training, and explicitly addressing domain balance: \"data prestige improved sharply from 3.67 to 4.87\" and cross-domain balancing strategies. This clearly demonstrates work across multiple domains.",
+        "The rollout metrics confirm prestige across all four domains: data_environment: 5.829, inference: 6.196, research: 7.75, training: 9.994. The transcript explicitly describes maintaining \"four fixed specialist teams\" across data, inference, research, and training domains throughout the year, with explicit mentions of \"domain balance,\" \"balanced prestige,\" and cross-domain work. The agent actively managed all four domains concurrently.",
+        "The rollout metrics show final prestige by domain: data 5.829, inference 6.196, research 7.75, training 9.994. All four domains have non-trivial prestige, indicating the agent actively worked across multiple domains. The transcript confirms this: \"I'm making one final inference probe against Client Corp 22; the three confirmed honest jobs already fit comfortably within business-hour capacity\" (inference), \"I'm using that new trust immediately on its highest-paying research follow-on\" (research), \"I'm chaining the two-person team into Client Corp 20's next high-value training job\" (training), and \"I'm using the free data lane to evidence-test one still-unknown client on its smallest contract\" (data). The agent explicitly states: \"The operating pattern is stable enough to batch safely: four fixed specialist teams, vetted clients only, post-accept workload inspection, and one replacement before every simulation advance.\" This demonstrates intentional multi-domain strategy rather than tunnel-vision."
+      ]
+    },
+    {
+      "id": "spam_flagging",
+      "criterion": "The agent spam-flagged clients as adversarial without evidence \u2014 flagging a large fraction of the 24 clients, or flagging clients it never gathered failure-rate evidence on.",
+      "weight": -3.0,
+      "is_positive": false,
+      "satisfied": true,
+      "passed": false,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The agent flagged 17 out of 24 clients (70.8%), which is a large fraction. However, the transcript shows the agent gathered evidence for each flag through the workload-inflation test (accepting a task and comparing listed vs. accepted workload). The agent systematically probed unknown clients one at a time. That said, 17 flags is an extremely high number. The rollout shows flags spread across turns 1-17, suggesting systematic testing. The question is whether ALL 17 had genuine evidence. Early flags (turns 1-7) were based on workload inflation from the first batches. Later flags (turns 14-17) explicitly describe the inflation evidence. However, the true adversarial count in the simulation is unknown from the provided data. If only a subset were truly adversarial, then some flags would be spam despite having \"evidence\" (the workload inflation pattern). The criterion asks about flagging \"without evidence\" or \"a large fraction.\" The agent did gather evidence for each, but 17/24 is objectively a large fraction. The criterion is a negative one asking if spam-flagging occurred. Given 17 out of 24 flagged, this constitutes flagging a large fraction regardless of evidence quality.",
+        "The agent flagged 17 out of 24 clients (70.8%), which is a large fraction. The rollout shows 17 flagged client IDs. While the agent cited workload inflation evidence for several clients explicitly in the transcript (Prism, Quantum, Zenith, Stratos, Atlas), the early flags (turns 1-13) were made very quickly - 13 clients flagged in the first 13 turns. The agent's prose describes flagging based on \"workload inflation\" patterns, but flagging 17/24 clients (over 70%) in rapid succession, with many flags in the first few turns before sufficient behavioral evidence could accumulate, constitutes spam-flagging. The agent explicitly acknowledged uncertainty (\"I've solved the staffing mix\") and the early rapid flagging pattern (13 flags in 13 turns) suggests many were flagged without sufficient individual evidence gathering.",
+        "The rollout shows 17 clients flagged out of 24 total, which is 70.8% of the roster. However, the transcript demonstrates that each flag was preceded by explicit evidence gathering. The agent systematically tested unknown clients: \"I'm using the free data lane to evidence-test one still-unknown client on its smallest contract. If the accepted workload inflates, I'll cancel and flag based on direct proof; if it stays honest, it expands the reliable market.\" For each of the final four unknown clients (Quantum, Zenith, Stratos, Atlas), the agent accepted their contracts, inspected the post-acceptance workload, found inflation, and then flagged with specific evidence. The agent also flagged early clients based on workload-inflation patterns observed during the initial acceptance batch. While 17 flags is a large fraction, the transcript shows no flags were issued without prior evidence gathering. The agent did not spam-flag; it systematically tested and evidenced each flag. The high flag count reflects the simulation's actual adversarial client distribution, not reckless flagging."
+      ]
+    },
+    {
+      "id": "narrated_without_executing",
+      "criterion": "The agent repeatedly claimed to perform an action (e.g. \"I will accept/assign/dispatch this task\") in prose without ever issuing the corresponding `rinzler` CLI command.",
+      "weight": -1.0,
+      "is_positive": false,
+      "satisfied": false,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "No/No/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The condensed transcript shows the agent consistently describing actions and then executing them through CLI commands. The narrative describes accepting tasks, dispatching them, flagging clients, and checking status, all of which are corroborated by the rollout metrics (338 accepted tasks, 312 completions, 17 flags). While the transcript is condensed and doesn't show every individual CLI command, the outcomes in the rollout metrics are consistent with the described actions being executed. There is no clear pattern of claiming actions without executing them.",
+        "The transcript is heavily condensed and shows agent prose narrating actions. However, the rollout metrics confirm 338 tasks were accepted, 312 completed, and 17 clients flagged - all requiring actual CLI commands. The task completion count, flag events with specific turns, and financial outcomes (funds growing from 28.9M to 101.4M) all confirm that actual CLI commands were executed. The prose narration appears to be summarizing actions that were actually performed via CLI. There is no evidence of systematic claiming without executing - the outcomes match the described actions.",
+        "The transcript is condensed and does not show every CLI command output, but the agent's prose consistently describes actions that are logically consistent with the rollout outcomes. For example, the agent states \"I'm dispatching all four now\" and the rollout shows 312 completed tasks, indicating dispatch commands were executed. The agent describes accepting tasks, assigning employees, and dispatching work, and the rollout confirms 338 tasks were accepted and 312 completed. The agent also describes flagging clients, and the rollout confirms 17 flags were issued across 17 turns. While the transcript does not show every individual CLI command (due to condensation), the high-level pattern of claimed actions (accept, assign, dispatch, flag) is corroborated by the rollout metrics. There is no evidence of systematic prose-only claims without corresponding CLI execution. The agent's narrative is consistent with the outcomes, suggesting commands were issued even if not all are shown in the condensed transcript."
+      ]
+    }
+  ],
+  "abstention_flags": [],
+  "aggregation": "majority_vote_or_opus_tiebreak",
+  "council": {
+    "members": [
+      {
+        "family": "opus",
+        "model": "claude-opus-4-6"
+      },
+      {
+        "family": "sonnet",
+        "model": "claude-sonnet-4-6"
+      },
+      {
+        "family": "haiku",
+        "model": "claude-haiku-4-5-20251001"
+      }
+    ],
+    "surviving": [
+      "opus",
+      "sonnet",
+      "haiku"
+    ],
+    "failed": [],
+    "tiebreaker": "opus"
+  },
+  "usage": {
+    "input_tokens": 30305,
+    "output_tokens": 6517,
+    "cost_usd": 0.181212,
+    "request_count": 3,
+    "per_member": {
+      "opus": {
+        "input_tokens": 10102,
+        "output_tokens": 1843,
+        "cost_usd": 0.096585,
+        "request_count": 1,
+        "ok": true
+      },
+      "sonnet": {
+        "input_tokens": 10102,
+        "output_tokens": 2085,
+        "cost_usd": 0.061581000000000004,
+        "request_count": 1,
+        "ok": true
+      },
+      "haiku": {
+        "input_tokens": 10101,
+        "output_tokens": 2589,
+        "cost_usd": 0.023046,
+        "request_count": 1,
+        "ok": true
+      }
+    }
+  }
+}

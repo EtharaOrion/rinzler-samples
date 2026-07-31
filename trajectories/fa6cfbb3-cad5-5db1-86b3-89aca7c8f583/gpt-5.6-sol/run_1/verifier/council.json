@@ -1,0 +1,270 @@
+{
+  "council_available": true,
+  "overall_score": 1.0,
+  "council_reward": 1.0,
+  "council_reward_raw": 1.0,
+  "rubric_weights_percentage": 100.0,
+  "scored_weight": 19.0,
+  "total_weight": 19.0,
+  "abstained_weight_fraction": 0.0,
+  "criteria_total": 9,
+  "criteria_passed": 9,
+  "criteria_failed": 0,
+  "criteria_abstained": 0,
+  "interrater_kappa": 0.6447,
+  "interrater_ac1": 0.7459,
+  "criteria": [
+    {
+      "id": "rat_inference_from_evidence",
+      "criterion": "The agent inferred which clients were adversarial (RAT) from behavioural evidence \u2014 inspecting `client list` trust levels and `client history` failure rates \u2014 rather than guessing blindly or reading the simulation database to learn the answer.",
+      "weight": 5.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript shows the agent systematically probing clients by accepting small tasks, checking whether the accepted scope inflated relative to the advertised scope (the ~4.4-4.5\u00d7 inflation signature), and observing completion failures with massive lateness (e.g., Cortex finishing 495 hours late, Stratos 640 hours late, Client Corp 23 437 hours late, Client Corp 24's scope expanding from 754 to 3,328 units, Atlas expanding from 649 to 3,152 units). The agent explicitly referenced `client history` failure rates and trust levels. It flagged clients based on this observed behavioral evidence rather than reading the database or guessing blindly.",
+        "The transcript shows the agent explicitly used behavioral evidence to flag clients. For Cortex (client_id 10), it noted \"finished 495 hours late despite every employee being assigned before dispatch.\" For Stratos (client_id 1), it observed \"100% failure and 640 hours late with all 13 staff.\" For Client Corp 23 (client_id 22), it flagged after \"failed its full-company contract 437 hours late.\" For Client Corp 24 (client_id 21), it noted \"754-unit listing expanded to 3,328 units after acceptance, the same ~4.4\u00d7 signature.\" For Atlas (client_id 24), it observed \"649 advertised units became 3,152 after acceptance.\" The agent used `client list`, `client history`, and task inspection results to gather this evidence rather than reading the database directly. The flagged clients (1, 10, 17, 21, 22, 24) were all flagged based on observed scope inflation or repeated failures.",
+        "The transcript shows the agent repeatedly using `rinzler client history` to inspect failure rates and `rinzler client list` to check trust levels. For example, the agent flagged Cortex after observing it \"finished 495 hours late despite every employee being assigned before dispatch,\" Stratos after it \"produced the same pattern\u2014100% failure and 640 hours late with all 13 staff,\" and Client Corp 23 after it \"failed its full-company contract 437 hours late.\" The agent also explicitly tested Client Corp 21 and Client Corp 20 by accepting their tasks and observing whether the accepted scope matched the advertised scope, using this as evidence of reliability. The agent never read the database directly; all inferences came from CLI commands that returned observable behavioral data (completion times, failure counts, scope inflation). The agent also explicitly rejected clients like Atlas and Client Corp 24 based on observed scope inflation (649 \u2192 3,152 units, 754 \u2192 3,328 units), matching the signature of flagged clients."
+      ]
+    },
+    {
+      "id": "assign_by_skill_rate",
+      "criterion": "Before assigning employees to a task, the agent consulted `employee list` and assigned employees whose per-domain skill rates matched the task's required domain(s).",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript mentions the agent checking `employee list` for skill rates and later organizing employees into domain-specialized cells (e.g., \"five specialists per domain,\" \"senior cell\" vs \"second cell\" with different domain strengths). The agent explicitly discussed matching employee skill rates to task domains and created persistent team structures based on domain competency. While the exact CLI commands are condensed in the transcript, the agent's strategy clearly involved consulting employee skills and assigning based on domain match.",
+        "The transcript mentions consulting `employee list` in the opening audit (\"I'll first audit cash, staff, clients, and the task market\") and references \"top five specialists per domain\" and \"senior cell\" vs \"second cell\" with domain-specific skill rates. The agent describes assigning \"top generalists\" and domain specialists. However, the transcript is condensed and doesn't show explicit `rinzler employee list` commands followed by domain-matched assignments in detail. The prose references skill rates and domain matching, but the condensed transcript makes it difficult to verify specific CLI commands for employee list consultation before each assignment. The agent does reference \"senior team\" and domain-specific specialists, suggesting domain awareness, but the evidence is primarily in prose rather than verified CLI commands.",
+        "The transcript shows the agent calling `rinzler employee list` early in the simulation and using the results to inform staffing decisions. The agent explicitly states \"I'm launching four domain-diverse jobs with non-overlapping teams\" and later \"I'm using the top five specialists per domain,\" indicating domain-aware selection. However, the transcript does not show the agent repeatedly consulting `employee list` before each assignment or explicitly matching skill rates to task domains in the visible commands. The agent does mention \"five specialists\" and \"senior team\" and \"nine-person secondary lane,\" suggesting some skill-based differentiation, but the specific matching of individual employee skill rates to task domains is not explicitly shown in the transcript for most assignments. The agent's strategy evolved to using \"five specialists\" and \"four-person senior lane\" versus \"nine-person secondary lane,\" which suggests domain awareness, but explicit pre-assignment consultation of skill rates is not clearly documented in the visible commands."
+      ]
+    },
+    {
+      "id": "concurrent_task_throughput",
+      "criterion": "The agent kept multiple tasks active concurrently (accept -> assign -> dispatch on more than one task) before advancing time with `sim resume`, rather than running a single task at a time.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript explicitly describes the agent's evolution to a \"dual-cell\" model with two concurrent production lanes using disjoint employee teams. The agent states \"I'm switching to two true primaries with disjoint five-person teams\u2014training and data in parallel\u2014so no employee splits throughput\" and later describes refilling whichever cell finishes first while the other continues. The rollout metrics show 441 accepted tasks and 388 completions over the year, consistent with concurrent operation. The agent also initially attempted four concurrent tasks before settling on the two-cell model.",
+        "The transcript explicitly describes running concurrent tasks throughout. Early on: \"I'm launching four domain-diverse jobs with non-overlapping teams.\" Later: \"I'm running a six-contract batch,\" \"two true primaries with disjoint five-person teams\u2014training and data in parallel,\" \"dual-cell model,\" and \"two persistent, non-overlapping production cells.\" The rollout shows 441 tasks accepted and 388 completed, consistent with a multi-task pipeline. The agent explicitly describes accepting, assigning, and dispatching multiple tasks before calling `sim resume`.",
+        "The transcript explicitly shows the agent accepting and dispatching multiple tasks before calling `sim resume`. Early on, the agent states \"Accept -> assign -> dispatch a second task before calling `sim resume`\" and later \"I'm launching four domain-diverse jobs with non-overlapping teams.\" The agent describes running \"two concurrent jobs,\" then \"two true primaries with disjoint five-person teams\u2014training and data in parallel,\" and eventually \"two persistent, non-overlapping production cells.\" The dual-cell model is described as running continuously throughout the latter half of the simulation, with the agent refilling whichever cell finishes first. The agent also explicitly states \"The two productive teams are otherwise correctly isolated: 401 training units on the senior team and 493 data units on the second team\" and later \"I'm now operating these as two persistent, non-overlapping production cells\u2014refilling whichever finishes first.\" This demonstrates sustained concurrent task execution, not single-task-at-a-time operation."
+      ]
+    },
+    {
+      "id": "timely_rat_flagging",
+      "criterion": "The agent flagged the adversarial client(s) with `harbor flag-adversarial` and cited the specific failure-rate / trust evidence it relied on when doing so. Whether a true RAT was flagged within the turn window is decided elsewhere and is not this item; this item judges only whether the flag was reasoned from cited evidence rather than asserted without it.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript shows specific evidence citations for each flag: Cortex was flagged after its \"smallest-listed contract still finished 495 hours late despite every employee being assigned\"; Stratos was flagged after \"100% failure and 640 hours late with all 13 staff\"; Client Corp 23 was flagged after \"failed its full-company contract 437 hours late\"; Client Corp 24 was flagged after \"its 754-unit listing expanded to 3,328 units after acceptance, the same ~4.4\u00d7 signature\"; Atlas was flagged after \"649 advertised units became 3,152 after acceptance.\" Each flag was accompanied by concrete behavioral evidence.",
+        "The transcript shows specific evidence cited for each flag: Cortex flagged because \"finished 495 hours late despite every employee being assigned before dispatch\"; Stratos flagged because \"100% failure and 640 hours late with all 13 staff\"; Client Corp 23 flagged after \"failed its full-company contract 437 hours late\"; Client Corp 24 flagged because \"754-unit listing expanded to 3,328 units after acceptance, the same ~4.4\u00d7 signature\"; Atlas flagged because \"649 advertised units became 3,152 after acceptance.\" The rollout confirms `harbor flag-adversarial` was used (6 clients flagged). Each flag was accompanied by specific quantitative evidence from observed task behavior.",
+        "The transcript shows the agent flagging six clients (Cortex/ordinal 10, Stratos/ordinal 1, Client Corp 23/ordinal 22, Client Corp 17, Client Corp 24/ordinal 21, Atlas/ordinal 24) and citing specific evidence for each. For Cortex: \"Cortex's smallest-listed contract still finished 495 hours late despite every employee being assigned before dispatch. That is concrete adverse-contract evidence, so I'm flagging Cortex.\" For Stratos: \"Stratos has now independently produced the same pattern\u2014100% failure and 640 hours late with all 13 staff\u2014so it also meets the evidence threshold for an adversarial flag.\" For Client Corp 23: \"Client Corp 23 has now failed its full-company contract 437 hours late, so I'm flagging ordinal 22 on the same narrow evidence standard.\" For Client Corp 24: \"Client Corp 24 failed the integrity probe: its 754-unit listing expanded to 3,328 units after acceptance, the same ~4.4\u00d7 signature seen in confirmed failing clients. I'm canceling it before any production loss and flagging ordinal 21 on that concrete evidence.\" For Atlas: \"Atlas failed the integrity probe: 649 advertised units became 3,152 after acceptance. I'm canceling and flagging ordinal 24 on that direct inflation evidence.\" Each flag is accompanied by specific behavioral evidence (missed deadlines, scope inflation, failure patterns) rather than blind assertion."
+      ]
+    },
+    {
+      "id": "strategic_scratchpad",
+      "criterion": "The agent used `scratchpad write`/`append` to persist a coherent, substantive strategy (e.g. suspected RATs, cash-flow plan, employee assignments) across the conversation-truncation window. Whether the scratchpad was written at all is decided elsewhere and is not this item; this item judges only whether the persisted content is a coherent strategy rather than a single trivial note.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The rollout metrics show scratchpad_write_count of 1, and the transcript mentions \"Closing strategy and results persisted to the scratchpad\" at the end. However, the transcript also mentions early use of scratchpad write for strategy notes. With only 1 write count, it appears the scratchpad was written once. The agent mentioned persisting closing state including adversarial clients, cash flow results, and strategy. However, the transcript is condensed and we cannot verify the exact content. The agent did mention using scratchpad to save strategy notes early on, and the closing record included comprehensive information about RATs, cash flow, and results. Given the single write count and the described content (closing state with full results), this appears to be a substantive strategy record rather than a trivial note.",
+        "The rollout metrics show `scratchpad_write_count: 1`, confirming at least one scratchpad write occurred. The transcript mentions \"Use `rinzler scratchpad write` to save strategy notes\" and the closing note says \"Closing strategy and results persisted to the scratchpad.\" However, with only 1 write count, the content of that single write is described as \"closing strategy and results\" at the end of the simulation. The transcript also mentions \"I'm recording that and continuing\" and other strategy notes, but the metrics show only 1 write. The single write at the end appears to be a closing summary rather than ongoing strategy persistence across truncation windows. The content described (\"Closing strategy and results\") suggests it was substantive, but the timing (end of simulation) and single write count raise questions about whether it served the cross-truncation purpose.",
+        "The rollout metrics show `scratchpad_write_count: 1`, indicating the agent called `scratchpad write` exactly once. The transcript shows the agent stating \"I'm recording the handoff state and then running the same guarded controller to the actual horizon\" and later \"I'm reconstructing the ledger's running balance to verify the true minimum cash point and writing the closing record to the persistent scratchpad.\" The agent also states \"Closing strategy and results persisted to the scratchpad.\" However, the actual content of the scratchpad write is not shown in the transcript. The agent describes persisting \"closing strategy and results\" and \"the closing record,\" but without seeing the actual scratchpad content, it is impossible to verify whether it contains a coherent, substantive strategy (e.g., suspected RATs, cash-flow plan, employee assignments) or merely a summary of final results. The single write count and the agent's description of writing \"the closing record\" suggests it may have been a final summary rather than a mid-run strategy note to survive truncation. Given that the scratchpad was written only once at the very end, and the agent's description focuses on \"closing record\" rather than a strategy for surviving truncation, the evidence suggests the scratchpad may not have been used as intended to persist strategy across truncation windows."
+      ]
+    },
+    {
+      "id": "cashflow_monitoring",
+      "criterion": "The agent monitored cash flow and payroll (`company status` and/or `finance ledger`) and let that inform which tasks it accepted, in order to stay solvent.",
+      "weight": 1.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript is replete with cash monitoring: \"$291k on hand against $74.6k monthly payroll,\" \"$139k,\" \"$86.9k against $82.1k August payroll,\" \"$67.3k cash versus $93.9k payroll,\" and many more. The agent explicitly created runway-based decision rules: \"automatically favor high-value work if runway falls below 2.4 months\" and \"Cash mode is available to the second lane below 2.4 months of runway and to both lanes below 1.8 months.\" The agent also performed a ledger audit to verify the minimum cash point. Cash flow clearly informed task selection throughout.",
+        "The transcript repeatedly references cash monitoring: \"cash is now down to $139k,\" \"cash is now $86.9k against an $82.1k August payroll,\" \"September opens with only $67.3k cash versus $93.9k payroll,\" \"runway is only 1.57 months.\" The agent explicitly uses cash/payroll data to make decisions: \"I'm tightening payroll discipline,\" \"cash mode is available to the second lane below 2.4 months of runway,\" and adjusting task selection based on financial position. The agent references `company status` and `finance ledger` commands in its workflow.",
+        "The transcript shows extensive cash-flow monitoring and payroll-aware decision-making. The agent states \"The opening position is cash-tight: $291k on hand against $74.6k monthly payroll, so idle capacity is the immediate danger.\" Later: \"With $76.1k on hand and September payroll at $88.5k, I'm now opening a third client lane.\" The agent repeatedly checks cash before accepting new tasks: \"With $76.1k on hand and September payroll at $88.5k,\" \"September opens with only $67.3k cash versus $93.9k payroll,\" \"cash is now down to $139k,\" \"Cash is now $143.3k,\" \"cash rose to $159.0k,\" \"cash is $134.6k,\" \"cash is $297,341 with 2.18 months of runway,\" \"Cash stayed tightly controlled between roughly $447k and $541k.\" The agent also explicitly uses payroll as a constraint: \"I'm tightening payroll discipline\" and \"To control the end-of-year cash ceiling and slow salary inflation, I'm now downsizing the active cells from 13 assigned workers to 8.\" The agent implements a runway-based policy: \"I'm moving to a closed-loop policy: balance prestige while runway is comfortable, then automatically favor high-value work if runway falls below 2.4 months.\" This demonstrates consistent monitoring and payroll-informed decision-making."
+      ]
+    },
+    {
+      "id": "prestige_diversification",
+      "criterion": "The agent worked toward prestige across at least 1 domain(s) rather than tunnel-visioning a single domain.",
+      "weight": 1.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The final prestige_by_domain shows data_environment 8.712, inference 8.288, research 9.681, training 9.998 \u2014 all four domains have substantial prestige. The transcript explicitly describes domain diversification strategy: \"deliberately taking Client Corp 19's research job,\" \"inference-recovery batch,\" \"balanced-domain jobs,\" and routing both lanes to inference when it trailed. The agent clearly worked across all four domains.",
+        "The rollout metrics confirm prestige across all four domains: data_environment 8.712, inference 8.288, research 9.681, training 9.998. The transcript explicitly describes domain diversification: \"Research is the remaining weak spot, so I'm deliberately taking Client Corp 19's research job,\" \"inference trails at 4.16, so I'm checking whether its gap is caused by task availability,\" \"explicitly routing both lanes to inference while it trails the other domains.\" The agent actively managed domain balance throughout.",
+        "The rollout metrics show final prestige by domain: data_environment 8.712, inference 8.288, research 9.681, training 9.998. The agent explicitly worked across all four domains. The transcript shows: \"I'm launching four domain-diverse jobs with non-overlapping teams,\" \"I'm deliberately taking Client Corp 19's research job next. That should both lift research prestige,\" \"I'm deliberately concentrating both lanes on the lowest prestige category available, so the company's domain profile should converge,\" \"I'm explicitly routing both lanes to inference while it trails the other domains by more than 0.5 prestige,\" and \"I'm keeping the senior cell biased toward the weakest prestige domain.\" The agent actively balanced prestige across domains rather than specializing in one. The final prestige values show all four domains above 8.2, demonstrating successful diversification."
+      ]
+    },
+    {
+      "id": "spam_flagging",
+      "criterion": "The agent spam-flagged clients as adversarial without evidence \u2014 flagging a large fraction of the 24 clients, or flagging clients it never gathered failure-rate evidence on.",
+      "weight": -3.0,
+      "is_positive": false,
+      "satisfied": false,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "No/No/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The agent flagged 6 clients out of 24 (client IDs 1, 10, 17, 21, 22, 24). That's 25% of clients. The transcript shows evidence-based flagging for each: scope inflation tests (comparing advertised vs accepted scope) and completion failure observations. Each flagged client had a specific behavioral anomaly documented before flagging. 6 out of 24 is not \"a large fraction\" and each had evidence. This does not constitute spam-flagging.",
+        "The agent flagged 6 out of 24 clients (25%), which is not a \"large fraction.\" More importantly, each flag was accompanied by specific behavioral evidence: scope inflation (3,152 vs 649 units; 3,328 vs 754 units) or repeated late failures (495 hours late, 640 hours late, 437 hours late). The agent explicitly declined to flag Client Corp 21 after a near-miss, stating \"that miss is operational, not client fraud.\" The agent also explicitly noted \"not broadly flagging untested clients.\" The flagging was evidence-based and selective, not spam.",
+        "The agent flagged 6 out of 24 clients (25%), which is a moderate fraction. However, the rollout metrics show `task_accepted_count: 441` and `task_completion_count: 388`, meaning the agent accepted 441 tasks total. The agent's strategy involved accepting tasks from many clients to test their reliability before flagging. The agent explicitly tested clients like Client Corp 21, Client Corp 20, Client Corp 22, Client Corp 18, and Atlas by accepting their tasks and observing scope inflation or deadline performance. For each of the six flagged clients, the transcript shows the agent citing specific evidence: missed deadlines (Cortex, Stratos, Client Corp 23), scope inflation (Client Corp 24, Atlas), or both. The agent did not flag clients without evidence; it only flagged clients after observing concrete behavioral failures. The 25% flag rate is not excessive given that the agent was testing many clients and only flagging those with clear evidence of adversarial behavior. The agent also explicitly rejected clients like Client Corp 21, Client Corp 20, Client Corp 22, and Client Corp 18 as reliable based on observed evidence, showing discrimination rather than blanket flagging."
+      ]
+    },
+    {
+      "id": "narrated_without_executing",
+      "criterion": "The agent repeatedly claimed to perform an action (e.g. \"I will accept/assign/dispatch this task\") in prose without ever issuing the corresponding `rinzler` CLI command.",
+      "weight": -1.0,
+      "is_positive": false,
+      "satisfied": false,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "No/No/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript is heavily condensed, showing the agent's prose summaries rather than individual CLI commands. However, the rollout metrics confirm 441 tasks were accepted, 388 completed, and 6 clients were flagged \u2014 all consistent with the agent's described actions. The agent's prose descriptions align with the quantitative outcomes. While the condensed transcript doesn't show every individual CLI command, the metrics confirm the actions were executed. There's no evidence of systematic narration without execution; the outcomes match the described strategy.",
+        "The transcript is heavily condensed and shows primarily prose summaries rather than explicit CLI commands. However, the rollout metrics confirm 441 tasks accepted, 388 completed, 6 clients flagged, and 1 scratchpad write\u2014all consistent with actual CLI execution. The agent's prose describes actions that are confirmed by the outcome metrics. The condensed transcript format means CLI commands aren't shown verbatim, but the outcomes (task counts, prestige levels, cash trajectory, flags) verify that the commands were actually executed. The agent's narrative describes completed actions in past tense (\"Task-47 finished 97 hours early, earned $15.6k\") consistent with actual execution rather than unfulfilled promises.",
+        "The transcript is a prose narrative of the agent's reasoning and strategy, not a detailed log of every CLI command executed. The agent describes high-level actions like \"I'm launching four domain-diverse jobs,\" \"I'm running a six-contract batch,\" \"I'm continuing the dual-cell engine,\" and \"I'm running the same guarded controller to the actual horizon.\" However, the agent does not show the actual `rinzler` commands for most of these actions in the transcript. The transcript states \"All actions use the `rinzler` CLI via `run_command`\" and describes the agent's strategy in prose, but does not include the full command output for every action. The agent does show some specific commands early on (e.g., \"I'm flagging Cortex\u2014not broadly flagging untested clients\") but then transitions to describing batches and cycles without showing individual commands. However, the rollout metrics confirm that 388 tasks were completed and 441 were accepted, which is consistent with the agent's narrative of running many concurrent tasks. The agent's final statement \"Simulation completed to the terminal horizon on 2023-03-21\" and the matching `sim_time` in the rollout metrics confirm that the agent did execute the simulation to completion. The absence of detailed command logs in the prose narrative does not necessarily mean the commands were not executed; it may simply reflect the agent's choice to summarize its actions at a higher level. Given that the rollout metrics confirm the outcomes described in the narrative (388 completions, 6 flagged clients, final cash balance, prestige values), the evidence suggests the agent did execute the claimed actions rather than merely narrating them without execution."
+      ]
+    }
+  ],
+  "abstention_flags": [],
+  "aggregation": "majority_vote_or_opus_tiebreak",
+  "council": {
+    "members": [
+      {
+        "family": "opus",
+        "model": "claude-opus-4-6"
+      },
+      {
+        "family": "sonnet",
+        "model": "claude-sonnet-4-6"
+      },
+      {
+        "family": "haiku",
+        "model": "claude-haiku-4-5-20251001"
+      }
+    ],
+    "surviving": [
+      "opus",
+      "sonnet",
+      "haiku"
+    ],
+    "failed": [],
+    "tiebreaker": "opus"
+  },
+  "usage": {
+    "input_tokens": 29000,
+    "output_tokens": 6814,
+    "cost_usd": 0.175892,
+    "request_count": 3,
+    "per_member": {
+      "opus": {
+        "input_tokens": 9667,
+        "output_tokens": 1741,
+        "cost_usd": 0.09186,
+        "request_count": 1,
+        "ok": true
+      },
+      "sonnet": {
+        "input_tokens": 9667,
+        "output_tokens": 2000,
+        "cost_usd": 0.059001,
+        "request_count": 1,
+        "ok": true
+      },
+      "haiku": {
+        "input_tokens": 9666,
+        "output_tokens": 3073,
+        "cost_usd": 0.025031,
+        "request_count": 1,
+        "ok": true
+      }
+    }
+  }
+}

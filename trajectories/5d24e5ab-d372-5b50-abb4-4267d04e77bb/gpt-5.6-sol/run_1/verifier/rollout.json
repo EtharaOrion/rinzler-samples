@@ -1,0 +1,58 @@
+{
+  "bankrupt": true,
+  "final_funds_cents": -976975,
+  "initial_funds_cents": 31701944,
+  "funds_min_intra_year_cents": -976975,
+  "scratchpad_write_count": 1,
+  "final_prestige": 5.245,
+  "prestige_by_domain": {
+    "data_environment": 2.65,
+    "inference": 1.896,
+    "research": 5.104,
+    "training": 5.245
+  },
+  "task_completion_count": 148,
+  "task_accepted_count": 170,
+  "task_deadline_hit_rate": 0.8705882352941177,
+  "agent_flagged_client_ids_as_adversarial": [
+    2,
+    3,
+    5,
+    9,
+    11,
+    13,
+    18
+  ],
+  "client_flag_events": [
+    {
+      "client_id": 13,
+      "turn": 1
+    },
+    {
+      "client_id": 3,
+      "turn": 2
+    },
+    {
+      "client_id": 18,
+      "turn": 3
+    },
+    {
+      "client_id": 9,
+      "turn": 4
+    },
+    {
+      "client_id": 11,
+      "turn": 5
+    },
+    {
+      "client_id": 2,
+      "turn": 6
+    },
+    {
+      "client_id": 5,
+      "turn": 7
+    }
+  ],
+  "sim_time": "2024-08-01T09:00:00",
+  "horizon_end": "2024-08-06T09:00:00"
+}

@@ -1,0 +1,26 @@
+schema_version = "1.1"
+
+[task]
+name = "rinzler/4beb059e-b715-53d0-96b6-793a890aea28"
+description = "rinzler long-horizon business sim. config=tier_expert seed=8240."
+authors = [{ name = "rinzler" }]
+keywords = ["rinzler", "long-horizon", "business-sim"]
+
+[metadata]
+bundle_uuid = "4beb059e-b715-53d0-96b6-793a890aea28"
+config = "tier_expert"
+seed = 8240
+
+[agent]
+network_mode = "public"
+timeout_sec = 1800.0
+
+[verifier]
+network_mode = "public"
+timeout_sec = 180.0
+
+[environment]
+build_timeout_sec = 900.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 10240

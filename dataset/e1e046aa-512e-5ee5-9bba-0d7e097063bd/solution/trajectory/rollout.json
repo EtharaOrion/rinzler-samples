@@ -1,0 +1,38 @@
+{
+  "bankrupt": false,
+  "final_funds_cents": 229551128,
+  "initial_funds_cents": 42263666,
+  "funds_min_intra_year_cents": 42263666,
+  "scratchpad_write_count": 1,
+  "final_prestige": 10.0,
+  "prestige_by_domain": {
+    "data_environment": 10.0,
+    "inference": 10.0,
+    "research": 4.224,
+    "training": 5.516
+  },
+  "task_completion_count": 562,
+  "task_accepted_count": 569,
+  "task_deadline_hit_rate": 0.9876977152899824,
+  "agent_flagged_client_ids_as_adversarial": [
+    3,
+    6,
+    7
+  ],
+  "client_flag_events": [
+    {
+      "client_id": 3,
+      "turn": 1
+    },
+    {
+      "client_id": 6,
+      "turn": 2
+    },
+    {
+      "client_id": 7,
+      "turn": 3
+    }
+  ],
+  "sim_time": "2005-02-07T09:00:00",
+  "horizon_end": "2005-02-07T09:00:00"
+}

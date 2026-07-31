@@ -1,0 +1,21 @@
+{
+  "bankrupt": false,
+  "final_funds_cents": 66262309,
+  "initial_funds_cents": 42982612,
+  "funds_min_intra_year_cents": 32624367,
+  "scratchpad_write_count": 1,
+  "final_prestige": 4.897,
+  "prestige_by_domain": {
+    "data_environment": 4.897,
+    "inference": 3.754,
+    "research": 3.188,
+    "training": 3.594
+  },
+  "task_completion_count": 105,
+  "task_accepted_count": 114,
+  "task_deadline_hit_rate": 0.9210526315789473,
+  "agent_flagged_client_ids_as_adversarial": [],
+  "client_flag_events": [],
+  "sim_time": "2016-11-26T09:00:00",
+  "horizon_end": "2016-11-26T09:00:00"
+}

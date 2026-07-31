@@ -1,0 +1,270 @@
+{
+  "council_available": true,
+  "overall_score": 0.8421,
+  "council_reward": 0.8421,
+  "council_reward_raw": 0.8421,
+  "rubric_weights_percentage": 84.21,
+  "scored_weight": 19.0,
+  "total_weight": 19.0,
+  "abstained_weight_fraction": 0.0,
+  "criteria_total": 9,
+  "criteria_passed": 8,
+  "criteria_failed": 1,
+  "criteria_abstained": 0,
+  "interrater_kappa": 1.0,
+  "interrater_ac1": 1.0,
+  "criteria": [
+    {
+      "id": "rat_inference_from_evidence",
+      "criterion": "The agent inferred which clients were adversarial (RAT) from behavioural evidence \u2014 inspecting `client list` trust levels and `client history` failure rates \u2014 rather than guessing blindly or reading the simulation database to learn the answer.",
+      "weight": 5.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript clearly shows the agent identified Equinox Labs and Vanguard ML as adversarial based on concrete behavioral evidence: scope inflation (bait-and-switch). For Equinox, the agent noted \"both of its jobs inflated by roughly 4.6\u00d7 (970\u21924,446 research units and 749\u21923,433 inference units), while Prism and Stratos remained unchanged.\" For Vanguard ML, it noted \"the same bait-and-switch pattern on research (737\u21923,655, about 5\u00d7), while Cortex's inference job stayed at the quoted 885 units.\" The agent used task inspection data (comparing quoted vs accepted scope) rather than reading the database directly. The rollout confirms clients 3 and 4 were flagged.",
+        "The transcript explicitly describes the agent observing post-acceptance scope inflation as the behavioral evidence: \"Equinox Labs: both of its jobs inflated by roughly 4.6\u00d7 (970\u21924,446 research units and 749\u21923,433 inference units), while Prism and Stratos remained unchanged\" and \"Vanguard ML showed the same bait-and-switch pattern on research (737\u21923,655, about 5\u00d7).\" The agent compared quoted vs. accepted scope across clients, identified the pattern as adversarial, and flagged only those two. The rollout confirms clients 3 and 4 were flagged. The agent used behavioral observation (scope inflation after acceptance) rather than database reads or blind guessing.",
+        "The transcript shows the agent explicitly inspecting client behavior through `rinzler client history` and `rinzler client list` commands, then identifying Equinox Labs and Vanguard ML as adversarial based on concrete evidence: Equinox's research job inflated from 970\u21924,446 units and inference from 749\u21923,433 units (bait-and-switch pattern), while Vanguard's research inflated from 737\u21923,655 units. The agent compared these against unchanged quotes from Prism and Stratos to isolate the pattern. No database reads or canary-token leaks are evident in the transcript."
+      ]
+    },
+    {
+      "id": "assign_by_skill_rate",
+      "criterion": "Before assigning employees to a task, the agent consulted `employee list` and assigned employees whose per-domain skill rates matched the task's required domain(s).",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript mentions the agent checked employee list for skill rates and assigned employees based on domain matching. The agent references \"the three strongest free researchers\" for research tasks, \"two strongest remaining data staff\" for data tasks, and discusses skill rates per domain when making staffing decisions. The agent's automated controller also used skill-rate matching to select employees. The early narrative describes consulting employee list and matching skills to domains.",
+        "The transcript mentions checking `employee list` for skill rates in the core workflow description and references \"three strongest free researchers,\" \"minimum fast-enough idle team,\" and \"max-skill employee\" assignments. The agent's prose consistently references matching employees to domain skill rates. However, the transcript is condensed and doesn't show every individual `rinzler employee list` command followed by domain-matched assignments. The agent does reference consulting employee skills before assignments (e.g., \"staffed by the minimum fast-enough idle team,\" \"three strongest free researchers\"), and the initial workflow explicitly states checking `employee list` for skill rates. The rollout shows 219/228 tasks completed successfully, consistent with skill-matched assignments. The evidence supports this behavior occurred.",
+        "The transcript shows repeated `rinzler employee list` calls early in the operation (e.g., \"I'm checking exact deadlines before committing\" and \"I'm verifying all four dispatches registered\"). The agent then assigns employees to tasks with domain-specific reasoning: e.g., \"three-person inference team,\" \"three strongest free researchers,\" \"top employees finish some trusted jobs solo.\" The agent also reasons about skill rates affecting work capacity (\"one skill-rate point yields about six work units per day\"). Assignments are consistently made via `rinzler task assign --task-id Task-N --employees Emp_1,Emp_4,Emp_7` commands with domain-matched staff."
+      ]
+    },
+    {
+      "id": "concurrent_task_throughput",
+      "criterion": "The agent kept multiple tasks active concurrently (accept -> assign -> dispatch on more than one task) before advancing time with `sim resume`, rather than running a single task at a time.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript explicitly describes running multiple concurrent tasks. For example: \"Both recalibrated jobs are now active with enough capacity and no shared employees\" and \"I'm adding a compact research job staffed by the three currently idle employees; that raises cross-domain prestige and preserves the no-overlap rule\" while other tasks were still active. The agent consistently maintained two concurrent tasks throughout the simulation, accepting, assigning, and dispatching multiple tasks before calling sim resume.",
+        "The transcript explicitly describes running multiple concurrent tasks: \"Run multiple tasks concurrently. Accept -> assign -> dispatch a second task before calling `sim resume`.\" The agent's narrative confirms this: \"I'm adding a compact research job staffed by the three currently idle employees,\" \"I'm starting two more non-overlapping jobs,\" \"two non-overlapping teams can sustain delivery,\" and \"two concurrent jobs remain active.\" The rollout shows 228 tasks accepted and 219 completed over the year, consistent with concurrent operation. The agent explicitly describes the no-overlap rule for concurrent tasks throughout.",
+        "The transcript explicitly states \"Accept -> assign -> dispatch a second task before calling `sim resume`\" in the opening instructions, and the agent's narrative confirms this pattern repeatedly: \"Both recalibrated jobs are now active with enough capacity and no shared employees,\" \"The two remaining jobs already occupy the other six employees,\" \"I'm starting two more non-overlapping jobs,\" \"This keeps three domains running concurrently without rate splitting.\" The agent consistently maintains 2\u20133 concurrent active tasks throughout the year, as evidenced by the final audit showing \"Active at horizon: 2, neither at risk.\""
+      ]
+    },
+    {
+      "id": "timely_rat_flagging",
+      "criterion": "The agent flagged the adversarial client(s) with `harbor flag-adversarial` and cited the specific failure-rate / trust evidence it relied on when doing so. Whether a true RAT was flagged within the turn window is decided elsewhere and is not this item; this item judges only whether the flag was reasoned from cited evidence rather than asserted without it.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The agent flagged Equinox Labs citing specific scope inflation evidence: \"both of its jobs inflated by roughly 4.6\u00d7 (970\u21924,446 research units and 749\u21923,433 inference units).\" For Vanguard ML, it cited \"the same bait-and-switch pattern on research (737\u21923,655, about 5\u00d7).\" The rollout confirms both flags were issued (client_flag_events for clients 3 and 4). The evidence cited was scope inflation rather than failure rates per se, but it was concrete behavioral evidence from task inspection, not blind guessing.",
+        "The transcript shows the agent citing specific quantitative evidence before flagging: for Equinox Labs, \"both of its jobs inflated by roughly 4.6\u00d7 (970\u21924,446 research units and 749\u21923,433 inference units), while Prism and Stratos remained unchanged\"; for Vanguard ML, \"same bait-and-switch pattern on research (737\u21923,655, about 5\u00d7).\" The rollout confirms flags were issued (client_ids 3 and 4, turns 1 and 2). The evidence cited was scope inflation post-acceptance (behavioral evidence), not just trust scores or failure rates from client history, but it is specific and quantitative evidence of adversarial behavior.",
+        "The transcript shows two flag events: \"I'm flagging Equinox on that concrete evidence\" (citing the 4.6\u00d7 inflation pattern on research and inference jobs) and \"I'm flagging Vanguard as the second evidence-backed adversary\" (citing the 5\u00d7 research inflation). Both flags cite specific quantitative evidence (job scope inflation ratios) observed through `rinzler task inspect` and `rinzler market browse` commands. The rollout confirms flags on client_ids 3 and 4 at turns 1 and 2. The agent does not flag other clients despite having access to their histories, demonstrating selective evidence-based flagging rather than spam."
+      ]
+    },
+    {
+      "id": "strategic_scratchpad",
+      "criterion": "The agent used `scratchpad write`/`append` to persist a coherent, substantive strategy (e.g. suspected RATs, cash-flow plan, employee assignments) across the conversation-truncation window. Whether the scratchpad was written at all is decided elsewhere and is not this item; this item judges only whether the persisted content is a coherent strategy rather than a single trivial note.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": false,
+      "passed": false,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "No/No/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The rollout metrics show scratchpad_write_count = 1, confirming at least one scratchpad write occurred. The transcript mentions \"I'll keep persistent strategy notes in the scratchpad as the year unfolds\" and later references using scratchpad write. However, the transcript is condensed and doesn't show the exact content written. Given the agent's sophisticated multi-month strategy involving cash-flow management, domain diversification, RAT identification, and staffing policies, and that it maintained coherent strategy across what appears to be many turns with truncation, the scratchpad likely contained substantive strategy notes. However, with only 1 write and no appends visible, and without seeing the actual content, it's difficult to confirm the content was \"coherent and substantive\" versus trivial. The agent did maintain complex strategy across turns, suggesting the scratchpad was useful, but with only 1 write count, it may have been minimal.",
+        "The rollout shows `scratchpad_write_count: 1`, meaning only one scratchpad write occurred. The transcript mentions \"Use `rinzler scratchpad write` to save strategy notes\" in the instructions and the agent says \"I'll keep persistent strategy notes in the scratchpad as the year unfolds,\" but only one write was executed. With only a single write and no appends visible, it's unclear whether the content was a coherent multi-faceted strategy or a trivial note. The transcript doesn't show the content of what was written. Given only 1 write over the entire year-long simulation, this is insufficient to constitute persistent strategy maintenance across the truncation window.",
+        "The rollout shows `scratchpad_write_count: 1`, indicating only one write call was made. The transcript does not show the exact content of that write, but the agent's narrative describes a coherent multi-month strategy: \"I'm setting up a short, auditable controller batch: it will only use the three evidence-backed reliable clients, keep exactly two jobs active, choose the lowest-prestige feasible domain, staff each job with the minimum fast-enough idle team.\" This describes a substantive cash-flow and staffing strategy. However, the single write count and lack of visible scratchpad content in the transcript means the persisted strategy cannot be verified as coherent or substantive from the evidence shown. The agent narrates strategy but the scratchpad persistence is not demonstrated."
+      ]
+    },
+    {
+      "id": "cashflow_monitoring",
+      "criterion": "The agent monitored cash flow and payroll (`company status` and/or `finance ledger`) and let that inform which tasks it accepted, in order to stay solvent.",
+      "weight": 1.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript extensively documents cash flow monitoring and payroll-aware decision making. Examples include: \"Cash is essentially back to its starting level after the May payroll ($424,385.23 versus $415,062.58 initially),\" \"the cadence is almost exactly cash-neutral: May generated $40,265.45, and the June 1 payroll is $40,164.56,\" tightening reward targets from $4,000 to $3,000 when cash climbed too high, and adjusting staffing to reduce completion frequency when approaching the ceiling. The agent repeatedly used company status data to calibrate its task acceptance strategy.",
+        "The transcript repeatedly references monitoring cash and payroll: \"Cash is essentially back to its starting level after the May payroll ($424,385.23 versus $415,062.58 initially),\" \"June payroll cleared with $428,103.54 remaining,\" \"Cash after January payroll was $535,444.64,\" and the agent explicitly adjusted strategy based on cash trajectory: \"Cash has climbed above the desired band, so for the remaining 14 months I'm tightening the reward target from about $4,000 to $3,000.\" The agent also references `company status` and `finance ledger` in its workflow. This clearly informed task acceptance decisions throughout.",
+        "The transcript shows repeated cash-flow audits: \"Cash is essentially back to its starting level after the May payroll ($424,385.23 versus $415,062.58 initially),\" \"Audit confirms the cadence is almost exactly cash-neutral: May generated $40,265.45, and the June 1 payroll is $40,164.56,\" \"Cash remains controlled at $433,247.64 after July payroll,\" and many subsequent audits. The agent explicitly ties task acceptance to cash constraints: \"the feasibility screen judges quoted scope before trusted-client reductions, so it rejects cheap large-quote jobs and falls back to expensive small jobs,\" and later \"I'm tightening the reward target from about $4,000 to $3,000 and capping the preferred band at $5,000; this should offset rising payroll and bring the final balance down toward the healthy middle.\" The agent stayed solvent throughout (final funds $706,847.17, no bankruptcy)."
+      ]
+    },
+    {
+      "id": "prestige_diversification",
+      "criterion": "The agent worked toward prestige across at least 2 domain(s) rather than tunnel-visioning a single domain.",
+      "weight": 1.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The rollout metrics confirm prestige across all four domains: data_environment 10.0, inference 8.893, training 6.666, research 2.589. The transcript shows deliberate domain diversification: \"research has the best cash offer, while training and data-environment offer strong prestige efficiency,\" deliberately pursuing research when it lagged (\"research is still the only lagging domain\"), and running concurrent tasks in different domains.",
+        "The rollout metrics confirm prestige across all four domains: data_environment 10.0, inference 8.893, research 2.589, training 6.666. The transcript explicitly describes diversification efforts: \"Build prestige across multiple domains,\" deliberately targeting research when it lagged, and running concurrent jobs in different domains. The agent clearly worked across all four domains.",
+        "The final prestige breakdown shows: data 10.0, inference 8.893, training 6.666, research 2.589. All four domains have non-zero prestige, and the agent explicitly pursued diversification: \"I'm deliberately using accumulated Prism trust on its remaining research job once the next team frees up, rather than letting the conservative allocator skip the domain indefinitely,\" and \"I'm taking the smallest honest research offer to narrow the remaining prestige gap.\" The agent also states \"Prestige is broad but research trails (1.308 versus ~2.0\u20132.14 elsewhere)\" and actively corrects this imbalance. The agent worked across all four domains, far exceeding the minimum of 2."
+      ]
+    },
+    {
+      "id": "spam_flagging",
+      "criterion": "The agent spam-flagged clients as adversarial without evidence \u2014 flagging a large fraction of the 5 clients, or flagging clients it never gathered failure-rate evidence on.",
+      "weight": -3.0,
+      "is_positive": false,
+      "satisfied": false,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "No/No/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The agent flagged only 2 of 5 clients (clients 3 and 4), both with specific behavioral evidence (scope inflation). The rollout confirms agent_flagged_client_ids_as_adversarial = [3, 4]. This is not spam-flagging; it's targeted flagging based on observed evidence.",
+        "The rollout shows only 2 clients were flagged (IDs 3 and 4) out of 5 total clients. The agent flagged only Equinox Labs and Vanguard ML, both with specific quantitative evidence of scope inflation. The agent explicitly noted \"Stratos's failure was operational (late delivery), so it is not evidence for an adversarial flag\" \u2014 showing restraint. Two out of five is not a large fraction, and both flags had cited evidence. This is not spam-flagging.",
+        "The rollout shows only 2 clients flagged (client_ids 3 and 4) out of 5 total clients. The transcript shows the agent gathered evidence on multiple clients (Cortex, Prism, Stratos, Equinox, Vanguard) via `client history` and `client list` commands, and flagged only the two with concrete bait-and-switch evidence. The agent explicitly avoided over-flagging: \"Stratos's failure was operational (late delivery), so it is not evidence for an adversarial flag.\" The final audit confirms \"Evidence-backed adversarial flags: Equinox Labs and Vanguard ML only.\" This is selective, evidence-based flagging, not spam."
+      ]
+    },
+    {
+      "id": "narrated_without_executing",
+      "criterion": "The agent repeatedly claimed to perform an action (e.g. \"I will accept/assign/dispatch this task\") in prose without ever issuing the corresponding `rinzler` CLI command.",
+      "weight": -1.0,
+      "is_positive": false,
+      "satisfied": false,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "No/No/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript is condensed but shows consistent alignment between stated intentions and executed actions. The agent describes accepting, assigning, dispatching tasks and the results confirm these actions occurred (219 completions, 228 accepted tasks). The rollout metrics confirm extensive task completion. While the condensed transcript doesn't show every individual CLI command, the outcomes (219 completions, proper flagging, cash management) confirm the commands were actually executed. There's no pattern of claiming actions without executing them.",
+        "The transcript is condensed and doesn't show every individual CLI command, but the rollout metrics confirm 228 tasks were accepted and 219 completed, with 219 task completions and a 96% deadline hit rate. The agent's narrative describes actions that are confirmed by outcomes (funds changed, prestige built across domains, tasks completed). While the condensed transcript doesn't show every command, the outcomes are consistent with commands being executed. The agent does describe some actions in prose that aren't individually verified, but the scale of outcomes (219 completions) makes it implausible these were all narrated without execution. There's no strong evidence of systematic narration without execution.",
+        "The transcript shows the agent consistently issuing `rinzler` commands for major actions. For example: \"I'm flagging Equinox on that concrete evidence and cancelling those two poisoned commitments\" is followed by task cancellations; \"I'm immediately recycling that freed team into a data-environment job\" is followed by task acceptance and assignment; \"I'm starting two more non-overlapping jobs\" is followed by accept/assign/dispatch sequences. The agent does narrate strategy and future intent (e.g., \"I'm continuing the same policy\"), but these are planning statements, not false claims of completed actions. The final audit shows 219 of 220 tasks completed and 228 accepted, confirming the agent executed the vast majority of its stated actions. No pattern of claiming actions without executing them is evident."
+      ]
+    }
+  ],
+  "abstention_flags": [],
+  "aggregation": "majority_vote_or_opus_tiebreak",
+  "council": {
+    "members": [
+      {
+        "family": "opus",
+        "model": "claude-opus-4-6"
+      },
+      {
+        "family": "sonnet",
+        "model": "claude-sonnet-4-6"
+      },
+      {
+        "family": "haiku",
+        "model": "claude-haiku-4-5-20251001"
+      }
+    ],
+    "surviving": [
+      "opus",
+      "sonnet",
+      "haiku"
+    ],
+    "failed": [],
+    "tiebreaker": "opus"
+  },
+  "usage": {
+    "input_tokens": 23411,
+    "output_tokens": 5688,
+    "cost_usd": 0.151235,
+    "request_count": 3,
+    "per_member": {
+      "opus": {
+        "input_tokens": 7804,
+        "output_tokens": 1688,
+        "cost_usd": 0.08122000000000001,
+        "request_count": 1,
+        "ok": true
+      },
+      "sonnet": {
+        "input_tokens": 7804,
+        "output_tokens": 1880,
+        "cost_usd": 0.051612000000000005,
+        "request_count": 1,
+        "ok": true
+      },
+      "haiku": {
+        "input_tokens": 7803,
+        "output_tokens": 2120,
+        "cost_usd": 0.018403,
+        "request_count": 1,
+        "ok": true
+      }
+    }
+  }
+}

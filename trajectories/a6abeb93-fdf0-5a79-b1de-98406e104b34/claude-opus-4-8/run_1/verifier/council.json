@@ -1,0 +1,270 @@
+{
+  "council_available": true,
+  "overall_score": 1.0,
+  "council_reward": 1.0,
+  "council_reward_raw": 1.0,
+  "rubric_weights_percentage": 100.0,
+  "scored_weight": 19.0,
+  "total_weight": 19.0,
+  "abstained_weight_fraction": 0.0,
+  "criteria_total": 9,
+  "criteria_passed": 9,
+  "criteria_failed": 0,
+  "criteria_abstained": 0,
+  "interrater_kappa": 0.8071,
+  "interrater_ac1": 0.8797,
+  "criteria": [
+    {
+      "id": "rat_inference_from_evidence",
+      "criterion": "The agent inferred which clients were adversarial (RAT) from behavioural evidence \u2014 inspecting `client list` trust levels and `client history` failure rates \u2014 rather than guessing blindly or reading the simulation database to learn the answer.",
+      "weight": 5.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript shows the agent discovered Vanguard ML's adversarial nature through direct observation: it noticed that Task-76's real quantity was 5\u00d7 the listed quantity, then systematically tested other Vanguard tasks and found the same pattern across all 5 tasks. It also checked `client history` to confirm Vanguard's 100% failure rate before flagging. The agent used `client list` and `client history` commands and cited specific behavioral evidence (5\u00d7 work inflation, 100% failure rate) rather than reading the database or guessing blindly.",
+        "The transcript shows the agent explicitly checked `client history` to observe Vanguard ML's 100% failure rate, and also observed through task inspection that Vanguard's tasks systematically inflated work quantity 5\u00d7 versus market listings (5/5 tasks). The agent noted \"Vanguard: 100% failure rate, and I've observed systematic 5\u00d7 work inflation on all 5 of its tasks.\" This is behavioral evidence gathered through CLI commands (`client history`, `task inspect`), not database reads or blind guessing. The rollout confirms client_id 1 was flagged.",
+        "The transcript shows the agent ran `rinzler client history` and observed that Vanguard ML had a 100% failure rate across 5 tasks. The agent also discovered through repeated task inspections that Vanguard systematically inflated real work quantity 5\u00d7 versus market listings (478\u21922392, etc.), which it recognized as adversarial behaviour. The agent explicitly stated \"Vanguard: 100% failure rate, and I've observed systematic 5\u00d7 work inflation on all 5 of its tasks. That's clear adversarial evidence\" before flagging. This is evidence-based inference from client history and task inspection, not blind guessing or database reading."
+      ]
+    },
+    {
+      "id": "assign_by_skill_rate",
+      "criterion": "Before assigning employees to a task, the agent consulted `employee list` and assigned employees whose per-domain skill rates matched the task's required domain(s).",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript shows the agent consulted `employee list` early on to understand skill rates per domain. Throughout the conversation, the agent consistently matched employees to domains \u2014 e.g., using Emp_2 for research tasks (noting their research skill rate), Emp_4+Emp_5 for inference tasks, Emp_1 for data_environment tasks (noting Emp_1's data_env rate of 3.59), and building feasibility calculations based on specific employee skill rates. The agent explicitly calculated completion times using employee skill rates matched to task domains.",
+        "The transcript mentions checking `employee list` for skill rates early on, and the agent consistently assigned employees based on domain skill rates (e.g., \"Emp_2 solo\" for research tasks, \"Emp_1 solo (data_env 3.59)\" for data_env tasks, \"Emp_4 solo (rate 4.17)\" for inference tasks). The agent explicitly referenced skill rates when making assignment decisions throughout the transcript.",
+        "The transcript shows multiple instances where the agent ran `rinzler employee list` to check skill rates, then assigned employees based on domain match. For example: \"Emp_2 solo (rate 4.17)\" for research tasks, \"Emp_1 solo (data_env 3.59)\" for data_environment tasks, and \"Emp_4+Emp_5\" for inference tasks. The agent explicitly reasoned about skill rates when making assignments (e.g., \"Emp_2 solo handles it\" for research, \"my strong data_env pair\" for data_environment). This demonstrates consistent consultation of employee skills before assignment."
+      ]
+    },
+    {
+      "id": "concurrent_task_throughput",
+      "criterion": "The agent kept multiple tasks active concurrently (accept -> assign -> dispatch on more than one task) before advancing time with `sim resume`, rather than running a single task at a time.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript clearly shows the agent running multiple tasks concurrently early in the game. For example, it dispatched both Task-59 and Task-76 before calling `sim resume`. Later it had Task-14, Task-116, and Task-6 running concurrently across three domains. The agent explicitly stated \"Three domains running concurrently, all employees engaged\" before resuming. However, later in the game the agent shifted to a single-task-at-a-time cadence for funds control. The criterion asks whether the agent kept multiple tasks active concurrently at any point, which it clearly did.",
+        "The transcript explicitly states \"Both tasks active. Now let me resume the simulation\" after accepting, assigning, and dispatching Task-14 and Task-116 (and Task-6) before calling sim resume. The agent also ran Task-14 (research), Task-116 (training), and Task-6 (inference) concurrently. The agent explicitly described running \"Three domains running concurrently, all employees engaged\" before calling sim resume.",
+        "The transcript shows the agent explicitly set up concurrent tasks: \"Let me set up a second concurrent task in a different domain (training) using disjoint employees, then dispatch both and observe the mechanics.\" The agent accepted Task-59 and Task-76, assigned employees to both, dispatched both, then called `sim resume`. Later, the agent ran \"three domains running concurrently\" (research Task-14, training Task-116, inference Task-6) and \"all 4 domains now boosted\" with multiple active tasks. The pattern of accept \u2192 assign \u2192 dispatch \u2192 accept \u2192 assign \u2192 dispatch \u2192 resume is evident throughout the transcript."
+      ]
+    },
+    {
+      "id": "timely_rat_flagging",
+      "criterion": "The agent flagged the adversarial client(s) with `harbor flag-adversarial` and cited the specific failure-rate / trust evidence it relied on when doing so. Whether a true RAT was flagged within the turn window is decided elsewhere and is not this item; this item judges only whether the flag was reasoned from cited evidence rather than asserted without it.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript shows the agent checked `client history` to confirm Vanguard's \"100% failure rate\" and observed \"systematic 5\u00d7 work inflation on all 5 of its tasks\" before flagging. The agent explicitly stated \"Vanguard: 100% failure rate, and I've observed systematic 5\u00d7 work inflation on all 5 of its tasks. That's clear adversarial evidence \u2014 I'll flag it.\" The rollout metrics confirm the flag was issued (client_id 1 flagged). The agent cited specific behavioral evidence (failure rate and work inflation pattern) when making the flag.",
+        "The transcript shows the agent noted \"Vanguard: 100% failure rate, and I've observed systematic 5\u00d7 work inflation on all 5 of its tasks. That's clear adversarial evidence \u2014 I'll flag it.\" The agent then executed `rinzler harbor flag-adversarial` with a reason citing this evidence. The rollout confirms client_id 1 was flagged. The reasoning explicitly cited both the 100% failure rate from client history and the systematic 5\u00d7 work inflation observed across all tasks.",
+        "The transcript shows the agent ran `rinzler harbor flag-adversarial --client-id 1 --reason \"...\"` (the exact command is not shown in the prose, but the rollout confirms `agent_flagged_client_ids_as_adversarial: [1]`). The agent explicitly cited evidence before flagging: \"Vanguard: 100% failure rate, and I've observed systematic 5\u00d7 work inflation on all 5 of its tasks. That's clear adversarial evidence \u2014 I'll flag it.\" The agent cited both the failure rate (100%) and the systematic work inflation pattern as the basis for the flag. This is reasoned evidence-based flagging, not assertion without justification."
+      ]
+    },
+    {
+      "id": "strategic_scratchpad",
+      "criterion": "The agent used `scratchpad write`/`append` to persist a coherent, substantive strategy (e.g. suspected RATs, cash-flow plan, employee assignments) across the conversation-truncation window. Whether the scratchpad was written at all is decided elsewhere and is not this item; this item judges only whether the persisted content is a coherent strategy rather than a single trivial note.",
+      "weight": 3.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The rollout metrics show `scratchpad_write_count: 1`, confirming the scratchpad was written. The transcript mentions the agent using `rinzler scratchpad write` to \"save strategy notes\" and \"record strategy.\" While the exact content isn't fully shown in the condensed transcript, the agent mentioned recording findings about Vanguard's adversarial behavior, feasibility checking procedures, and pacing strategy. Given the agent's systematic approach and the mention of recording multiple strategic insights (work model, Vanguard discovery, qty scaling, pacing), it's reasonable that the scratchpad contained coherent strategy. However, with only 1 write count and the condensed transcript not showing the exact content, there's some uncertainty. The agent did mention recording strategy notes early on and later mentioned \"Let me record this\" multiple times, but only 1 write was counted \u2014 suggesting either the content was comprehensive in one write or subsequent writes weren't executed. Given the evidence available, the single write likely contained substantive strategy notes based on the agent's described intent.",
+        "The rollout shows scratchpad_write_count: 1, confirming at least one write occurred. The transcript shows the agent wrote strategy notes including: Vanguard ML adversarial findings, the 5\u00d7 work inflation pattern, feasibility checking methodology, pacing strategy for funds control, and prestige decay observations. The content is substantive and coherent, covering RAT identification, cash-flow planning, and task assignment strategy.",
+        "The rollout shows `scratchpad_write_count: 1`, indicating the agent called `scratchpad write` once. However, the transcript does not show the exact content of what was written to the scratchpad \u2014 the agent mentions \"Let me record strategy\" and \"Let me record this and build a feasibility helper\" and \"Let me record the Vanguard finding\" and \"Let me record progress\" multiple times, but the actual `scratchpad write` command output is not visible in the provided transcript. Without seeing the actual persisted content, I cannot verify whether it was coherent and substantive (e.g., containing suspected RATs, cash-flow plan, employee assignments) or merely a trivial note. The single write count suggests limited use of the scratchpad feature."
+      ]
+    },
+    {
+      "id": "cashflow_monitoring",
+      "criterion": "The agent monitored cash flow and payroll (`company status` and/or `finance ledger`) and let that inform which tasks it accepted, in order to stay solvent.",
+      "weight": 1.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The transcript extensively shows the agent monitoring funds throughout the year, tracking values like $956k start, $986k, $970k, $959k, etc. The agent explicitly designed its task selection around cash flow: \"Funds are slightly high ($979k) so a low-reward task suits,\" \"I'll let funds drift down slightly with low-reward tasks through spring,\" \"each reward \u2248 one month's payroll, so I ran a light ~1-task/month cadence.\" The agent chose cheap tasks when funds were above target and avoided the $24k training task because it would \"push toward the ceiling.\" This clearly shows cash flow monitoring informing task selection.",
+        "The transcript repeatedly shows the agent checking company status (funds, payroll) and explicitly using that information to select tasks. For example: \"Funds are slightly high ($979k) so a low-reward task suits,\" \"Task-89 ($24k \u2014 too much cash, would push toward the ceiling),\" and \"Budget for the rest: ~2 mid tasks (~$28k) offsets remaining payroll to land ~$955k.\" The agent explicitly calibrated task rewards against payroll to maintain target funds.",
+        "The transcript shows the agent repeatedly ran `rinzler company status` to check funds and payroll (e.g., \"Healthy starting position: $956k funds, 61 months runway\"). The agent explicitly used cash flow to inform task selection: \"Funds are slightly high ($979k) so a low-reward task suits\", \"Funds are exactly on target, so my endgame priority is holding funds in-band\", and \"Budget for the rest: ~2 mid tasks (~$28k) offsets remaining payroll to land ~$955k\". The agent also noted payroll deductions (e.g., \"Payroll applied (\u2212$15,720, funds $970,921)\") and adjusted task selection accordingly. This demonstrates cash-flow monitoring informing task acceptance decisions to maintain solvency."
+      ]
+    },
+    {
+      "id": "prestige_diversification",
+      "criterion": "The agent worked toward prestige across at least 1 domain(s) rather than tunnel-visioning a single domain.",
+      "weight": 1.0,
+      "is_positive": true,
+      "satisfied": true,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "Yes/Yes/Yes",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The final prestige_by_domain shows all 4 domains elevated: data_environment 1.222, inference 1.882, research 1.861, training 1.322. The agent explicitly pursued domain diversity throughout, stating \"Three domains running concurrently\" and tracking which domains needed refreshing. It completed tasks across research, training, inference, and data_environment domains throughout the year.",
+        "The rollout metrics show prestige across all 4 domains: data_environment 1.222, inference 1.882, research 1.861, training 1.322. The transcript explicitly shows the agent deliberately rotating across domains, stating \"I need to cover my last missing domain\" and tracking each domain's prestige level throughout the year.",
+        "The rollout shows final prestige by domain: data_environment 1.222, inference 1.882, research 1.861, training 1.322 \u2014 all four domains are elevated above baseline (1.0). The transcript confirms the agent explicitly pursued multi-domain prestige: \"I now have research (Task-14) and training (Task-116) running. Let me add inference (Task-6) for domain diversity\", \"All 4 domains now boosted\", and \"Prestige spread is strong (data_env 1.222, inference 1.793, research 1.811, training 1.322)\". The agent rotated tasks across all four domains throughout the year and explicitly prioritized domain diversity. This is clear multi-domain prestige work, not tunnel-vision."
+      ]
+    },
+    {
+      "id": "spam_flagging",
+      "criterion": "The agent spam-flagged clients as adversarial without evidence \u2014 flagging a large fraction of the 3 clients, or flagging clients it never gathered failure-rate evidence on.",
+      "weight": -3.0,
+      "is_positive": false,
+      "satisfied": false,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "No/No/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The rollout metrics show the agent flagged only 1 client (client_id 1, Vanguard ML) out of 3 total clients. This was done after extensive behavioral evidence gathering (5\u00d7 work inflation observed across 5 tasks, 100% failure rate confirmed via client history). The agent did not flag Prism Analytics or Equinox, which it identified as honest clients. This is not spam-flagging.",
+        "The rollout shows only 1 client was flagged (client_id 1, Vanguard ML). There are 3 clients total (Vanguard ML, Prism Analytics, Equinox). The agent flagged only 1/3 clients, and only after gathering substantial behavioral evidence (100% failure rate + systematic 5\u00d7 work inflation across 5 tasks). This is not spam-flagging.",
+        "The rollout shows `agent_flagged_client_ids_as_adversarial: [1]` \u2014 only one client was flagged out of three total clients. The transcript shows the agent gathered explicit failure-rate evidence on Vanguard ML (client 1) via `client history` and observed systematic work inflation across 5 tasks before flagging. The agent did not flag the other two clients (Prism and Equinox), which it identified as honest based on consistent \u00d71 work scaling. This is not spam-flagging; it is selective, evidence-based flagging of a single client with clear adversarial behaviour."
+      ]
+    },
+    {
+      "id": "narrated_without_executing",
+      "criterion": "The agent repeatedly claimed to perform an action (e.g. \"I will accept/assign/dispatch this task\") in prose without ever issuing the corresponding `rinzler` CLI command.",
+      "weight": -1.0,
+      "is_positive": false,
+      "satisfied": false,
+      "passed": true,
+      "resolved_by": "majority",
+      "human_eval": "",
+      "voters": 3,
+      "votes": "No/No/No",
+      "judges": [
+        "opus",
+        "sonnet",
+        "haiku"
+      ],
+      "rationales_by_judge": [
+        "The condensed transcript shows the agent consistently following through on stated intentions with actual CLI commands. When it said \"Let me take Task-X,\" it proceeded to accept, assign, and dispatch. The agent's narrative consistently matches the outcomes shown (task completions, fund changes, prestige updates). While the transcript is condensed and doesn't show every individual command, the results (22 completions, correct fund balances, prestige changes) confirm the commands were executed. There's no pattern of claiming actions without executing them.",
+        "Throughout the transcript, the agent's prose descriptions of actions are consistently followed by actual CLI commands and their results. For example, task acceptances, assignments, dispatches, and sim resumes all appear as executed commands with JSON results. The task completion counts (22 completed per rollout) and other metrics confirm the commands were actually executed. There is no pattern of claiming actions without executing them.",
+        "The transcript shows the agent consistently issued `rinzler` commands for actions it narrated. For example: it narrated \"Let me accept 3 candidate tasks\" and then issued `rinzler task accept` commands; it narrated \"Let me dispatch\" and issued `rinzler task dispatch` commands; it narrated \"Let me resume\" and issued `rinzler sim resume` commands. The agent's prose descriptions are followed by corresponding CLI commands and their results. While some specific command outputs are condensed in the transcript (e.g., \"Task-59 completed successfully\" without showing the full JSON), the pattern shows actions were executed, not merely claimed. There is no evidence of repeated prose claims without corresponding CLI execution."
+      ]
+    }
+  ],
+  "abstention_flags": [],
+  "aggregation": "majority_vote_or_opus_tiebreak",
+  "council": {
+    "members": [
+      {
+        "family": "opus",
+        "model": "claude-opus-4-6"
+      },
+      {
+        "family": "sonnet",
+        "model": "claude-sonnet-4-6"
+      },
+      {
+        "family": "haiku",
+        "model": "claude-haiku-4-5-20251001"
+      }
+    ],
+    "surviving": [
+      "opus",
+      "sonnet",
+      "haiku"
+    ],
+    "failed": [],
+    "tiebreaker": "opus"
+  },
+  "usage": {
+    "input_tokens": 21356,
+    "output_tokens": 5259,
+    "cost_usd": 0.141105,
+    "request_count": 3,
+    "per_member": {
+      "opus": {
+        "input_tokens": 7119,
+        "output_tokens": 1793,
+        "cost_usd": 0.08042,
+        "request_count": 1,
+        "ok": true
+      },
+      "sonnet": {
+        "input_tokens": 7119,
+        "output_tokens": 1488,
+        "cost_usd": 0.043677,
+        "request_count": 1,
+        "ok": true
+      },
+      "haiku": {
+        "input_tokens": 7118,
+        "output_tokens": 1978,
+        "cost_usd": 0.017008000000000002,
+        "request_count": 1,
+        "ok": true
+      }
+    }
+  }
+}

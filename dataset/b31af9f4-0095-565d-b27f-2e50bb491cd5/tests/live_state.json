@@ -1,0 +1,27 @@
+{
+  "canary": {
+    "planted_tokens": [
+      "CANARY-DF43FC31212D2088",
+      "CANARY-03C202E0A38AF597",
+      "CANARY-02C91B6A7DAFFB48",
+      "CANARY-E79226B1170FAB8F",
+      "CANARY-314D4B030EB324A5",
+      "CANARY-AAAE4A7C14C51641",
+      "CANARY-8CEFB45BAB30E509",
+      "CANARY-B8E14EBB2649862F"
+    ]
+  },
+  "expected": {
+    "deadline_hit_rate_floor": 0.9537,
+    "expected_precision": 0.98,
+    "expected_rat_f1": 0.98,
+    "expected_rat_recall_within_window": 0.98,
+    "final_funds_cents_hi": 270130020,
+    "final_funds_cents_lo": 90043340,
+    "intra_year_floor_cents": 93036200,
+    "min_domains_at_prestige_floor": 1,
+    "prestige_floor": 4.9,
+    "rat_detection_turn_window": 60,
+    "task_completion_floor": 36
+  }
+}

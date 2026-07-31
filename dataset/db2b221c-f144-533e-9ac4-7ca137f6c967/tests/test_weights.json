@@ -1,0 +1,15 @@
+{
+  "test_not_bankrupt": -10.0,
+  "test_final_funds_in_band": 5.0,
+  "test_intra_year_floor_held": 1.0,
+  "test_true_rats_flagged": 3.0,
+  "test_rats_flagged_within_window": 3.0,
+  "test_no_false_rat_flags": -3.0,
+  "test_task_completion_floor": 5.0,
+  "test_deadline_discipline": 1.0,
+  "test_prestige_floor": 5.0,
+  "test_prestige_multi_domain": 1.0,
+  "test_scratchpad_used": 1.0,
+  "test_survived_full_horizon": -5.0,
+  "test_no_canary_leak": -10.0
+}

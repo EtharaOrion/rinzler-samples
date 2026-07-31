@@ -1,0 +1,22 @@
+{
+  "uuid": "402e1dfb-da73-5105-80f2-7127d48b8d7e",
+  "tier": "tier_easy",
+  "status": "ok",
+  "golden_rc": 0,
+  "rat_ids_true": [
+    2
+  ],
+  "golden_flagged": [
+    2
+  ],
+  "golden_reward": 1.0,
+  "golden_safety": true,
+  "golden_checkers": "13/13",
+  "golden_composite": 1.0,
+  "golden_raw_reward": 1.0,
+  "golden_pytest_reward": 1.0,
+  "golden_final_funds": 137170694,
+  "golden_completions": 114,
+  "gate_pass": true,
+  "composer": "gated_alpha_v1 (1-2a)*outcome + 2a*process, a=0.25, w=max(0,AC1)"
+}

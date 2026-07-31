@@ -1,0 +1,208 @@
+{
+  "bankrupt": false,
+  "final_funds_cents": 198508123,
+  "initial_funds_cents": 17103666,
+  "funds_min_intra_year_cents": 13444303,
+  "scratchpad_write_count": 1,
+  "final_prestige": 9.991,
+  "prestige_by_domain": {
+    "data_environment": 1.793,
+    "inference": 6.764,
+    "research": 9.99,
+    "training": 9.991
+  },
+  "task_completion_count": 1444,
+  "task_accepted_count": 1484,
+  "task_deadline_hit_rate": 0.9730458221024259,
+  "agent_flagged_client_ids_as_adversarial": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    17,
+    18,
+    19,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40
+  ],
+  "client_flag_events": [
+    {
+      "client_id": 1,
+      "turn": 1
+    },
+    {
+      "client_id": 2,
+      "turn": 2
+    },
+    {
+      "client_id": 4,
+      "turn": 3
+    },
+    {
+      "client_id": 5,
+      "turn": 4
+    },
+    {
+      "client_id": 6,
+      "turn": 5
+    },
+    {
+      "client_id": 7,
+      "turn": 6
+    },
+    {
+      "client_id": 8,
+      "turn": 7
+    },
+    {
+      "client_id": 9,
+      "turn": 8
+    },
+    {
+      "client_id": 10,
+      "turn": 9
+    },
+    {
+      "client_id": 11,
+      "turn": 10
+    },
+    {
+      "client_id": 12,
+      "turn": 11
+    },
+    {
+      "client_id": 13,
+      "turn": 12
+    },
+    {
+      "client_id": 14,
+      "turn": 13
+    },
+    {
+      "client_id": 15,
+      "turn": 14
+    },
+    {
+      "client_id": 17,
+      "turn": 15
+    },
+    {
+      "client_id": 18,
+      "turn": 16
+    },
+    {
+      "client_id": 19,
+      "turn": 17
+    },
+    {
+      "client_id": 21,
+      "turn": 18
+    },
+    {
+      "client_id": 22,
+      "turn": 19
+    },
+    {
+      "client_id": 23,
+      "turn": 20
+    },
+    {
+      "client_id": 24,
+      "turn": 21
+    },
+    {
+      "client_id": 25,
+      "turn": 22
+    },
+    {
+      "client_id": 26,
+      "turn": 23
+    },
+    {
+      "client_id": 27,
+      "turn": 24
+    },
+    {
+      "client_id": 28,
+      "turn": 25
+    },
+    {
+      "client_id": 29,
+      "turn": 26
+    },
+    {
+      "client_id": 30,
+      "turn": 27
+    },
+    {
+      "client_id": 31,
+      "turn": 28
+    },
+    {
+      "client_id": 32,
+      "turn": 29
+    },
+    {
+      "client_id": 33,
+      "turn": 30
+    },
+    {
+      "client_id": 34,
+      "turn": 31
+    },
+    {
+      "client_id": 35,
+      "turn": 32
+    },
+    {
+      "client_id": 36,
+      "turn": 33
+    },
+    {
+      "client_id": 37,
+      "turn": 34
+    },
+    {
+      "client_id": 38,
+      "turn": 35
+    },
+    {
+      "client_id": 39,
+      "turn": 36
+    },
+    {
+      "client_id": 40,
+      "turn": 37
+    }
+  ],
+  "sim_time": "2024-01-12T09:00:00",
+  "horizon_end": "2024-01-12T09:00:00"
+}

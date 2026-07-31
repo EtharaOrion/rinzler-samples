@@ -1,0 +1,98 @@
+{
+  "bankrupt": false,
+  "final_funds_cents": 36383249,
+  "initial_funds_cents": 28455945,
+  "funds_min_intra_year_cents": 26203454,
+  "scratchpad_write_count": 1,
+  "final_prestige": 8.17,
+  "prestige_by_domain": {
+    "data_environment": 4.197,
+    "inference": 2.062,
+    "research": 8.17,
+    "training": 6.734
+  },
+  "task_completion_count": 373,
+  "task_accepted_count": 478,
+  "task_deadline_hit_rate": 0.7803347280334728,
+  "agent_flagged_client_ids_as_adversarial": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    9,
+    11,
+    12,
+    13,
+    14,
+    15,
+    18,
+    19,
+    20
+  ],
+  "client_flag_events": [
+    {
+      "client_id": 4,
+      "turn": 1
+    },
+    {
+      "client_id": 12,
+      "turn": 2
+    },
+    {
+      "client_id": 19,
+      "turn": 3
+    },
+    {
+      "client_id": 20,
+      "turn": 4
+    },
+    {
+      "client_id": 2,
+      "turn": 5
+    },
+    {
+      "client_id": 11,
+      "turn": 6
+    },
+    {
+      "client_id": 15,
+      "turn": 7
+    },
+    {
+      "client_id": 1,
+      "turn": 8
+    },
+    {
+      "client_id": 3,
+      "turn": 9
+    },
+    {
+      "client_id": 5,
+      "turn": 10
+    },
+    {
+      "client_id": 7,
+      "turn": 11
+    },
+    {
+      "client_id": 9,
+      "turn": 12
+    },
+    {
+      "client_id": 13,
+      "turn": 13
+    },
+    {
+      "client_id": 14,
+      "turn": 14
+    },
+    {
+      "client_id": 18,
+      "turn": 15
+    }
+  ],
+  "sim_time": "2026-03-05T09:00:00",
+  "horizon_end": "2026-03-05T09:00:00"
+}

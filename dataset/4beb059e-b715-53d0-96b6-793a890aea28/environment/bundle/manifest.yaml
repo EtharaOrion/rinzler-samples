@@ -1,0 +1,20 @@
+canonical_content_hash: 49ecfb3ffac35efba037e05c74dbe206113ba4d90f4ea69ca1dd14bd58065edd
+config: tier_expert
+declared_tier: tier_expert
+disposition_ceiling: SHIP
+maturity: full
+schema: rinzler.harbor/v2
+seed: 8240
+upstream_harness:
+  base_preset: tier_expert
+  repository: https://github.com/Ethara-ai/rinzler
+upstream_provenance:
+  origin: derived
+  train_cutoff: '2026-04-01'
+  provenance_date: '2026-04-01'
+  upstream_benchmark_identity:
+    arxiv_id: '2604.01212'
+    first_published: '2026-04-01'
+    name: Rinzler
+  upstream_license: arxiv_non_exclusive_distribution
+uuid: 4beb059e-b715-53d0-96b6-793a890aea28
