@@ -1,0 +1,1370 @@
+===MARKET===
+{
+  "total": 40,
+  "offset": 0,
+  "limit": 40,
+  "tasks": [
+    {
+      "task_id": "Task-740",
+      "client_name": "Vanguard ML",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 2080786,
+      "reward_prestige_delta": 0.192,
+      "skill_boost_pct": 0.2363,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 988.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-455",
+      "client_name": "Client Corp 20",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 2039244,
+      "reward_prestige_delta": 0.187,
+      "skill_boost_pct": 0.1096,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 764.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-577",
+      "client_name": "Cortex Intelligence",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 2037150,
+      "reward_prestige_delta": 0.106,
+      "skill_boost_pct": 0.01,
+      "requirements": [
+        {
+          "domain": "inference",
+          "required_qty": 971.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-267",
+      "client_name": "Vanguard ML",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1911255,
+      "reward_prestige_delta": 0.085,
+      "skill_boost_pct": 0.0665,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 1078.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-81",
+      "client_name": "Helix Systems",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1902790,
+      "reward_prestige_delta": 0.099,
+      "skill_boost_pct": 0.0849,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 874.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-44",
+      "client_name": "Client Corp 24",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1876620,
+      "reward_prestige_delta": 0.037,
+      "skill_boost_pct": 0.1648,
+      "requirements": [
+        {
+          "domain": "inference",
+          "required_qty": 1146.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-417",
+      "client_name": "Zenith Technologies",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1871979,
+      "reward_prestige_delta": 0.208,
+      "skill_boost_pct": 0.2095,
+      "requirements": [
+        {
+          "domain": "training",
+          "required_qty": 1061.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-408",
+      "client_name": "Client Corp 19",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1807438,
+      "reward_prestige_delta": 0.063,
+      "skill_boost_pct": 0.1404,
+      "requirements": [
+        {
+          "domain": "data_environment",
+          "required_qty": 1345.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-747",
+      "client_name": "Client Corp 23",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1801997,
+      "reward_prestige_delta": 0.007,
+      "skill_boost_pct": 0.0729,
+      "requirements": [
+        {
+          "domain": "data_environment",
+          "required_qty": 852.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-147",
+      "client_name": "Cortex Intelligence",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1791504,
+      "reward_prestige_delta": 0.098,
+      "skill_boost_pct": 0.088,
+      "requirements": [
+        {
+          "domain": "inference",
+          "required_qty": 719.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-185",
+      "client_name": "Apex Robotics",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1778388,
+      "reward_prestige_delta": 0.111,
+      "skill_boost_pct": 0.1874,
+      "requirements": [
+        {
+          "domain": "data_environment",
+          "required_qty": 1148.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-662",
+      "client_name": "Client Corp 42",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1765176,
+      "reward_prestige_delta": 0.133,
+      "skill_boost_pct": 0.1222,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 764.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-473",
+      "client_name": "Client Corp 22",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1757355,
+      "reward_prestige_delta": 0.212,
+      "skill_boost_pct": 0.1567,
+      "requirements": [
+        {
+          "domain": "inference",
+          "required_qty": 924.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-547",
+      "client_name": "Client Corp 34",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1740459,
+      "reward_prestige_delta": 0.014,
+      "skill_boost_pct": 0.0698,
+      "requirements": [
+        {
+          "domain": "data_environment",
+          "required_qty": 539.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-1",
+      "client_name": "Client Corp 24",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1734472,
+      "reward_prestige_delta": 0.085,
+      "skill_boost_pct": 0.0944,
+      "requirements": [
+        {
+          "domain": "inference",
+          "required_qty": 1224.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-711",
+      "client_name": "Client Corp 21",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1720887,
+      "reward_prestige_delta": 0.234,
+      "skill_boost_pct": 0.1108,
+      "requirements": [
+        {
+          "domain": "training",
+          "required_qty": 549.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-611",
+      "client_name": "Vanguard ML",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1704677,
+      "reward_prestige_delta": 0.021,
+      "skill_boost_pct": 0.1227,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 828.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-568",
+      "client_name": "Vanguard ML",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1680994,
+      "reward_prestige_delta": 0.042,
+      "skill_boost_pct": 0.1518,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 440.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-306",
+      "client_name": "Atlas Computing",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1675503,
+      "reward_prestige_delta": 0.084,
+      "skill_boost_pct": 0.0294,
+      "requirements": [
+        {
+          "domain": "training",
+          "required_qty": 1115.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-117",
+      "client_name": "Client Corp 34",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1671585,
+      "reward_prestige_delta": 0.09,
+      "skill_boost_pct": 0.1638,
+      "requirements": [
+        {
+          "domain": "data_environment",
+          "required_qty": 1105.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-414",
+      "client_name": "Client Corp 33",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1658613,
+      "reward_prestige_delta": 0.065,
+      "skill_boost_pct": 0.1039,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 843.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-53",
+      "client_name": "Client Corp 39",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1652769,
+      "reward_prestige_delta": 0.127,
+      "skill_boost_pct": 0.0977,
+      "requirements": [
+        {
+          "domain": "inference",
+          "required_qty": 1387.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-75",
+      "client_name": "Client Corp 37",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1650054,
+      "reward_prestige_delta": 0.155,
+      "skill_boost_pct": 0.0903,
+      "requirements": [
+        {
+          "domain": "inference",
+          "required_qty": 886.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-197",
+      "client_name": "Client Corp 20",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1642458,
+      "reward_prestige_delta": 0.029,
+      "skill_boost_pct": 0.01,
+      "requirements": [
+        {
+          "domain": "data_environment",
+          "required_qty": 936.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-122",
+      "client_name": "Client Corp 31",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1637776,
+      "reward_prestige_delta": 0.098,
+      "skill_boost_pct": 0.0876,
+      "requirements": [
+        {
+          "domain": "training",
+          "required_qty": 721.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-352",
+      "client_name": "Client Corp 16",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1637105,
+      "reward_prestige_delta": 0.025,
+      "skill_boost_pct": 0.1446,
+      "requirements": [
+        {
+          "domain": "training",
+          "required_qty": 1099.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-331",
+      "client_name": "Zenith Technologies",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1635740,
+      "reward_prestige_delta": 0.071,
+      "skill_boost_pct": 0.1197,
+      "requirements": [
+        {
+          "domain": "training",
+          "required_qty": 741.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-766",
+      "client_name": "Client Corp 17",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1626416,
+      "reward_prestige_delta": 0.284,
+      "skill_boost_pct": 0.1364,
+      "requirements": [
+        {
+          "domain": "inference",
+          "required_qty": 1213.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-788",
+      "client_name": "Client Corp 26",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1625859,
+      "reward_prestige_delta": 0.082,
+      "skill_boost_pct": 0.1415,
+      "requirements": [
+        {
+          "domain": "data_environment",
+          "required_qty": 742.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-305",
+      "client_name": "Nexus AI",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1622218,
+      "reward_prestige_delta": 0.026,
+      "skill_boost_pct": 0.1175,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 480.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-8",
+      "client_name": "Client Corp 16",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1621325,
+      "reward_prestige_delta": 0.004,
+      "skill_boost_pct": 0.01,
+      "requirements": [
+        {
+          "domain": "training",
+          "required_qty": 1339.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-692",
+      "client_name": "Nexus AI",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1617339,
+      "reward_prestige_delta": 0.076,
+      "skill_boost_pct": 0.0247,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 1021.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-123",
+      "client_name": "Nova Research",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1611490,
+      "reward_prestige_delta": 0.008,
+      "skill_boost_pct": 0.0645,
+      "requirements": [
+        {
+          "domain": "training",
+          "required_qty": 998.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-307",
+      "client_name": "Client Corp 32",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1610985,
+      "reward_prestige_delta": 0.026,
+      "skill_boost_pct": 0.01,
+      "requirements": [
+        {
+          "domain": "training",
+          "required_qty": 920.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-422",
+      "client_name": "Client Corp 17",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1610591,
+      "reward_prestige_delta": 0.083,
+      "skill_boost_pct": 0.1366,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 875.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-116",
+      "client_name": "Zenith Technologies",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1603363,
+      "reward_prestige_delta": 0.021,
+      "skill_boost_pct": 0.0374,
+      "requirements": [
+        {
+          "domain": "training",
+          "required_qty": 805.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-660",
+      "client_name": "Client Corp 30",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1587924,
+      "reward_prestige_delta": 0.041,
+      "skill_boost_pct": 0.1862,
+      "requirements": [
+        {
+          "domain": "training",
+          "required_qty": 732.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-94",
+      "client_name": "Client Corp 16",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1583907,
+      "reward_prestige_delta": 0.036,
+      "skill_boost_pct": 0.0989,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 683.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-373",
+      "client_name": "Client Corp 38",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1569952,
+      "reward_prestige_delta": 0.201,
+      "skill_boost_pct": 0.1558,
+      "requirements": [
+        {
+          "domain": "inference",
+          "required_qty": 1191.0
+        }
+      ]
+    },
+    {
+      "task_id": "Task-181",
+      "client_name": "Vanguard ML",
+      "required_prestige": 1,
+      "required_trust": 0,
+      "reward_funds_cents": 1568772,
+      "reward_prestige_delta": 0.002,
+      "skill_boost_pct": 0.1274,
+      "requirements": [
+        {
+          "domain": "research",
+          "required_qty": 758.0
+        }
+      ]
+    }
+  ]
+}
+===CLIENTS===
+{
+  "count": 43,
+  "clients": [
+    {
+      "client_id": "bfbecaf3-936b-4b51-ac06-0b4045375ef6",
+      "ordinal": 1,
+      "name": "Client Corp 24",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "inference"
+      ]
+    },
+    {
+      "client_id": "7aa92fb8-9f07-4047-87a3-17458ade0c82",
+      "ordinal": 2,
+      "name": "Vertex Labs",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "data_environment"
+      ]
+    },
+    {
+      "client_id": "4149f2ca-f49f-47a3-a58f-6fc924c303ed",
+      "ordinal": 3,
+      "name": "Client Corp 18",
+      "trust_level": 0.0,
+      "tier": "Standard",
+      "specialties": [
+        "training"
+      ]
+    },
+    {
+      "client_id": "5fe3d8ae-97c2-436a-a16e-048f3a01c01e",
+      "ordinal": 4,
+      "name": "Nexus AI",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "research"
+      ]
+    },
+    {
+      "client_id": "a2b24828-4045-4811-9f05-bf3468f24ad1",
+      "ordinal": 5,
+      "name": "Atlas Computing",
+      "trust_level": 0.0,
+      "tier": "Standard",
+      "specialties": [
+        "training"
+      ]
+    },
+    {
+      "client_id": "85e12b51-dc9d-4509-9542-94fefcdc2652",
+      "ordinal": 6,
+      "name": "Client Corp 32",
+      "trust_level": 0.0,
+      "tier": "Standard",
+      "specialties": [
+        "data_environment",
+        "research"
+      ]
+    },
+    {
+      "client_id": "1f15088c-6302-4e59-84a9-d680c88b9615",
+      "ordinal": 7,
+      "name": "Quantum Dynamics",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "training",
+        "inference"
+      ]
+    },
+    {
+      "client_id": "fc111e96-e155-4907-9690-70b4d9d1a48f",
+      "ordinal": 8,
+      "name": "Client Corp 16",
+      "trust_level": 0.0,
+      "tier": "Enterprise",
+      "specialties": [
+        "training",
+        "research"
+      ]
+    },
+    {
+      "client_id": "8baffc09-93f0-4a21-8996-60627deab081",
+      "ordinal": 9,
+      "name": "Vanguard ML",
+      "trust_level": 0.0,
+      "tier": "Enterprise",
+      "specialties": [
+        "research"
+      ]
+    },
+    {
+      "client_id": "18a64a7b-be92-426a-8328-5f218353eb67",
+      "ordinal": 10,
+      "name": "Client Corp 39",
+      "trust_level": 0.0,
+      "tier": "Standard",
+      "specialties": [
+        "inference"
+      ]
+    },
+    {
+      "client_id": "87c38332-be60-4e5e-acec-b3b0f0614bd0",
+      "ordinal": 11,
+      "name": "Client Corp 27",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "research"
+      ]
+    },
+    {
+      "client_id": "38b9616b-bf1f-45cd-af91-8cc46d515847",
+      "ordinal": 12,
+      "name": "Client Corp 25",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "inference",
+        "research"
+      ]
+    },
+    {
+      "client_id": "04ec137b-031f-4a87-8d5f-6683e9675484",
+      "ordinal": 13,
+      "name": "Apex Robotics",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "data_environment"
+      ]
+    },
+    {
+      "client_id": "c69f53ad-0ce4-4203-9fa8-a53115f363d1",
+      "ordinal": 14,
+      "name": "Client Corp 26",
+      "trust_level": 0.0,
+      "tier": "Enterprise",
+      "specialties": [
+        "data_environment",
+        "training"
+      ]
+    },
+    {
+      "client_id": "ecf89807-f60c-4b2b-86f9-664df0df3c8f",
+      "ordinal": 15,
+      "name": "Client Corp 30",
+      "trust_level": 0.0,
+      "tier": "Standard",
+      "specialties": [
+        "training"
+      ]
+    },
+    {
+      "client_id": "562a1581-d297-4e72-bcd8-39ec0b08c439",
+      "ordinal": 16,
+      "name": "Client Corp 23",
+      "trust_level": 0.0,
+      "tier": "Enterprise",
+      "specialties": [
+        "data_environment"
+      ]
+    },
+    {
+      "client_id": "1835e7ca-4fae-4864-81e0-830c6d90f10b",
+      "ordinal": 17,
+      "name": "Client Corp 42",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "research"
+      ]
+    },
+    {
+      "client_id": "cf83154b-fcf1-49c7-a78b-216dcacbd679",
+      "ordinal": 18,
+      "name": "Cortex Intelligence",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "data_environment",
+        "inference"
+      ]
+    },
+    {
+      "client_id": "e028577e-ef31-4934-80fe-3738f58091a6",
+      "ordinal": 19,
+      "name": "Client Corp 40",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "research",
+        "data_environment"
+      ]
+    },
+    {
+      "client_id": "5772a0e7-06f4-4e1e-8a74-b065e54d74a9",
+      "ordinal": 20,
+      "name": "Client Corp 41",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "training"
+      ]
+    },
+    {
+      "client_id": "b060d33c-12e5-4edd-b85d-e460bb988132",
+      "ordinal": 21,
+      "name": "Client Corp 19",
+      "trust_level": 0.0,
+      "tier": "Standard",
+      "specialties": [
+        "research",
+        "data_environment"
+      ]
+    },
+    {
+      "client_id": "c90980dc-1f5e-4599-8cdf-8a21e763dbb7",
+      "ordinal": 22,
+      "name": "Client Corp 35",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "inference",
+        "data_environment"
+      ]
+    },
+    {
+      "client_id": "e1a23a80-3072-49bd-b676-b51dac0c08ce",
+      "ordinal": 23,
+      "name": "Client Corp 21",
+      "trust_level": 0.0,
+      "tier": "Enterprise",
+      "specialties": [
+        "training"
+      ]
+    },
+    {
+      "client_id": "0c3752aa-303b-43a3-a843-387485ca569d",
+      "ordinal": 24,
+      "name": "Stratos Cloud",
+      "trust_level": 0.0,
+      "tier": "Enterprise",
+      "specialties": [
+        "training"
+      ]
+    },
+    {
+      "client_id": "fc595406-7ccc-4c76-b9ea-5ec2089e0206",
+      "ordinal": 25,
+      "name": "Client Corp 20",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "training"
+      ]
+    },
+    {
+      "client_id": "ad4433c1-0fed-47e1-a948-ec1c49bd52e7",
+      "ordinal": 26,
+      "name": "Cipher Corp",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "research",
+        "data_environment"
+      ]
+    },
+    {
+      "client_id": "40f88ae7-4205-4572-b8b0-0c625a81301e",
+      "ordinal": 27,
+      "name": "Client Corp 33",
+      "trust_level": 0.0,
+      "tier": "Standard",
+      "specialties": [
+        "inference",
+        "research"
+      ]
+    },
+    {
+      "client_id": "98ecd1d6-122a-43b8-9e8b-3ecee8a1aebc",
+      "ordinal": 28,
+      "name": "Prism Analytics",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "training"
+      ]
+    },
+    {
+      "client_id": "1b65376a-f6d1-4737-b249-ce9b3f6ad1c2",
+      "ordinal": 29,
+      "name": "Client Corp 38",
+      "trust_level": 0.0,
+      "tier": "Standard",
+      "specialties": [
+        "research",
+        "training"
+      ]
+    },
+    {
+      "client_id": "8bd04abe-bb13-4752-828f-1d4e19001ad2",
+      "ordinal": 30,
+      "name": "Zenith Technologies",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "training"
+      ]
+    },
+    {
+      "client_id": "3129159b-5dde-4d48-aa4d-0bbc295c2c5b",
+      "ordinal": 31,
+      "name": "Client Corp 34",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "data_environment"
+      ]
+    },
+    {
+      "client_id": "dcb2d770-5915-4f0b-a24a-ae0051373604",
+      "ordinal": 32,
+      "name": "Client Corp 37",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "inference"
+      ]
+    },
+    {
+      "client_id": "dc774026-7f71-49dd-9a08-cada0e594bab",
+      "ordinal": 33,
+      "name": "Equinox Labs",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "research"
+      ]
+    },
+    {
+      "client_id": "278f7a97-2019-4075-a726-675c8bed6570",
+      "ordinal": 34,
+      "name": "Client Corp 29",
+      "trust_level": 0.0,
+      "tier": "Enterprise",
+      "specialties": [
+        "research"
+      ]
+    },
+    {
+      "client_id": "379477c3-1133-4e7c-86e2-d23f44e1b1bc",
+      "ordinal": 35,
+      "name": "Client Corp 17",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "research",
+        "inference"
+      ]
+    },
+    {
+      "client_id": "52b4ee2a-5f64-4a67-bfcc-7abce6bb45cb",
+      "ordinal": 36,
+      "name": "Client Corp 31",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "data_environment",
+        "training"
+      ]
+    },
+    {
+      "client_id": "0dc2d79a-1d90-4d3f-9256-e9847579b1b0",
+      "ordinal": 37,
+      "name": "Nova Research",
+      "trust_level": 0.0,
+      "tier": "Enterprise",
+      "specialties": [
+        "data_environment",
+        "inference"
+      ]
+    },
+    {
+      "client_id": "20911bf9-3b73-4260-a8e3-8268c8081967",
+      "ordinal": 38,
+      "name": "Helix Systems",
+      "trust_level": 0.0,
+      "tier": "Enterprise",
+      "specialties": [
+        "inference",
+        "research"
+      ]
+    },
+    {
+      "client_id": "0f535563-3460-4c0b-aabb-5e28d638f076",
+      "ordinal": 39,
+      "name": "Client Corp 28",
+      "trust_level": 0.0,
+      "tier": "Enterprise",
+      "specialties": [
+        "research"
+      ]
+    },
+    {
+      "client_id": "e7dae1b5-d952-4a2f-b13e-aae8da5ed93c",
+      "ordinal": 40,
+      "name": "Client Corp 43",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "training",
+        "data_environment"
+      ]
+    },
+    {
+      "client_id": "464bb412-606f-46be-a448-a1809ef6aeda",
+      "ordinal": 41,
+      "name": "Client Corp 36",
+      "trust_level": 0.0,
+      "tier": "Premium",
+      "specialties": [
+        "data_environment"
+      ]
+    },
+    {
+      "client_id": "dfd0684e-498a-4b05-acc9-33c3462ef4b6",
+      "ordinal": 42,
+      "name": "Orion Data",
+      "trust_level": 0.0,
+      "tier": "Standard",
+      "specialties": [
+        "inference",
+        "training"
+      ]
+    },
+    {
+      "client_id": "eb7f586b-50e6-4b6b-b521-096e8264aeb1",
+      "ordinal": 43,
+      "name": "Client Corp 22",
+      "trust_level": 0.0,
+      "tier": "Enterprise",
+      "specialties": [
+        "inference",
+        "research"
+      ]
+    }
+  ]
+}
+===HISTORY===
+{
+  "count": 43,
+  "client_history": [
+    {
+      "client_name": "Apex Robotics",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Atlas Computing",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Cipher Corp",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 16",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 17",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 18",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 19",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 20",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 21",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 22",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 23",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 24",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 25",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 26",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 27",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 28",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 29",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 30",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 31",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 32",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 33",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 34",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 35",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 36",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 37",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 38",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 39",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 40",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 41",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 42",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Client Corp 43",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Cortex Intelligence",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Equinox Labs",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Helix Systems",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Nexus AI",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Nova Research",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Orion Data",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Prism Analytics",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Quantum Dynamics",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Stratos Cloud",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Vanguard ML",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Vertex Labs",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    },
+    {
+      "client_name": "Zenith Technologies",
+      "trust_level": 0.0,
+      "tasks_succeeded": 0,
+      "tasks_failed": 0,
+      "failure_rate_pct": 0.0
+    }
+  ]
+}
