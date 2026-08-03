@@ -47,13 +47,13 @@ flowchart TB
     scoretxt --> score(["scalar score"])
 ```
 
-**The world.** A `(config preset, seed)` pair deterministically fixes the entire company: a workforce with per-domain skill rates across four domains (*data-environment, inference, research, training*), a client roster in which a fraction are **RATs** (adversarial clients with scope creep and deadline traps that dangle top-tier scores to bait a greedy agent), and a market of tasks with score / prestige / deadline distributions. The whole world runs **in-container on a self-contained SQLite backend** — the business simulation itself makes no external calls.
+**The world.** A `(config preset, seed)` pair deterministically fixes the entire company: a workforce with per-domain skill rates across four domains (*data-environment, inference, research, training*), a client roster in which a fraction are **RATs** (adversarial clients with scope creep and deadline traps that dangle top-tier scores to bait a greedy agent), and a market of tasks with score / prestige / deadline distributions. The whole world runs **in-container on a self-contained SQLite backend**; the business simulation itself makes no external calls.
 
 **What the agent must do.** Survive the full horizon solvent, keep funds in a healthy band (over-earning is penalized, not just under-earning), build prestige across multiple domains, complete tasks on time, assign employees whose skills match the task's domain, keep a persistent **scratchpad** across context truncation, and correctly flag adversarial clients from *behavioral evidence* without over-flagging honest ones.
 
 **What the verifier does.** After the rollout, a hidden verifier replays the **final database state** plus the agent's adversarial-client flags through three independent grading channels and a safety gate, then emits a single scalar score. The grader is **baked into every task bundle**, so it travels with the task and cannot drift from the harness that authored it.
 
-**On isolation & `network_mode`.** The business world itself is fully self-contained: the SQLite discrete-event simulation runs entirely in-container and makes **no external calls**, so the graded business state is deterministic and offline. Each bundle's `task.toml` nonetheless declares `network_mode = "public"` for both the `[agent]` and `[verifier]` blocks, because the two *model-facing* channels do need egress: the **agent** reaches its LLM through a fixed proxy endpoint (`ANTHROPIC_BASE_URL` / `OPENAI_BASE_URL`, pointed at the harness proxy), and the **verifier's LLM rubric-judge council** calls its judge models the same way. Network access is therefore scoped to the model/judge API surface, not to the simulation — the world's determinism does not depend on the network, only the model inference and the council grading do. Deployments that require a hard network seal can pin egress to the proxy host (or run the model/judge endpoints in-cluster); the SQLite world needs nothing.
+**On isolation & `network_mode`.** The business world itself is fully self-contained: the SQLite discrete-event simulation runs entirely in-container and makes **no external calls**, so the graded business state is deterministic and offline. Each bundle's `task.toml` nonetheless declares `network_mode = "public"` for both the `[agent]` and `[verifier]` blocks, because the two *model-facing* channels do need egress: the **agent** reaches its LLM through a fixed proxy endpoint (`ANTHROPIC_BASE_URL` / `OPENAI_BASE_URL`, pointed at the harness proxy), and the **verifier's LLM rubric-judge council** calls its judge models the same way. Network access is therefore scoped to the model/judge API surface, not to the simulation; the world's determinism does not depend on the network, only the model inference and the council grading do. Deployments that require a hard network seal can pin egress to the proxy host (or run the model/judge endpoints in-cluster); the SQLite world needs nothing.
 
 ---
 
@@ -89,7 +89,7 @@ Rinzler grades each rollout with **schema v3**, combining three independent chan
 
 Difficulty is **measured, never declared.** Each task is placed into a tier **strictly by its observed pilot score**. The 30 tasks are ranked by mean pilot score and cut into five equal-count quantile tiers of **6 tasks each** (Trivial nearest the golden `1.0` ceiling, Expert nearest the nop `0.0` floor), so the gradient is auditable rather than authored and every tier is populated. The frontier pilot (gpt-5.6-sol) tracks this decay, and the corpus ships **30 graded runs** (1 model × 30 tasks) plus a golden reference per task.
 
-The reported score is the **raw** deterministic checker channel (Channel A): the weighted mean of the continuous scorers over the final and intra-year business state, **before** the pytest and council channels and before the gate — it measures what the agent actually achieved in the world. It is the value stored as `score` (and mirrored in `score.txt`) in each `verifier/score.json`, and it spans the full `[0,1]` frame, so a fully-failing run reaches an honest `0.000`.
+The reported score is the **raw** deterministic checker channel (Channel A): the weighted mean of the continuous scorers over the final and intra-year business state, **before** the pytest and council channels and before the gate; it measures what the agent actually achieved in the world. It is the value stored as `score` (and mirrored in `score.txt`) in each `verifier/score.json`, and it spans the full `[0,1]` frame, so a fully-failing run reaches an honest `0.000`.
 
 ### Score decay across tiers
 
@@ -105,7 +105,7 @@ The reported score is the **raw** deterministic checker channel (Channel A): the
 | **Hard** | 6 | **0.701** | 0.64 – 0.76 |
 | **Expert** | 6 | **0.225** | 0.00 – 0.47 |
 
-Tiers are cut by **score quantile** (6 tasks each), so every tier is populated and the split is auditable rather than authored. The pilot tracks a monotonic decay — near the golden ceiling on the easy tiers, then a sharp fall to the Expert tier where cash runway, RAT-client density, short deadlines, and prestige decay stack up. Three of the Expert-tier runs bottom out at an honest **0.000** (bankruptcy or zero task completion).
+Tiers are cut by **score quantile** (6 tasks each), so every tier is populated and the split is auditable rather than authored. The pilot tracks a monotonic decay: near the golden ceiling on the easy tiers, then a sharp fall to the Expert tier where cash runway, RAT-client density, short deadlines, and prestige decay stack up. Three of the Expert-tier runs bottom out at an honest **0.000** (bankruptcy or zero task completion).
 
 Per-task, the score forms a clean calibration band from the golden `1.0` ceiling down to the `0.0` floor:
 
@@ -167,7 +167,7 @@ A self-contained sample of the Rinzler environment: the 30-task dataset, model t
 
 ## Trajectories
 
-Rollout traces ship **co-located with each task** under `<task-uuid>/trajectories/`, for the pilot model — `gpt-5.6-sol` — each a full Harbor trial directory:
+Rollout traces ship **co-located with each task** under `<task-uuid>/trajectories/`, for the pilot model `gpt-5.6-sol`, each a full Harbor trial directory:
 
 ```
 <task-uuid>/trajectories/<model>/run_1/
