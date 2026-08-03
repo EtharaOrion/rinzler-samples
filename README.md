@@ -21,7 +21,7 @@ flowchart LR
 
 </div>
 
-**Rinzler** is a verifiable **reinforcement-learning environment** (in [Harbor](https://github.com/Ethara-Ai/harbor) format) for **long-horizon agentic coherence**. A model is handed only a written contract and told to run a simulated AI startup: hire and assign employees across **four skill domains** (*data-environment, inference, research, training*), browse a client market, accept and dispatch tasks, manage cash and prestige, and detect adversarial clients, **coherently across a full 1-year horizon**. A hidden verifier, never shown to the model, scores the run against a fully **simulated, offline business backend** (a SQLite discrete-event world) with no external service, no network, fully deterministic, through **13 deterministic checkers** (each paired with a continuous scorer) plus a pytest suite, an LLM rubric-judge council, and a hard safety gate. Reward is **earned through verified behavior over time**, not pattern-matched against a reference string.
+**Rinzler** is a verifiable **reinforcement-learning environment** (in [Harbor](https://github.com/Ethara-Ai/harbor) format) for **long-horizon agentic coherence**. A model is handed only a written contract and told to run a simulated AI startup: hire and assign employees across **four skill domains** (*data-environment, inference, research, training*), browse a client market, accept and dispatch tasks, manage cash and prestige, and detect adversarial clients, **coherently across a full 1-year horizon**. A hidden verifier, never shown to the model, scores the run against a fully **simulated business backend** (a SQLite discrete-event world with no external service) through **13 deterministic checkers** (each paired with a continuous scorer) plus a pytest suite, an LLM rubric-judge council, and a hard safety gate. Reward is **earned through verified behavior over time**, not pattern-matched against a reference string.
 
 > **Why this matters.** Reinforcement learning from verifiable rewards (RLVR) is only as good as its verifier. Most "agent RL" environments are single-turn or grade on strings the model can read and overfit. Rinzler grades on **behavioral business state across an entire simulated year** (end-of-horizon *and* intra-year) with the **answer key and adversarial ground truth the agent never sees**, making the reward **deterministic, reproducible, and resistant to reward hacking**.
 
@@ -47,7 +47,7 @@ flowchart TB
     rewardtxt --> reward(["scalar reward"])
 ```
 
-**The world.** A `(config preset, seed)` pair deterministically fixes the entire company: a workforce with per-domain skill rates across four domains (*data-environment, inference, research, training*), a client roster in which a fraction are **RATs** (adversarial clients with scope creep and deadline traps that dangle top-tier rewards to bait a greedy agent), and a market of tasks with reward / prestige / deadline distributions. The whole world runs in-container on SQLite with **no network**.
+**The world.** A `(config preset, seed)` pair deterministically fixes the entire company: a workforce with per-domain skill rates across four domains (*data-environment, inference, research, training*), a client roster in which a fraction are **RATs** (adversarial clients with scope creep and deadline traps that dangle top-tier rewards to bait a greedy agent), and a market of tasks with reward / prestige / deadline distributions. The whole world runs **in-container on a self-contained SQLite backend** — the business simulation itself makes no external calls.
 
 **What the agent must do.** Survive the full horizon solvent, keep funds in a healthy band (over-earning is penalized, not just under-earning), build prestige across multiple domains, complete tasks on time, assign employees whose skills match the task's domain, keep a persistent **scratchpad** across context truncation, and correctly flag adversarial clients from *behavioral evidence* without over-flagging honest ones.
 
@@ -164,13 +164,13 @@ A self-contained sample of the Rinzler environment: the 30-task dataset, model t
 │   ├── live_state.json               #   HIDDEN answer key: expected{} + planted canary tokens
 │   └── test.sh                       #   entrypoint: harbor report → grade → reward
 └── trajectories/                     # rollout traces for this task, one dir per model
-    ├── claude-opus-4-8/run_1/        #   agent/ + artifacts/ + verifier/reward.json
+    ├── opus-4-8/run_1/               #   agent/ + artifacts/ + verifier/reward.json  (model: anthropic/claude-opus-4-8)
     └── gpt-5.6-sol/run_1/
 ```
 
 ## Trajectories
 
-Rollout traces ship **co-located with each task** under `<task-uuid>/trajectories/`, for **two models**, `claude-opus-4-8` and `gpt-5.6-sol`, each a full Harbor trial directory:
+Rollout traces ship **co-located with each task** under `<task-uuid>/trajectories/`, for **two models** — `opus-4-8` (anthropic/claude-opus-4-8) and `gpt-5.6-sol` — each a full Harbor trial directory:
 
 ```
 <task-uuid>/trajectories/<model>/run_1/

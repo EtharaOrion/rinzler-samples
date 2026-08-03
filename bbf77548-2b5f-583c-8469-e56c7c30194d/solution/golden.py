@@ -54,7 +54,7 @@ def _env(db, cfg):
     e = dict(os.environ)
     e["DATABASE_URL"] = f"sqlite:///{db}"
     if cfg:
-        e["YC_BENCH_EXPERIMENT"] = cfg
+        e["RINZLER_EXPERIMENT"] = cfg
     return e
 
 

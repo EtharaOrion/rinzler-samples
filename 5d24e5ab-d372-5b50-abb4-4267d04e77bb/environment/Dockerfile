@@ -8,6 +8,6 @@ RUN rinzler harbor init-db --bundle /opt/rinzler-task/bundle --db /opt/rinzler-t
  && cp /opt/rinzler-task/seed.db /work/rinzler.db
 
 ENV DATABASE_URL=sqlite:////work/rinzler.db
-ENV YC_BENCH_EXPERIMENT=/opt/rinzler-task/bundle/config.toml
+ENV RINZLER_EXPERIMENT=/opt/rinzler-task/bundle/config.toml
 
 WORKDIR /work
