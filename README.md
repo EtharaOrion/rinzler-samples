@@ -182,18 +182,4 @@ Every task is **content-addressed**: `harbor build` with the same `(config, seed
 
 Released under the **MIT License** (see [`LICENSE`](LICENSE)). Any datasets or task bundles retain their own original licences.
 
-## Citation
-
-```bibtex
-@misc{rinzler2026,
-  title        = {Rinzler: A Verifiable RL Environment for Long-Horizon Agentic Coherence},
-  author       = {Ethara.AI},
-  year         = {2026},
-  howpublished = {\url{https://github.com/Ethara-Ai/rinzler}},
-  note         = {A verifiable reinforcement-learning environment in Harbor format; a model operates a simulated AI startup across a 1-year horizon, graded by a hidden, non-gameable 3-channel verifier over its behavior}
-}
-```
-
----
-
 **Rinzler** · An Ethara.AI project · Harness: self-hosted Harbor business sim.
