@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./assets/banner.png" alt="rinzler mascot · a verifiable long-horizon-coherence RL environment" style="width: 100%; height: auto;" />
+<img src="./images/banner.png" alt="rinzler mascot · a verifiable long-horizon-coherence RL environment" style="width: 100%; height: auto;" />
 
 **A verifiable RL environment for long-horizon agentic coherence: a model runs a simulated AI startup for a year from a written contract, graded by a hidden, non-gameable reward over its behavior.**
 
@@ -53,6 +53,8 @@ flowchart TB
 
 **What the verifier does.** After the rollout, a hidden verifier replays the **final database state** plus the agent's adversarial-client flags through three independent grading channels and a safety gate, then emits a single scalar reward. The grader is **baked into every task bundle**, so it travels with the task and cannot drift from the harness that authored it.
 
+**On isolation & `network_mode`.** The business world itself is fully self-contained: the SQLite discrete-event simulation runs entirely in-container and makes **no external calls**, so the graded business state is deterministic and offline. Each bundle's `task.toml` nonetheless declares `network_mode = "public"` for both the `[agent]` and `[verifier]` blocks, because the two *model-facing* channels do need egress: the **agent** reaches its LLM through a fixed proxy endpoint (`ANTHROPIC_BASE_URL` / `OPENAI_BASE_URL`, pointed at the harness proxy), and the **verifier's LLM rubric-judge council** calls its judge models the same way. Network access is therefore scoped to the model/judge API surface, not to the simulation — the world's determinism does not depend on the network, only the model inference and the council grading do. Deployments that require a hard network seal can pin egress to the proxy host (or run the model/judge endpoints in-cluster); the SQLite world needs nothing.
+
 ---
 
 ## The reward composite
@@ -85,14 +87,14 @@ Rinzler grades each rollout with **schema v3**, combining three independent chan
 
 ## Difficulty & reward decay
 
-Difficulty is **measured, never declared.** Each task is placed into a tier **strictly by its observed pilot reward**. The 30 tasks are ranked by mean pilot reward and cut into five equal-count quantile tiers of **6 tasks each** (Trivial nearest the golden `1.0` ceiling, Expert nearest the nop `0.0` floor), so the gradient is auditable rather than authored and every tier is populated. Both frontier pilots (claude-opus-4-8, gpt-5.6-sol) track the same decay, and the corpus ships **60 graded runs** (2 models × 30 tasks) plus a golden reference per task.
+Difficulty is **measured, never declared.** Each task is placed into a tier **strictly by its observed pilot reward**. The 30 tasks are ranked by mean pilot reward and cut into five equal-count quantile tiers of **6 tasks each** (Trivial nearest the golden `1.0` ceiling, Expert nearest the nop `0.0` floor), so the gradient is auditable rather than authored and every tier is populated. Both frontier pilots (opus-4-8, gpt-5.6-sol) track the same decay, and the corpus ships **60 graded runs** (2 models × 30 tasks) plus a golden reference per task.
 
 The reported reward is the **raw** deterministic checker channel (Channel A): the weighted mean of the continuous scorers over the final and intra-year business state, **before** the pytest and council channels and before the gate — it measures what the agent actually achieved in the world. It is the value stored as `reward` (and mirrored in `reward.txt`) in each `verifier/reward.json`, and it spans the full `[0,1]` frame, so a fully-failing run reaches an honest `0.000`.
 
 ### Reward decay across tiers
 
 <div align="center">
-<img src="./assets/tier_reward_decay_raw.png" alt="Per-tier mean raw checker reward for claude-opus-4-8 and gpt-5.6-sol across five reward-quantile tiers, Trivial near the golden ceiling to Expert reaching 0.0" style="width: 88%; height: auto;" />
+<img src="./images/tier_reward_decay_raw.png" alt="Per-tier mean raw checker reward for opus-4-8 and gpt-5.6-sol across five reward-quantile tiers, Trivial near the golden ceiling to Expert reaching 0.0" style="width: 88%; height: auto;" />
 </div>
 
 | Tier | Tasks | Mean reward | opus | gpt | Reward window |
@@ -106,13 +108,13 @@ The reported reward is the **raw** deterministic checker channel (Channel A): th
 Tiers are cut by **reward quantile** (6 tasks each), so every tier is populated and the split is auditable rather than authored. Both pilots track the same monotonic decay — near the golden ceiling on the easy tiers, then a sharp fall to the Expert tier where cash runway, RAT-client density, short deadlines, and prestige decay stack up. Seven of the Expert-tier runs bottom out at an honest **0.000** (bankruptcy or zero task completion).
 
 <div align="center">
-<img src="./assets/model_comparison.png" alt="Grouped-bar comparison of claude-opus-4-8 vs gpt-5.6-sol mean raw reward across the five tiers" style="width: 88%; height: auto;" />
+<img src="./images/model_comparison.png" alt="Grouped-bar comparison of opus-4-8 vs gpt-5.6-sol mean raw reward across the five tiers" style="width: 88%; height: auto;" />
 </div>
 
 Per-task, the reward forms a clean calibration band from the golden `1.0` ceiling down to the `0.0` floor:
 
 <div align="center">
-<img src="./assets/calibration_band.png" alt="Per-task raw reward for both pilots, ranked easiest to hardest, with the five reward-quantile tier bands shaded" style="width: 92%; height: auto;" />
+<img src="./images/calibration_band.png" alt="Per-task raw reward for both pilots, ranked easiest to hardest, with the five reward-quantile tier bands shaded" style="width: 92%; height: auto;" />
 </div>
 
 ### The composite (reference)
@@ -140,7 +142,7 @@ A self-contained sample of the Rinzler environment: the 30-task dataset, model t
 ```
 .
 ├── <task-uuid>/        # 30 UUID-keyed Harbor tasks at repo root; each carries its own trajectories/
-├── assets/             # banner + reward-decay, model-comparison, and calibration-band graphs
+├── images/             # banner + reward-decay, model-comparison, and calibration-band graphs
 └── README.md
 ```
 
