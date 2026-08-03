@@ -87,34 +87,30 @@ Rinzler grades each rollout with **schema v3**, combining three independent chan
 
 ## Difficulty & reward decay
 
-Difficulty is **measured, never declared.** Each task is placed into a tier **strictly by its observed pilot reward**. The 30 tasks are ranked by mean pilot reward and cut into five equal-count quantile tiers of **6 tasks each** (Trivial nearest the golden `1.0` ceiling, Expert nearest the nop `0.0` floor), so the gradient is auditable rather than authored and every tier is populated. Both frontier pilots (opus-4-8, gpt-5.6-sol) track the same decay, and the corpus ships **60 graded runs** (2 models × 30 tasks) plus a golden reference per task.
+Difficulty is **measured, never declared.** Each task is placed into a tier **strictly by its observed pilot reward**. The 30 tasks are ranked by mean pilot reward and cut into five equal-count quantile tiers of **6 tasks each** (Trivial nearest the golden `1.0` ceiling, Expert nearest the nop `0.0` floor), so the gradient is auditable rather than authored and every tier is populated. The frontier pilot (gpt-5.6-sol) tracks this decay, and the corpus ships **30 graded runs** (1 model × 30 tasks) plus a golden reference per task.
 
 The reported reward is the **raw** deterministic checker channel (Channel A): the weighted mean of the continuous scorers over the final and intra-year business state, **before** the pytest and council channels and before the gate — it measures what the agent actually achieved in the world. It is the value stored as `reward` (and mirrored in `reward.txt`) in each `verifier/reward.json`, and it spans the full `[0,1]` frame, so a fully-failing run reaches an honest `0.000`.
 
 ### Reward decay across tiers
 
 <div align="center">
-<img src="./images/tier_reward_decay_raw.png" alt="Per-tier mean raw checker reward for opus-4-8 and gpt-5.6-sol across five reward-quantile tiers, Trivial near the golden ceiling to Expert reaching 0.0" style="width: 88%; height: auto;" />
+<img src="./images/tier_score_decay_raw.png" alt="Per-tier mean raw checker reward for gpt-5.6-sol across five reward-quantile tiers, Trivial near the golden ceiling to Expert reaching 0.0" style="width: 88%; height: auto;" />
 </div>
 
-| Tier | Tasks | Mean reward | opus | gpt | Reward window |
-| :--- | ---: | ---: | ---: | ---: | :--- |
-| **Trivial** | 6 | **0.869** | 0.815 | 0.923 | 0.85 – 0.88 |
-| **Easy** | 6 | **0.834** | 0.796 | 0.871 | 0.82 – 0.85 |
-| **Medium** | 6 | **0.796** | 0.782 | 0.811 | 0.77 – 0.81 |
-| **Hard** | 6 | **0.723** | 0.702 | 0.744 | 0.68 – 0.77 |
-| **Expert** | 6 | **0.146** | 0.067 | 0.225 | 0.00 – 0.33 |
+| Tier | Tasks | Mean reward | Reward window |
+| :--- | ---: | ---: | :--- |
+| **Trivial** | 6 | **0.941** | 0.91 – 1.00 |
+| **Easy** | 6 | **0.884** | 0.87 – 0.90 |
+| **Medium** | 6 | **0.823** | 0.77 – 0.85 |
+| **Hard** | 6 | **0.701** | 0.64 – 0.76 |
+| **Expert** | 6 | **0.225** | 0.00 – 0.47 |
 
-Tiers are cut by **reward quantile** (6 tasks each), so every tier is populated and the split is auditable rather than authored. Both pilots track the same monotonic decay — near the golden ceiling on the easy tiers, then a sharp fall to the Expert tier where cash runway, RAT-client density, short deadlines, and prestige decay stack up. Seven of the Expert-tier runs bottom out at an honest **0.000** (bankruptcy or zero task completion).
-
-<div align="center">
-<img src="./images/model_comparison.png" alt="Grouped-bar comparison of opus-4-8 vs gpt-5.6-sol mean raw reward across the five tiers" style="width: 88%; height: auto;" />
-</div>
+Tiers are cut by **reward quantile** (6 tasks each), so every tier is populated and the split is auditable rather than authored. The pilot tracks a monotonic decay — near the golden ceiling on the easy tiers, then a sharp fall to the Expert tier where cash runway, RAT-client density, short deadlines, and prestige decay stack up. Three of the Expert-tier runs bottom out at an honest **0.000** (bankruptcy or zero task completion).
 
 Per-task, the reward forms a clean calibration band from the golden `1.0` ceiling down to the `0.0` floor:
 
 <div align="center">
-<img src="./images/calibration_band.png" alt="Per-task raw reward for both pilots, ranked easiest to hardest, with the five reward-quantile tier bands shaded" style="width: 92%; height: auto;" />
+<img src="./images/calibration_band.png" alt="Per-task raw reward for the pilot, ranked easiest to hardest, with the five reward-quantile tier bands shaded" style="width: 92%; height: auto;" />
 </div>
 
 ### The composite (reference)
@@ -142,7 +138,7 @@ A self-contained sample of the Rinzler environment: the 30-task dataset, model t
 ```
 .
 ├── <task-uuid>/        # 30 UUID-keyed Harbor tasks at repo root; each carries its own trajectories/
-├── images/             # banner + reward-decay, model-comparison, and calibration-band graphs
+├── images/             # banner + score-decay and calibration-band graphs
 └── README.md
 ```
 
@@ -166,13 +162,12 @@ A self-contained sample of the Rinzler environment: the 30-task dataset, model t
 │   ├── live_state.json               #   HIDDEN answer key: expected{} + planted canary tokens
 │   └── test.sh                       #   entrypoint: harbor report → grade → reward
 └── trajectories/                     # rollout traces for this task, one dir per model
-    ├── opus-4-8/run_1/               #   agent/ + artifacts/ + verifier/reward.json  (model: anthropic/claude-opus-4-8)
-    └── gpt-5.6-sol/run_1/
+    └── gpt-5.6-sol/run_1/            #   agent/ + artifacts/ + verifier/reward.json
 ```
 
 ## Trajectories
 
-Rollout traces ship **co-located with each task** under `<task-uuid>/trajectories/`, for **two models** — `opus-4-8` (anthropic/claude-opus-4-8) and `gpt-5.6-sol` — each a full Harbor trial directory:
+Rollout traces ship **co-located with each task** under `<task-uuid>/trajectories/`, for the pilot model — `gpt-5.6-sol` — each a full Harbor trial directory:
 
 ```
 <task-uuid>/trajectories/<model>/run_1/

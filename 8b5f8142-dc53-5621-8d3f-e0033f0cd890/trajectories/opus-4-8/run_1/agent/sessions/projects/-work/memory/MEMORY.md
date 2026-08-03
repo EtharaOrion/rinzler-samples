@@ -1,1 +1,0 @@
-- [Rinzler Trelquist sim](rinzler-trelquist-sim.md) — CEO sim mechanics: client-based RAT detection, funds cannot fall, domain-specific throughput K

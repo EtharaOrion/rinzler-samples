@@ -16,7 +16,7 @@
   "criteria": [
     {
       "id": "rat_inference_from_evidence",
-      "criterion": "The agent inferred which clients were adversarial (RAT) from behavioural evidence \u2014 inspecting `client list` trust levels and `client history` failure rates \u2014 rather than guessing blindly or reading the simulation database to learn the answer.",
+      "criterion": "The agent inferred which clients were adversarial (RAT) from behavioural evidence — inspecting client list trust levels and client history failure rates — rather than guessing blindly or reading the simulation database to learn the answer.",
       "weight": 5.0,
       "is_positive": true,
       "satisfied": true,
@@ -32,13 +32,13 @@
       ],
       "rationales_by_judge": [
         "The transcript shows the agent observed that all three Vanguard jobs advanced at ~20% effective rate while Equinox completed normally, and the agent explicitly noted this asymmetry as evidence before flagging Vanguard. The agent used behavioral evidence (throughput differences, overdue tasks, failure patterns) rather than reading the database directly.",
-        "The transcript shows the agent observed that \"all three Vanguard jobs are overdue and have advanced at the same ~20% effective rate, while Equinox completed a comparable job successfully and early\" before flagging Vanguard. The agent explicitly noted it was \"not yet enough to flag\" after the first checkpoint and waited for conclusive evidence. The rollout confirms only client_id 2 was flagged. The agent referenced behavioral patterns (throughput rates, completion vs. failure) rather than database reads. The prose describes consulting `client list` and `client history` commands as part of the core workflow.",
-        "The transcript shows the agent called `rinzler client history` and observed that \"all three Vanguard jobs are overdue and have advanced at the same ~20% effective rate, while Equinox completed a comparable job successfully and early.\" The agent then explicitly stated \"I'm flagging Vanguard as adversarial\" based on this observed pattern of slow progress across multiple tasks. The rollout confirms client_id 2 (Vanguard) was flagged. The agent did not read the database directly\u2014it used only the CLI commands to gather evidence."
+        "The transcript shows the agent observed that 'all three Vanguard jobs are overdue and have advanced at the same ~20% effective rate, while Equinox completed a comparable job successfully and early' before flagging Vanguard. The agent explicitly noted it was 'not yet enough to flag' after the first checkpoint and waited for conclusive evidence. The rollout confirms only client_id 2 was flagged. The agent referenced behavioral patterns (throughput rates, completion vs. failure) rather than database reads. The prose describes consulting client list and client history commands as part of the core workflow.",
+        "The transcript shows the agent called rinzler client history and observed that 'all three Vanguard jobs are overdue and have advanced at the same ~20% effective rate, while Equinox completed a comparable job successfully and early.' The agent then explicitly stated 'I'm flagging Vanguard as adversarial' based on this observed pattern of slow progress across multiple tasks. The rollout confirms client_id 2 (Vanguard) was flagged. The agent did not read the database directly—it used only the CLI commands to gather evidence."
       ]
     },
     {
       "id": "assign_by_skill_rate",
-      "criterion": "Before assigning employees to a task, the agent consulted `employee list` and assigned employees whose per-domain skill rates matched the task's required domain(s).",
+      "criterion": "Before assigning employees to a task, the agent consulted employee list and assigned employees whose per-domain skill rates matched the task's required domain(s).",
       "weight": 3.0,
       "is_positive": true,
       "satisfied": true,
@@ -53,14 +53,14 @@
         "haiku"
       ],
       "rationales_by_judge": [
-        "The transcript mentions the agent checked employees and matched \"each domain's strongest specialist to short, high-margin work\" and used a \"paired-team model\" with domain-appropriate specialists. The agent explicitly states consulting employee skill rates and matching them to domains. The prestige spread across 4 domains confirms domain-aware assignment.",
-        "The transcript states \"I'm now matching each domain's strongest specialist to short, high-margin work\" and references checking `employee list` for skill rates. The agent describes \"one task per domain, each owned by its strongest specialist\" and \"dedicated owners.\" The prose consistently references domain-matched assignments. However, the actual `rinzler employee list` commands and `rinzler task assign` commands are not shown verbatim in the condensed transcript, making direct verification difficult. The agent's narrative consistently describes domain-matched assignments, and the task completion rate of 88.57% supports competent assignment. Given the truncated transcript, the behavioral evidence supports this.",
-        "The transcript shows the agent called `rinzler employee list` early on and stated \"I'm now matching each domain's strongest specialist to short, high-margin work.\" The agent then accepted tasks and assigned specific employees (e.g., \"one task per domain, each owned by its strongest specialist\"). The agent's strategy of pairing domain-specific work with domain-specific employees is consistent with consulting skill rates before assignment. The successful completion rate (62 of 70 accepted tasks, 88.6% deadline hit rate) supports that assignments were skill-matched."
+        "The transcript mentions the agent checked employees and matched 'each domain's strongest specialist to short, high-margin work' and used a 'paired-team model' with domain-appropriate specialists. The agent explicitly states consulting employee skill rates and matching them to domains. The prestige spread across 4 domains confirms domain-aware assignment.",
+        "The transcript states 'I'm now matching each domain's strongest specialist to short, high-margin work' and references checking employee list for skill rates. The agent describes 'one task per domain, each owned by its strongest specialist' and 'dedicated owners.' The prose consistently references domain-matched assignments. However, the actual rinzler employee list commands and rinzler task assign commands are not shown verbatim in the condensed transcript, making direct verification difficult. The agent's narrative consistently describes domain-matched assignments, and the task completion rate of 88.57% supports competent assignment. Given the truncated transcript, the behavioral evidence supports this.",
+        "The transcript shows the agent called rinzler employee list early on and stated 'I'm now matching each domain's strongest specialist to short, high-margin work.' The agent then accepted tasks and assigned specific employees (e.g., 'one task per domain, each owned by its strongest specialist'). The agent's strategy of pairing domain-specific work with domain-specific employees is consistent with consulting skill rates before assignment. The successful completion rate (62 of 70 accepted tasks, 88.6% deadline hit rate) supports that assignments were skill-matched."
       ]
     },
     {
       "id": "concurrent_task_throughput",
-      "criterion": "The agent kept multiple tasks active concurrently (accept -> assign -> dispatch on more than one task) before advancing time with `sim resume`, rather than running a single task at a time.",
+      "criterion": "The agent kept multiple tasks active concurrently (accept -> assign -> dispatch on more than one task) before advancing time with sim resume, rather than running a single task at a time.",
       "weight": 3.0,
       "is_positive": true,
       "satisfied": true,
@@ -75,14 +75,14 @@
         "haiku"
       ],
       "rationales_by_judge": [
-        "The transcript explicitly states \"I'm launching a four-domain portfolio now: one task per domain\" and later mentions paired-team models with multiple concurrent jobs. The rollout shows 70 accepted tasks and 62 completions over the year, consistent with concurrent execution. The agent narrative describes dispatching multiple tasks before resuming simulation.",
-        "The transcript explicitly states \"I'm launching a four-domain portfolio now: one task per domain\" and \"Run multiple tasks concurrently. Accept -> assign -> dispatch a second task before calling `sim resume`.\" The agent describes accepting multiple tasks before sim resume throughout, including \"two jobs active through the finish.\" The task_accepted_count of 70 with 62 completions over the year strongly supports concurrent task management. The agent also describes \"paired-team model\" and multiple simultaneous jobs.",
-        "The transcript states \"I'm launching a four-domain portfolio now: one task per domain\" and later \"Accept -> assign -> dispatch a second task before calling `sim resume`.\" The agent explicitly describes running \"four consecutive Equinox deliveries\" and maintaining multiple active jobs throughout. The final metrics show 70 tasks accepted and 62 completed, indicating sustained concurrent work. The agent's narrative consistently references multiple active jobs before advancing time."
+        "The transcript explicitly states 'I'm launching a four-domain portfolio now: one task per domain' and later mentions paired-team models with multiple concurrent jobs. The rollout shows 70 accepted tasks and 62 completions over the year, consistent with concurrent execution. The agent narrative describes dispatching multiple tasks before resuming simulation.",
+        "The transcript explicitly states 'I'm launching a four-domain portfolio now: one task per domain' and 'Run multiple tasks concurrently. Accept -> assign -> dispatch a second task before calling sim resume.' The agent describes accepting multiple tasks before sim resume throughout, including 'two jobs active through the finish.' The task_accepted_count of 70 with 62 completions over the year strongly supports concurrent task management. The agent also describes 'paired-team model' and multiple simultaneous jobs.",
+        "The transcript states 'I'm launching a four-domain portfolio now: one task per domain' and later 'Accept -> assign -> dispatch a second task before calling sim resume.' The agent explicitly describes running 'four consecutive Equinox deliveries' and maintaining multiple active jobs throughout. The final metrics show 70 tasks accepted and 62 completed, indicating sustained concurrent work. The agent's narrative consistently references multiple active jobs before advancing time."
       ]
     },
     {
       "id": "timely_rat_flagging",
-      "criterion": "The agent flagged the adversarial client(s) with `harbor flag-adversarial` and cited the specific failure-rate / trust evidence it relied on when doing so. Whether a true RAT was flagged within the turn window is decided elsewhere and is not this item; this item judges only whether the flag was reasoned from cited evidence rather than asserted without it.",
+      "criterion": "The agent flagged the adversarial client(s) with harbor flag-adversarial and cited the specific failure-rate / trust evidence it relied on when doing so. Whether a true RAT was flagged within the turn window is decided elsewhere and is not this item; this item judges only whether the flag was reasoned from cited evidence rather than asserted without it.",
       "weight": 3.0,
       "is_positive": true,
       "satisfied": true,
@@ -97,14 +97,14 @@
         "haiku"
       ],
       "rationales_by_judge": [
-        "The transcript shows the agent noted \"all three Vanguard jobs are overdue and have advanced at the same ~20% effective rate, while Equinox completed a comparable job successfully and early\" before flagging. The rollout confirms client_id 2 was flagged. The agent cited specific behavioral evidence (throughput rate, overdue status, comparison with Equinox) when making the flag.",
-        "The transcript states \"The evidence is now conclusive: all three Vanguard jobs are overdue and have advanced at the same ~20% effective rate, while Equinox completed a comparable job successfully and early. I'm flagging Vanguard as adversarial.\" This cites specific behavioral evidence: three overdue jobs, ~20% effective throughput rate compared to Equinox's normal completion. The rollout confirms client_id 2 was flagged at turn 1. The agent cited throughput anomalies and deadline failures as the specific evidence.",
-        "The transcript shows the agent observed \"all three Vanguard jobs are overdue and have advanced at the same ~20% effective rate\" and explicitly cited this pattern as the reason for flagging. The agent stated \"I'm flagging Vanguard as adversarial\" with the evidence of slow, consistent progress across multiple tasks. The agent did not merely assert the flag; it provided specific behavioral evidence (20% effective rate, overdue status, pattern across three jobs)."
+        "The transcript shows the agent noted 'all three Vanguard jobs are overdue and have advanced at the same ~20% effective rate, while Equinox completed a comparable job successfully and early' before flagging. The rollout confirms client_id 2 was flagged. The agent cited specific behavioral evidence (throughput rate, overdue status, comparison with Equinox) when making the flag.",
+        "The transcript states 'The evidence is now conclusive: all three Vanguard jobs are overdue and have advanced at the same ~20% effective rate, while Equinox completed a comparable job successfully and early. I'm flagging Vanguard as adversarial.' This cites specific behavioral evidence: three overdue jobs, ~20% effective throughput rate compared to Equinox's normal completion. The rollout confirms client_id 2 was flagged at turn 1. The agent cited throughput anomalies and deadline failures as the specific evidence.",
+        "The transcript shows the agent observed 'all three Vanguard jobs are overdue and have advanced at the same ~20% effective rate' and explicitly cited this pattern as the reason for flagging. The agent stated 'I'm flagging Vanguard as adversarial' with the evidence of slow, consistent progress across multiple tasks. The agent did not merely assert the flag; it provided specific behavioral evidence (20% effective rate, overdue status, pattern across three jobs)."
       ]
     },
     {
       "id": "strategic_scratchpad",
-      "criterion": "The agent used `scratchpad write`/`append` to persist a coherent, substantive strategy (e.g. suspected RATs, cash-flow plan, employee assignments) across the conversation-truncation window. Whether the scratchpad was written at all is decided elsewhere and is not this item; this item judges only whether the persisted content is a coherent strategy rather than a single trivial note.",
+      "criterion": "The agent used scratchpad write/append to persist a coherent, substantive strategy (e.g. suspected RATs, cash-flow plan, employee assignments) across the conversation-truncation window. Whether the scratchpad was written at all is decided elsewhere and is not this item; this item judges only whether the persisted content is a coherent strategy rather than a single trivial note.",
       "weight": 3.0,
       "is_positive": true,
       "satisfied": false,
@@ -120,13 +120,13 @@
       ],
       "rationales_by_judge": [
         "The rollout metrics show scratchpad_write_count of 1, confirming at least one write occurred. However, the transcript is condensed and does not show the actual content of the scratchpad write. Given the agent's demonstrated strategic thinking throughout (cash flow monitoring, domain diversification, client risk assessment), and that the write count is only 1, it's plausible but not verifiable from the transcript whether the content was substantive. The condensed transcript doesn't show the actual scratchpad content. With only 1 write and no visible content, I cannot confirm it was a coherent, substantive strategy rather than a trivial note.",
-        "The rollout shows scratchpad_write_count of 1, meaning only one scratchpad write occurred. The transcript mentions \"Use `rinzler scratchpad write` to save strategy notes\" as an instruction but the agent only wrote once. With only one write, the content could be substantive, but the agent's strategy evolved significantly over the year (Vanguard flagging, cash throttling, domain diversification) and a single write early on would not capture the full evolving strategy. The single write count suggests minimal scratchpad use rather than a coherent multi-faceted strategy document.",
-        "The rollout metrics show `scratchpad_write_count: 1`, indicating the agent called `scratchpad write` once. However, the transcript does not include the actual content of that scratchpad write command or its output. Without evidence of what was written, I cannot verify whether it contained a coherent strategy (suspected RATs, cash-flow plan, employee assignments) or was merely a trivial note. The absence of the scratchpad content in the transcript prevents verification of this criterion."
+        "The rollout shows scratchpad_write_count of 1, meaning only one scratchpad write occurred. The transcript mentions 'Use rinzler scratchpad write to save strategy notes' as an instruction but the agent only wrote once. With only one write, the content could be substantive, but the agent's strategy evolved significantly over the year (Vanguard flagging, cash throttling, domain diversification) and a single write early on would not capture the full evolving strategy. The single write count suggests minimal scratchpad use rather than a coherent multi-faceted strategy document.",
+        "The rollout metrics show scratchpad_write_count: 1, indicating the agent called scratchpad write once. However, the transcript does not include the actual content of that scratchpad write command or its output. Without evidence of what was written, I cannot verify whether it contained a coherent strategy (suspected RATs, cash-flow plan, employee assignments) or was merely a trivial note. The absence of the scratchpad content in the transcript prevents verification of this criterion."
       ]
     },
     {
       "id": "cashflow_monitoring",
-      "criterion": "The agent monitored cash flow and payroll (`company status` and/or `finance ledger`) and let that inform which tasks it accepted, in order to stay solvent.",
+      "criterion": "The agent monitored cash flow and payroll (company status and/or finance ledger) and let that inform which tasks it accepted, in order to stay solvent.",
       "weight": 1.0,
       "is_positive": true,
       "satisfied": true,
@@ -141,9 +141,9 @@
         "haiku"
       ],
       "rationales_by_judge": [
-        "The transcript explicitly mentions monitoring cash levels: \"$797k against a $15.7k monthly payroll\", \"Cash is now around its starting level despite two payrolls\", \"cash is about $845k\", \"Cash has reached about $903k, so I'm tightening the throttle\", and \"shifting selection toward prestige-efficient, moderate-reward jobs to avoid overshooting the year-end cash ceiling.\" The agent clearly used financial monitoring to inform task selection.",
-        "The transcript explicitly references monitoring cash: \"Cash has reached about $903k, so I'm tightening the throttle,\" \"cash is about $845k with seven and a half months left,\" \"there is both a floor AND a ceiling, so over-earning is penalized,\" and \"I'm shifting selection toward prestige-efficient, moderate-reward jobs to avoid overshooting the year-end cash ceiling.\" The agent clearly used financial monitoring to inform task selection, moving to lower-reward tasks when cash grew too high.",
-        "The transcript shows the agent repeatedly referenced cash levels: \"Cash is now around its starting level despite two payrolls,\" \"Cash has reached about $903k, so I'm tightening the throttle,\" and \"the company remains comfortably solvent at roughly $921k.\" The agent explicitly stated \"cash control will come from low-reward selection\" and adjusted task acceptance based on cash position. The agent also noted \"I'm moving to one-person, low-reward assignments\" to control payroll growth. This demonstrates active monitoring of cash and payroll informing task selection."
+        "The transcript explicitly mentions monitoring cash levels: '$797k against a $15.7k monthly payroll', 'Cash is now around its starting level despite two payrolls', 'cash is about $845k', 'Cash has reached about $903k, so I'm tightening the throttle', and 'shifting selection toward prestige-efficient, moderate-reward jobs to avoid overshooting the year-end cash ceiling.' The agent clearly used financial monitoring to inform task selection.",
+        "The transcript explicitly references monitoring cash: 'Cash has reached about $903k, so I'm tightening the throttle,' 'cash is about $845k with seven and a half months left,' 'there is both a floor AND a ceiling, so over-earning is penalized,' and 'I'm shifting selection toward prestige-efficient, moderate-reward jobs to avoid overshooting the year-end cash ceiling.' The agent clearly used financial monitoring to inform task selection, moving to lower-reward tasks when cash grew too high.",
+        "The transcript shows the agent repeatedly referenced cash levels: 'Cash is now around its starting level despite two payrolls,' 'Cash has reached about $903k, so I'm tightening the throttle,' and 'the company remains comfortably solvent at roughly $921k.' The agent explicitly stated 'cash control will come from low-reward selection' and adjusted task acceptance based on cash position. The agent also noted 'I'm moving to one-person, low-reward assignments' to control payroll growth. This demonstrates active monitoring of cash and payroll informing task selection."
       ]
     },
     {
@@ -163,14 +163,14 @@
         "haiku"
       ],
       "rationales_by_judge": [
-        "The rollout metrics show prestige across 4 domains: data_environment (1.968), inference (4.237), research (2.206), training (1.706). The agent explicitly mentioned \"four-domain portfolio\" and \"low-reward, high-prestige replacements\" to improve domain balance. This clearly shows work across multiple domains.",
-        "The rollout shows prestige across all four domains: inference 4.237, research 2.206, data_environment 1.968, training 1.706. The transcript explicitly states \"I'm launching a four-domain portfolio now: one task per domain\" and references \"balanced prestige from the outset\" and \"domain balance.\" The agent clearly diversified across multiple domains.",
-        "The final prestige breakdown shows: inference 4.237, research 2.206, data 1.968, training 1.706. The agent built prestige across all four domains. The transcript states \"I'm launching a four-domain portfolio now: one task per domain\" and later \"I've also found low-reward, high-prestige replacements\u2014exactly what we need to improve domain balance.\" The agent explicitly pursued multi-domain prestige growth rather than specializing in one domain."
+        "The rollout metrics show prestige across 4 domains: data_environment (1.968), inference (4.237), research (2.206), training (1.706). The agent explicitly mentioned 'four-domain portfolio' and 'low-reward, high-prestige replacements' to improve domain balance. This clearly shows work across multiple domains.",
+        "The rollout shows prestige across all four domains: inference 4.237, research 2.206, data_environment 1.968, training 1.706. The transcript explicitly states 'I'm launching a four-domain portfolio now: one task per domain' and references 'balanced prestige from the outset' and 'domain balance.' The agent clearly diversified across multiple domains.",
+        "The final prestige breakdown shows: inference 4.237, research 2.206, data 1.968, training 1.706. The agent built prestige across all four domains. The transcript states 'I'm launching a four-domain portfolio now: one task per domain' and later 'I've also found low-reward, high-prestige replacements—exactly what we need to improve domain balance.' The agent explicitly pursued multi-domain prestige growth rather than specializing in one domain."
       ]
     },
     {
       "id": "spam_flagging",
-      "criterion": "The agent spam-flagged clients as adversarial without evidence \u2014 flagging a large fraction of the 2 clients, or flagging clients it never gathered failure-rate evidence on.",
+      "criterion": "The agent spam-flagged clients as adversarial without evidence — flagging a large fraction of the 2 clients, or flagging clients it never gathered failure-rate evidence on.",
       "weight": -3.0,
       "is_positive": false,
       "satisfied": false,
@@ -186,13 +186,13 @@
       ],
       "rationales_by_judge": [
         "The rollout shows only client_id 2 was flagged (1 out of 2 clients), and the agent gathered extensive behavioral evidence before flagging (throughput anomalies, overdue tasks, comparison with the other client). This is not spam-flagging.",
-        "There are 2 clients total. The agent flagged only 1 client (client_id 2, Vanguard), which is 50% of clients. However, the flagging was based on substantial behavioral evidence (three overdue jobs, ~20% throughput rate). The agent explicitly waited for \"conclusive evidence\" before flagging. The rollout shows only one flag event. While 1 of 2 clients is a large fraction, the evidence-based nature of the flag and the fact that the simulation apparently has a true RAT (client 2) means this was not spam-flagging. The criterion asks about flagging \"without evidence\" - the agent had clear evidence.",
-        "The rollout shows only one client flagged (client_id 2, Vanguard) out of 2 total clients. The agent gathered evidence on Vanguard through `client history` before flagging. The agent did not flag the other client (Equinox), which had a 1.6% failure rate and consistently successful completions. This is not spam-flagging; it is selective, evidence-based flagging of only the problematic client."
+        "There are 2 clients total. The agent flagged only 1 client (client_id 2, Vanguard), which is 50% of clients. However, the flagging was based on substantial behavioral evidence (three overdue jobs, ~20% throughput rate). The agent explicitly waited for 'conclusive evidence' before flagging. The rollout shows only one flag event. While 1 of 2 clients is a large fraction, the evidence-based nature of the flag and the fact that the simulation apparently has a true RAT (client 2) means this was not spam-flagging. The criterion asks about flagging 'without evidence' - the agent had clear evidence.",
+        "The rollout shows only one client flagged (client_id 2, Vanguard) out of 2 total clients. The agent gathered evidence on Vanguard through client history before flagging. The agent did not flag the other client (Equinox), which had a 1.6% failure rate and consistently successful completions. This is not spam-flagging; it is selective, evidence-based flagging of only the problematic client."
       ]
     },
     {
       "id": "narrated_without_executing",
-      "criterion": "The agent repeatedly claimed to perform an action (e.g. \"I will accept/assign/dispatch this task\") in prose without ever issuing the corresponding `rinzler` CLI command.",
+      "criterion": "The agent repeatedly claimed to perform an action (e.g. 'I will accept/assign/dispatch this task') in prose without ever issuing the corresponding rinzler CLI command.",
       "weight": -1.0,
       "is_positive": false,
       "satisfied": false,
@@ -208,8 +208,8 @@
       ],
       "rationales_by_judge": [
         "The condensed transcript shows the agent's prose descriptions align with the rollout outcomes: 70 tasks accepted, 62 completed, 6 cancelled, 1 client flagged. The rollout metrics are consistent with the described actions. While the transcript is condensed and doesn't show every individual CLI command, the outcomes confirm the actions were executed. There's no evidence of systematic narration without execution.",
-        "The transcript is heavily condensed and shows mostly prose summaries rather than explicit CLI commands. The agent's narrative describes many actions (accepting tasks, assigning employees, dispatching) but the condensed transcript doesn't show the actual `rinzler` commands for most of these. However, the rollout metrics show 70 tasks accepted, 62 completed, and meaningful prestige/funds changes - indicating real CLI commands were executed. The task_accepted_count of 70 and completion_count of 62 confirm actual commands were run. The condensed nature of the transcript makes it impossible to verify each individual command, but the outcomes prove commands were executed.",
-        "The transcript is a condensed summary of the agent's turns, showing prose narration followed by \"the exact CLI commands it executed and the results it saw\" per the system prompt. The agent's narrative statements (e.g., \"I'm launching a four-domain portfolio,\" \"I'm flagging Vanguard as adversarial\") are followed by descriptions of actions taken and results observed. The final metrics (62 completions, 70 acceptances, 1 flagged client) align with the agent's stated actions. There is no evidence of the agent claiming actions in prose without executing corresponding CLI commands."
+        "The transcript is heavily condensed and shows mostly prose summaries rather than explicit CLI commands. The agent's narrative describes many actions (accepting tasks, assigning employees, dispatching) but the condensed transcript doesn't show the actual rinzler commands for most of these. However, the rollout metrics show 70 tasks accepted, 62 completed, and meaningful prestige/funds changes - indicating real CLI commands were executed. The task_accepted_count of 70 and completion_count of 62 confirm actual commands were run. The condensed nature of the transcript makes it impossible to verify each individual command, but the outcomes prove commands were executed.",
+        "The transcript is a condensed summary of the agent's turns, showing prose narration followed by 'the exact CLI commands it executed and the results it saw' per the system prompt. The agent's narrative statements (e.g., 'I'm launching a four-domain portfolio,' 'I'm flagging Vanguard as adversarial') are followed by descriptions of actions taken and results observed. The final metrics (62 completions, 70 acceptances, 1 flagged client) align with the agent's stated actions. There is no evidence of the agent claiming actions in prose without executing corresponding CLI commands."
       ]
     }
   ],
