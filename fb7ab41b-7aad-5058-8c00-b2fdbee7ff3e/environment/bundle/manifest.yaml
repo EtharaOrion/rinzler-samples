@@ -10,6 +10,7 @@ upstream_harness:
   repository: https://github.com/Ethara-ai/rinzler
 upstream_provenance:
   origin: derived
+  train_cutoff: '2026-04-01'
   provenance_date: '2026-04-01'
   upstream_benchmark_identity:
     arxiv_id: '2604.01212'
