@@ -53,8 +53,6 @@ flowchart TB
 
 **What the verifier does.** After the rollout, a hidden verifier replays the **final database state** plus the agent's adversarial-client flags through three independent grading channels and a safety gate, then emits a single scalar score. The grader is **baked into every task bundle**, so it travels with the task and cannot drift from the harness that authored it.
 
-**On isolation & `network_mode`.** The business world itself is fully self-contained: the SQLite discrete-event simulation runs entirely in-container and makes **no external calls**, so the graded business state is deterministic and offline. Each bundle's `task.toml` nonetheless declares `network_mode = "public"` for both the `[agent]` and `[verifier]` blocks, because the two *model-facing* channels do need egress: the **agent** reaches its LLM through a fixed proxy endpoint (`ANTHROPIC_BASE_URL` / `OPENAI_BASE_URL`, pointed at the harness proxy), and the **verifier's LLM rubric-judge council** calls its judge models the same way. Network access is therefore scoped to the model/judge API surface, not to the simulation; the world's determinism does not depend on the network, only the model inference and the council grading do. Deployments that require a hard network seal can pin egress to the proxy host (or run the model/judge endpoints in-cluster); the SQLite world needs nothing.
-
 ---
 
 ## The score composite
