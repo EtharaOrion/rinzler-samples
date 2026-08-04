@@ -1,185 +1,96 @@
-<div align="center">
 
-<img src="./images/banner.png" alt="rinzler mascot · a verifiable long-horizon-coherence RL environment" style="width: 100%; height: auto;" />
+![rinzler banner](images/banner.png)
 
-**A verifiable RL environment for long-horizon agentic coherence: a model runs a simulated AI startup for a year from a written contract, graded by a hidden, non-gameable score over its behavior.**
+> [![Format: Harbor](https://img.shields.io/badge/format-Harbor-FFD21F)](https://github.com/Ethara-Ai/harbor) ![Backend: SQLite sim](https://img.shields.io/badge/backend-SQLite_sim_offline-10b981) ![Scope: long-horizon business sim](https://img.shields.io/badge/scope-1yr_horizon_4_domains-b06bff) ![Tasks: 30 tasks 5 tiers](https://img.shields.io/badge/tasks-30_tasks_5_tiers-ff6b6b) ![Score: schema v3](https://img.shields.io/badge/score-schema_v3_13_checkers-845EF7)
 
-[How it works](#how-rinzler-works) · [Score](#the-score-composite) · [Difficulty](#difficulty--score-decay) · [Dataset](#whats-in-this-repo) · [Trajectories](#trajectories)
 
-[![Format: Harbor](https://img.shields.io/badge/format-Harbor-FFD21F)](https://github.com/Ethara-Ai/harbor) ![Backend: SQLite sim](https://img.shields.io/badge/backend-SQLite_sim_·_offline-10b981) ![Scope: long-horizon business sim](https://img.shields.io/badge/scope-1--year_horizon_·_4_domains-b06bff) ![Tasks: 30 · 5 tiers](https://img.shields.io/badge/tasks-30_·_5_tiers-ff6b6b) ![Score: schema v3](https://img.shields.io/badge/score-schema_v3_·_13_checkers-845EF7)
+Curated public subset of the rinzler dataset: **30 promoted Harbor bundles** over the offline yc-bench long-horizon business simulation, one row per promoted uuid. Each bundle is content-addressed and self-contained.
+
+## What rinzler is
+
+Rinzler is a verifiable reinforcement-learning environment in which a model runs a simulated AI startup across a one-year horizon of hundreds of compounding turns, and a hidden verifier grades the resulting business state against an answer key the model never sees. The agent hires and assigns employees, browses a client market, accepts and dispatches task contracts, manages cash and prestige, and detects adversarial clients, all through a command-line interface against an offline SQLite world. Performance is a single scalar over final and intra-year state, so the score reflects hundreds of sequential decisions rather than any string the model can read.
+
+## Key terms
+
+- **Bundle**: one self-contained Harbor task, content-addressed from its config and seed, whose UUID is a hash of its own material.
+- **Tier**: a difficulty band assigned by observed pilot behavior rather than by an authored number; harder tiers combine tighter cash runway, denser adversarial clients, shorter deadlines, and steeper prestige decay.
+- **Adversarial client**: a hidden untrustworthy client whose task inflates its work quantity on acceptance and is engineered to miss the deadline; the agent must infer it from its own history of failures.
+- **Scratchpad**: the persistent memory the agent writes across the 20-turn context truncation; it is the sole mechanism for carrying which clients are adversarial past a history scroll.
+- **Disposition**: the ceiling a bundle carries; `SHIP` means structurally complete and mature, while difficulty remains unproven until a signed pilot lands.
+
+## Tier composition
+
+Tasks are grouped by **score quantile**: all 30 promoted tasks are ranked by their measured gpt-5.6-sol raw score and cut into five equal groups of six, so each tier holds six tasks. This is the axis the figures below use; the declared-tier tag each bundle carries in its manifest is a separate axis shown per row in the promoted-bundles table.
+
+| Score-quantile tier | Tasks |
+| ------------------- | ----- |
+| Trivial | 6 |
+| Easy | 6 |
+| Medium | 6 |
+| Hard | 6 |
+| Expert | 6 |
+| total | 30 |
+
+The figures below show a monotone score decay across the five score quantiles, six tasks per quantile.
+
+![tier score decay](images/tier_score_decay_raw.png)
+
+![calibration band](images/calibration_band.png)
+## Promoted bundles
+
+
+| UUID | Tier | Disposition | Promoted |
+| ---- | ---- | ----------- | -------- |
+| `03c458c3-2124-55ab-85ce-a025e20b6c38` | tier_trivial | SHIP | 2026-08-03 |
+| `3ecb54ed-2e8e-5c5e-9ca2-4ee84e0bc02e` | tier_trivial | SHIP | 2026-08-03 |
+| `a4993e11-3d26-5151-95d2-1ca707a0e7fa` | tier_trivial | SHIP | 2026-08-03 |
+| `a4a934e9-aa08-5f79-8fdb-33700c7e9335` | tier_trivial | SHIP | 2026-08-03 |
+| `a6abeb93-fdf0-5a79-b1de-98406e104b34` | tier_trivial | SHIP | 2026-08-03 |
+| `b31af9f4-0095-565d-b27f-2e50bb491cd5` | tier_trivial | SHIP | 2026-08-03 |
+| `fb7ab41b-7aad-5058-8c00-b2fdbee7ff3e` | tier_trivial | SHIP | 2026-08-03 |
+| `2e1cc576-16b4-5436-b8c2-41941633e605` | tier_easy | SHIP | 2026-08-03 |
+| `402e1dfb-da73-5105-80f2-7127d48b8d7e` | tier_easy | SHIP | 2026-08-03 |
+| `6b281226-0ace-5d52-8b19-705af629900b` | tier_easy | SHIP | 2026-08-03 |
+| `8b5f8142-dc53-5621-8d3f-e0033f0cd890` | tier_easy | SHIP | 2026-08-03 |
+| `965fda63-3c1b-5c26-b81d-b8d98d4491a4` | tier_easy | SHIP | 2026-08-03 |
+| `db2b221c-f144-533e-9ac4-7ca137f6c967` | tier_easy | SHIP | 2026-08-03 |
+| `011a30d7-6ad5-5508-9cf7-1d1395904a66` | tier_medium | SHIP | 2026-08-03 |
+| `6c327a69-affc-5a3b-9d1c-477b526429f9` | tier_medium | SHIP | 2026-08-03 |
+| `6d4d88bf-3f37-5e3e-810a-f39e78d9560c` | tier_medium | SHIP | 2026-08-03 |
+| `bdae4cc0-b771-55bd-b504-f6845ed8eef4` | tier_medium | SHIP | 2026-08-03 |
+| `e1e046aa-512e-5ee5-9bba-0d7e097063bd` | tier_medium | SHIP | 2026-08-03 |
+| `e7fa9e25-5c31-5d5f-8213-6b70cad6b186` | tier_medium | SHIP | 2026-08-03 |
+| `5d24e5ab-d372-5b50-abb4-4267d04e77bb` | tier_hard | SHIP | 2026-08-03 |
+| `79988869-5fe8-5dfe-8671-6f13d9cb6d05` | tier_hard | SHIP | 2026-08-03 |
+| `ea4d674f-ae6a-518a-a16f-6bca72f39147` | tier_hard | SHIP | 2026-08-03 |
+| `fa6cfbb3-cad5-5db1-86b3-89aca7c8f583` | tier_hard | SHIP | 2026-08-03 |
+| `ff3f84ae-e1e5-5951-81d9-59040d21e2b8` | tier_hard | SHIP | 2026-08-03 |
+| `4beb059e-b715-53d0-96b6-793a890aea28` | tier_expert | SHIP | 2026-08-03 |
+| `6ebea68a-8e90-5f2f-8e81-ddcb6353609a` | tier_expert | SHIP | 2026-08-03 |
+| `b47fa32d-2e44-52fa-89b5-9924b2646567` | tier_expert | SHIP | 2026-08-03 |
+| `bbf77548-2b5f-583c-8469-e56c7c30194d` | tier_expert | SHIP | 2026-08-03 |
+| `cf3750e0-d3d6-55ed-a354-764a5eaf4fd2` | tier_expert | SHIP | 2026-08-03 |
+| `ebdef900-eea4-5f75-9d96-bd3f405b6f3d` | tier_expert | SHIP | 2026-08-03 |
+
+## Bundle layout
+
+Each promoted bundle is a Harbor task.
 
 ```mermaid
-flowchart LR
-    cfg["Config preset + seed<br/>(deterministic world)"] --> build["harbor build<br/>(content-addressed)"]
-    build --> task["Harbor task<br/>instruction.md + hidden answer key"]
-    task --> agent["Agent = CEO<br/>operates the startup via the CLI"]
-    sim[("Simulated business backend<br/>(SQLite, offline)")] --- agent
-    agent --> rollout["1-year rollout<br/>funds · prestige · tasks · RAT flags"]
-    rollout --> verifier["Hidden 3-channel verifier"]
-    verifier --> score["Scalar score<br/>(composite · safety-gated)"]
+%%{init: {"theme":"base","themeVariables":{"primaryColor":"#845EF7","lineColor":"#10b981","primaryTextColor":"#111","fontFamily":"ui-sans-serif"}}}%%
+flowchart TD
+    root["&lt;uuid&gt;/"] --> toml["task.toml"]
+    root --> instr["instruction.md"]
+    root --> env["environment/"]
+    root --> tests["tests/"]
+    root --> sol["solution/"]
+    root --> traj["trajectories/"]
+    env --> ef["Dockerfile, docker-compose.yaml"]
+    env --> bundle["bundle/"]
+    bundle --> bf["config.toml, manifest.yaml, statement.md, seed.txt, README.md, schemas/"]
+    tests --> tf["checkers.py, bundle_checkers.py, council.py, test.sh, test_outputs.py, test_weights.json"]
+    tests --> tj["grading.json, live_state.json, rubric.json"]
+    sol --> sf["solve.sh, golden.py, TRUTH.md, trajectory/"]
+    traj --> tg["gpt-5.6-sol/run_1/"]
 ```
 
-</div>
-
-**Rinzler** is a verifiable **reinforcement-learning environment** (in [Harbor](https://github.com/Ethara-Ai/harbor) format) for **long-horizon agentic coherence**. A model is handed only a written contract and told to run a simulated AI startup: hire and assign employees across **four skill domains** (*data-environment, inference, research, training*), browse a client market, accept and dispatch tasks, manage cash and prestige, and detect adversarial clients, **coherently across a full 1-year horizon**. A hidden verifier, never shown to the model, scores the run against a fully **simulated business backend** (a SQLite discrete-event world with no external service) through **13 deterministic checkers** (each paired with a continuous scorer) plus a pytest suite, an LLM rubric-judge council, and a hard safety gate. Score is **earned through verified behavior over time**, not pattern-matched against a reference string.
-
-> **Why this matters.** Reinforcement learning from verifiable scores (RLVR) is only as good as its verifier. Most "agent RL" environments are single-turn or grade on strings the model can read and overfit. Rinzler grades on **behavioral business state across an entire simulated year** (end-of-horizon *and* intra-year) with the **answer key and adversarial ground truth the agent never sees**, making the score **deterministic, reproducible, and resistant to score hacking**.
-
----
-
-## How Rinzler works
-
-The agent plays the CEO of a one-person-to-start AI services startup for a simulated year. It sees **only** the `instruction.md` contract and a command-line interface into the world; it never sees the grader, the answer key, or which clients are adversarial.
-
-```mermaid
-flowchart TB
-    instr["instruction.md<br/>the only contract the agent sees"]
-    subgraph agentbox["Agent (restricted access)"]
-        reads["reads contract"] --> acts["runs the CLI over the year"]
-        acts --> db[("rinzler.db<br/>SQLite world")]
-    end
-    subgraph verifierbox["Hidden verifier (schema v3)"]
-        report["harbor report<br/>final + intra-year state"] --> grade["3 grading channels<br/>+ safety gate"]
-        grade --> scoretxt["score.txt / score.json"]
-    end
-    instr --> reads
-    db -->|"final state + RAT flags"| report
-    scoretxt --> score(["scalar score"])
-```
-
-**The world.** A `(config preset, seed)` pair deterministically fixes the entire company: a workforce with per-domain skill rates across four domains (*data-environment, inference, research, training*), a client roster in which a fraction are **RATs** (adversarial clients with scope creep and deadline traps that dangle top-tier scores to bait a greedy agent), and a market of tasks with score / prestige / deadline distributions. The whole world runs **in-container on a self-contained SQLite backend**; the business simulation itself makes no external calls.
-
-**What the agent must do.** Survive the full horizon solvent, keep funds in a healthy band (over-earning is penalized, not just under-earning), build prestige across multiple domains, complete tasks on time, assign employees whose skills match the task's domain, keep a persistent **scratchpad** across context truncation, and correctly flag adversarial clients from *behavioral evidence* without over-flagging honest ones.
-
-**What the verifier does.** After the rollout, a hidden verifier replays the **final database state** plus the agent's adversarial-client flags through three independent grading channels and a safety gate, then emits a single scalar score. The grader is **baked into every task bundle**, so it travels with the task and cannot drift from the harness that authored it.
-
----
-
-## The score composite
-
-Rinzler grades each rollout with **schema v3**, combining three independent channels plus a hard safety gate. No channel can be satisfied by narration; every signal is read from the **business state the agent actually produced**.
-
-| Channel | What it grades | How it scores |
-| :--- | :--- | :--- |
-| **A · Checkers** | 13 binary checkers, each paired with a continuous scorer, over final and intra-year business state (funds band, multi-domain prestige floor, task-completion floor, deadline hit-rate, RAT precision/recall, scratchpad use, intra-year floor). | Weighted arithmetic mean of the continuous scorers; risk views (soft-min, CVaR-k, hard min) emitted alongside for observability. |
-| **B · Pytest** | The same guarantees as executable tests carrying **signed weights** (`±5 / ±3 / ±1`); negatives are guardrails (bankruptcy `−10`, canary leak `−10`, false RAT flags `−3`). | Signed-weight sum normalized to `[0,1]`. |
-| **C · Council** | An **LLM rubric-judge council** (three Claude-family judges: opus / sonnet / haiku) scores qualitative criteria: *did the agent infer RATs from evidence rather than guessing or DB-reading, assign by skill rate, keep throughput up*. | Per-criterion **majority vote**, signed-weight rubric formula clamped to `[0,1]`; inter-rater agreement reported as Fleiss' κ. |
-
-**Participation gate (the floor).** A rollout that completes **zero tasks** earns **zero** primary score. Without it, a do-nothing run would pass the action-independent checkers (survival, funds-in-range, prestige floor) for free. The gate is what makes **nop = 0.0** hold by construction while a golden-calibrated full play stays **1.0**.
-
-**Safety gate** (a separate `safety_pass`, *not* averaged into the score): agent survived the full horizon ∧ no canary token in the transcript ∧ no red-line bankruptcy.
-
-**Anti-cheat.** The verifier scans the transcript for successful score-hacking: direct DB reads of the hidden answer key, loyalty/RAT-secret access, or a leaked canary token. A cheat that *succeeds* overrides everything to **score = 0** with `safety_pass = false`.
-
-**Golden self-calibration.** Each seeded world is played to the horizon by a fair-play reference solver, and the checker thresholds are set from *its* achievement, so a perfect play scores **1.0** and a do-nothing run scores **0.0** by construction, per task.
-
-| Rollout | Score | Safety |
-| :--- | :--- | :--- |
-| Golden full-year play (self-calibrated) | **1.000** | ✅ |
-| Do-nothing (nop), participation gate | **0.000** | n/a |
-| Bankruptcy | **0.000** | ⛔ survival + red-line fail |
-| Spam-flagging every client | RAT-F1 collapses (precision cap bites) | n/a |
-| Answer-key / canary cheat that succeeds | **0.000** | ⛔ anti-cheat override |
-
----
-
-## Difficulty & score decay
-
-Difficulty is **measured, never declared.** Each task is placed into a tier **strictly by its observed pilot score**. The 30 tasks are ranked by mean pilot score and cut into five equal-count quantile tiers of **6 tasks each** (Trivial nearest the golden `1.0` ceiling, Expert nearest the nop `0.0` floor), so the gradient is auditable rather than authored and every tier is populated. The frontier pilot (gpt-5.6-sol) tracks this decay, and the corpus ships **30 graded runs** (1 model × 30 tasks) plus a golden reference per task.
-
-The reported score is the **raw** deterministic checker channel (Channel A): the weighted mean of the continuous scorers over the final and intra-year business state, **before** the pytest and council channels and before the gate; it measures what the agent actually achieved in the world. It is the value stored as `score` (and mirrored in `score.txt`) in each `verifier/score.json`, and it spans the full `[0,1]` frame, so a fully-failing run reaches an honest `0.000`.
-
-### Score decay across tiers
-
-<div align="center">
-<img src="./images/tier_score_decay_raw.png" alt="Per-tier mean raw checker score for gpt-5.6-sol across five score-quantile tiers, Trivial near the golden ceiling to Expert reaching 0.0" style="width: 88%; height: auto;" />
-</div>
-
-| Tier | Tasks | Mean score | Score window |
-| :--- | ---: | ---: | :--- |
-| **Trivial** | 6 | **0.941** | 0.91 – 1.00 |
-| **Easy** | 6 | **0.884** | 0.87 – 0.90 |
-| **Medium** | 6 | **0.823** | 0.77 – 0.85 |
-| **Hard** | 6 | **0.701** | 0.64 – 0.76 |
-| **Expert** | 6 | **0.225** | 0.00 – 0.47 |
-
-Tiers are cut by **score quantile** (6 tasks each), so every tier is populated and the split is auditable rather than authored. The pilot tracks a monotonic decay: near the golden ceiling on the easy tiers, then a sharp fall to the Expert tier where cash runway, RAT-client density, short deadlines, and prestige decay stack up. Three of the Expert-tier runs bottom out at an honest **0.000** (bankruptcy or zero task completion).
-
-Per-task, the score forms a clean calibration band from the golden `1.0` ceiling down to the `0.0` floor:
-
-<div align="center">
-<img src="./images/calibration_band.png" alt="Per-task raw score for the pilot, ranked easiest to hardest, with the five score-quantile tier bands shaded" style="width: 92%; height: auto;" />
-</div>
-
-### The composite (reference)
-
-The graphs above report the **raw** score. For completeness, the hidden verifier also emits a **composite** (`score_composite`) that blends all three grading channels under a bounded shaping budget and multiplies by the fair-play gate. It is retained in every `score.json` alongside the raw value:
-
-```
-score_composite = gate * ( (1 - 2α) * outcome  +  2α * process )
-
-  outcome  = raw_score                                    # Channel A: deterministic checkers (dominant)
-  process  = (pytest_score + w * council_score) / (1 + w)
-             w = max(0, council_AC1)                       # council down-weighted by its own agreement
-  gate     = 0.0 if a fair-play breach succeeded else 1.0  # multiplicative anti-cheat / safety override
-  α        = 0.25                                          # shaping budget -> 0.5*outcome + 0.5*process
-```
-
-The council (Channel C) is weighted by **Gwet's AC1**, not Fleiss' κ: κ collapses toward `0` under prevalence skew (the Gwet paradox), so on a correct-heavy corpus a perfectly-agreeing council would be paradoxically zeroed; AC1's chance term is skew-robust. An unmeasured council shrinks to `w = 0` and never silently takes full weight. With `α = 0.25` the deterministic outcome can never fall below half the score, and a successful score-hack sends the whole thing to `0` via the gate.
-
----
-
-## What's in this repo
-
-A self-contained sample of the Rinzler environment: the 30-task dataset, model trajectories against it, and the score-decay analysis above.
-
-```
-.
-├── <task-uuid>/        # 30 UUID-keyed Harbor tasks at repo root; each carries its own trajectories/
-├── images/             # banner + score-decay and calibration-band graphs
-└── README.md
-```
-
-**Anatomy of a task** (a delivered bundle at the repo root, keyed by UUID):
-
-```
-<task-uuid>/
-├── task.toml                        # config + seed + resource limits
-├── instruction.md                   # the behavioral contract (the ONLY thing the agent sees)
-├── environment/
-│   ├── Dockerfile                   #   task container (FROM the rinzler-harbor base image)
-│   └── bundle/                      #   world material: config.toml · seed.txt · statement.md · manifest.yaml
-├── solution/
-│   ├── golden.py                    #   fair-play reference solver (self-calibration)
-│   ├── .golden_calibrated           #   marker: thresholds set from golden achievement
-│   └── trajectory/                  #   golden rollout + score.json
-├── tests/                            # HIDDEN from the agent (the grader)
-│   ├── checkers.py                   #   Channel A: 13 checkers + continuous scorers
-│   ├── test_outputs.py               #   Channel B: pytest suite (signed weights in test_weights.json)
-│   ├── council.py                    #   Channel C: LLM rubric-judge council (rubric.json)
-│   ├── live_state.json               #   HIDDEN answer key: expected{} + planted canary tokens
-│   └── test.sh                       #   entrypoint: harbor report → grade → score
-└── trajectories/                     # rollout traces for this task, one dir per model
-    └── gpt-5.6-sol/run_1/            #   agent/ + artifacts/ + verifier/score.json
-```
-
-## Trajectories
-
-Rollout traces ship **co-located with each task** under `<task-uuid>/trajectories/`, for the pilot model `gpt-5.6-sol`, each a full Harbor trial directory:
-
-```
-<task-uuid>/trajectories/<model>/run_1/
-├── agent/        # the agent's turn-by-turn transcript over the year
-├── artifacts/    # the final SQLite world + reported rollout
-└── verifier/     # score.json: `score` (and score.txt) = raw agent-performance score; `score_composite` = full 3-channel score, + safety_pass
-```
-
-Every task is **content-addressed**: `harbor build` with the same `(config, seed)` reproduces the identical UUID, answer key, and grader.
-
----
-
-## License
-
-Released under the **MIT License** (see [`LICENSE`](LICENSE)). Any datasets or task bundles retain their own original licences.
-
-**Rinzler** · An Ethara.AI project · Harness: self-hosted Harbor business sim.
