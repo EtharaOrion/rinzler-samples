@@ -16,7 +16,6 @@ Rinzler is a verifiable reinforcement-learning environment in which a model runs
 - **Tier**: a difficulty band assigned by observed pilot behavior rather than by an authored number; harder tiers combine tighter cash runway, denser adversarial clients, shorter deadlines, and steeper prestige decay.
 - **Adversarial client**: a hidden untrustworthy client whose task inflates its work quantity on acceptance and is engineered to miss the deadline; the agent must infer it from its own history of failures.
 - **Scratchpad**: the persistent memory the agent writes across the 20-turn context truncation; it is the sole mechanism for carrying which clients are adversarial past a history scroll.
-- **Disposition**: the ceiling a bundle carries; `SHIP` means structurally complete and mature, while difficulty remains unproven until a signed pilot lands.
 
 ## Tier composition
 
