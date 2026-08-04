@@ -4,7 +4,7 @@
 > [![Format: Harbor](https://img.shields.io/badge/format-Harbor-FFD21F)](https://github.com/Ethara-Ai/harbor) ![Backend: SQLite sim](https://img.shields.io/badge/backend-SQLite_sim_offline-10b981) ![Scope: long-horizon business sim](https://img.shields.io/badge/scope-1yr_horizon_4_domains-b06bff) ![Tasks: 30 tasks 5 tiers](https://img.shields.io/badge/tasks-30_tasks_5_tiers-ff6b6b) ![Score: schema v3](https://img.shields.io/badge/score-schema_v3_13_checkers-845EF7)
 
 
-Curated public subset of the rinzler dataset: **30 promoted Harbor bundles** over the offline yc-bench long-horizon business simulation, one row per promoted uuid. Each bundle is content-addressed and self-contained.
+Curated public subset of the rinzler dataset: **30 promoted Harbor bundles** over the offline rinzler long-horizon business simulation, one row per promoted uuid. Each bundle is content-addressed and self-contained.
 
 ## What rinzler is
 
