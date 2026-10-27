@@ -109,3 +109,9 @@ Released under the MIT License; see [LICENSE](LICENSE). Copyright (c) 2026 Ethar
 - Organization: [Ethara.AI](https://github.com/Ethara-Ai)
 - Security and benchmark-integrity disclosure: see [SECURITY.md](SECURITY.md) (do not open public issues for leaks, contamination, or gameable shortcuts)
 - Contribution route: [CONTRIBUTING.md](CONTRIBUTING.md)
+
+---
+
+## Copyright
+
+Copyright (c) 2026 Green Rider Technology LLP (Ethara AI). All rights reserved.
